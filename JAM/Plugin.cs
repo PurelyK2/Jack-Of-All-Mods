@@ -91,4 +91,5 @@ public enum JAMRpcCalls : uint
  * Fixed Role Option Description Text (RoleMedDescription) For Roles
  * Changed Micromanager To Use An RPC Call Instead Of A Modifier
  * Made This Mod's Neutrals Win/Lose Correctly When Dead
+ * Added Concealed Modifier
 */
