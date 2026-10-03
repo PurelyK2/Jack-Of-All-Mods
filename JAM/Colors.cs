@@ -7,7 +7,7 @@ namespace JAM;
 public static class Colors
 {
     // Crew Colors
-    public static Color Gossip => TownOfUsColors.UseBasic ? Palette.CrewmateBlue : new Color32(255, 237, 162, byte.MaxValue);
+    public static Color Informant => TownOfUsColors.UseBasic ? Palette.CrewmateBlue : new Color32(255, 237, 162, byte.MaxValue);
     public static Color JackOfAll => TownOfUsColors.UseBasic ? Palette.CrewmateBlue : Color.white;
     public static Color Snoop => TownOfUsColors.UseBasic ? Palette.CrewmateBlue : new Color32(97, 147, 212, byte.MaxValue);
 

@@ -9,18 +9,18 @@ using TownOfUs.Modules.Localization;
 
 namespace JAM.Options.Roles.Crewmate;
 
-public sealed class GossipOptions : AbstractOptionGroup<GossipRole>
+public sealed class InformantOptions : AbstractOptionGroup<InformantRole>
 {
-    public override string GroupName => "Gossip";
+    public override string GroupName => "Informant";
     
-    [ModdedNumberOption("Overhear Cooldown", 0f, 35f, 2.5f, MiraNumberSuffixes.Seconds)]
-    public float GossipCooldown { get; set; } = 15f;
+    [ModdedNumberOption("Investigate Cooldown", 0f, 35f, 2.5f, MiraNumberSuffixes.Seconds)]
+    public float InformantCooldown { get; set; } = 15f;
     
-    [ModdedNumberOption("Overhear Roles Count", 0f, 15f, 1f)]
-    public float GossipRoles { get; set; } = 8f;
+    [ModdedNumberOption("Investigate Roles Count", 0f, 15f, 1f)]
+    public float InformantRoles { get; set; } = 8f;
 
     [ModdedToggleOption("Shares Info")]
-    public bool ShowGossip { get; set; } = true;
+    public bool ShareInfo { get; set; } = true;
 
     [ModdedNumberOption("Crew Role Weight", 25f, 75f, 5f, MiraNumberSuffixes.Percent)]
     public float CrewWeight { get; set; } = 50;

@@ -17,7 +17,7 @@ public static class JamRoleIcons
     public static LoadableAsset<Sprite> JackOfAll { get; } = new LoadableResourceAsset($"{ShortPath}.Jack Of All.png", 200);
     public static LoadableAsset<Sprite> Deceiver { get; } = new LoadableResourceAsset($"{ShortPath}.Deceiver.png", 200);
     public static LoadableAsset<Sprite> BountyHunter { get; } = new LoadableResourceAsset($"{ShortPath}.Bounty Hunter.png", 200);
-    public static LoadableAsset<Sprite> Gossip { get; } = new LoadableResourceAsset($"{ShortPath}.Gossip.png", 200);
+    public static LoadableAsset<Sprite> Informant { get; } = new LoadableResourceAsset($"{ShortPath}.Informant.png", 200);
     public static LoadableAsset<Sprite> Scrubber { get; } = new LoadableResourceAsset($"{ShortPath}.Scrubber.png", 200);
     // Nulls Roles
     public static LoadableAsset<Sprite> Micromanager { get; } = new LoadableResourceAsset($"{ShortPath}.RoleIcons.Micromanager.png", 200);

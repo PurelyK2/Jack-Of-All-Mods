@@ -15,67 +15,67 @@ using TownOfUs.Extensions;
 
 namespace JAM.Modifiers.Crewmate;
 
-public sealed class GossipOverhearModifier : BaseModifier
+public sealed class InformantInfoModifier : BaseModifier
 {
-        public GossipOverhearModifier(List<RoleBehaviour> rolesList)
+    public InformantInfoModifier(List<RoleBehaviour> rolesList)
     {
-        GossipRoles = rolesList;
+        InformantRoles = rolesList;
     }
-    public GossipOverhearModifier(RoleBehaviour[] rolesList)
+    public InformantInfoModifier(RoleBehaviour[] rolesList)
     {
-        GossipRoles = rolesList.ToList();
+        InformantRoles = rolesList.ToList();
     }
-    public GossipOverhearModifier(string rolesList)
+    public InformantInfoModifier(string rolesList)
     {
         string[] roleNames = rolesList.Split("|");
 
-        GossipRoles = roleNames.Select(name => DestroyableSingleton<RoleManager>.Instance.AllRoles.ToArray().First(r => r.GetRoleName() == name)).ToList();
+        InformantRoles = roleNames.Select(name => DestroyableSingleton<RoleManager>.Instance.AllRoles.ToArray().First(r => r.GetRoleName() == name)).ToList();
     }
 
-        public List<RoleBehaviour> GossipRoles = [];
+    public List<RoleBehaviour> InformantRoles = [];
 
-        public override string ModifierName => "Gossip Target";
-        public override bool HideOnUi => true;
+    public override string ModifierName => "Informant Target";
+    public override bool HideOnUi => true;
 
-        public override void OnActivate()
+    public override void OnActivate()
     {
         base.OnActivate();
 
-        foreach(GossipOverhearModifier? gossipOverhearModifier in PlayerControl.AllPlayerControls.ToArray().Where(p => p.HasModifier<GossipOverhearModifier>()).Select(p => p.GetModifier<GossipOverhearModifier>()))
+        foreach(InformantInfoModifier? InformantInfoModifier in PlayerControl.AllPlayerControls.ToArray().Where(p => p.HasModifier<InformantInfoModifier>()).Select(p => p.GetModifier<InformantInfoModifier>()))
         {
-            if(gossipOverhearModifier != this)
+            if(InformantInfoModifier != this)
             {
-                gossipOverhearModifier?.Player.RemoveModifier<GossipOverhearModifier>();
+                InformantInfoModifier?.Player.RemoveModifier<InformantInfoModifier>();
             }
         }
     }
 
-        public override void OnDeath(DeathReason reason)
+    public override void OnDeath(DeathReason reason)
     {
         base.OnDeath(reason);
 
         Player.RemoveModifier(this);
     }
 
-        public override void OnMeetingStart()
+    public override void OnMeetingStart()
     {
-        if(!Helpers.GetAlivePlayers().Any(p => p.GetRoleWhenAlive() is GossipRole)) return;
+        if(!Helpers.GetAlivePlayers().Any(p => p.GetRoleWhenAlive() is InformantRole)) return;
 
         if(Player == null)
         {
-            Error("Player Is Null For Gossip");
+            Error("Player Is Null For Informant");
             return;
         }        
         
-        GossipRole.GenerateGossip(Player, GossipRoles);
-        Player.RemoveModifier<GossipOverhearModifier>();
+        InformantRole.GenerateInfo(Player, InformantRoles);
+        Player.RemoveModifier<InformantInfoModifier>();
 
-        GossipRoles = new List<RoleBehaviour>();
+        InformantRoles = new List<RoleBehaviour>();
     }
 
-        public static List<RoleBehaviour> GenerateGossipRoles(PlayerControl player)
+    public static List<RoleBehaviour> GenerateInfoRoles(PlayerControl player)
     {
-        int randRolesCount = (int)OptionGroupSingleton<GossipOptions>.Instance.GossipRoles;
+        int randRolesCount = (int)OptionGroupSingleton<InformantOptions>.Instance.InformantRoles;
         List<RoleBehaviour> possibleRolesList = new List<RoleBehaviour>();
 
         List<RoleBehaviour> allRoles = DestroyableSingleton<RoleManager>.Instance.AllRoles.ToArray().Where(delegate (RoleBehaviour r)
@@ -86,7 +86,7 @@ public sealed class GossipOverhearModifier : BaseModifier
             if (!CustomRoleUtils.CanSpawnOnCurrentMode(r)) return false; //Only If It Can Spawn On The Current Mode
             if (r is DeceiverRole) return false; //Can't Be A Role That Logicall Doesn't Make Sense
             if (r is IGhostRole) return false; //No Ghost Roles
-            if (r is GossipRole && roleData.Count < 2) return false; //No Gossip Unless Enough Gossips
+            if (r is InformantRole && roleData.Count < 2) return false; //No Informant Unless Enough Informants
 
             return true; //Will Be Ok Here
         }).ToList();
@@ -106,13 +106,13 @@ public sealed class GossipOverhearModifier : BaseModifier
         {
             var getableRoles = new List<RoleBehaviour>();
 
-            if(UnityEngine.Random.Range(0, 101) <= OptionGroupSingleton<GossipOptions>.Instance.CrewWeight)
+            if(UnityEngine.Random.Range(0, 101) <= OptionGroupSingleton<InformantOptions>.Instance.CrewWeight)
             {
                 getableRoles = allRoles.Where(r => r.IsCrewmate()).ToList();
 
                 if (getableRoles.Count == 0)
                 {
-                    Error("No Roles To Get For Gossip! (Crewmate)");
+                    Error("No Roles To Get For Informant! (Crewmate)");
 
                     getableRoles = allRoles;
                 }
@@ -123,7 +123,7 @@ public sealed class GossipOverhearModifier : BaseModifier
 
                 if (getableRoles.Count == 0)
                 {
-                    Error("No Roles To Get For Gossip! (Non-Crew)");
+                    Error("No Roles To Get For Informant! (Non-Crew)");
 
                     getableRoles = allRoles;
                 }
@@ -131,7 +131,7 @@ public sealed class GossipOverhearModifier : BaseModifier
 
             if(getableRoles.Count == 0)
             {
-                Error("No Roles To Get For Gossip! (Mid-Picks)");
+                Error("No Roles To Get For Informant! (Mid-Picks)");
                 break;
             }
 
@@ -145,7 +145,7 @@ public sealed class GossipOverhearModifier : BaseModifier
 
         if (possibleRolesList.Count == 0)
         {
-            Error("No Roles To Get For Gossip!");
+            Error("No Roles To Get For Informant!");
         }
 
         return possibleRolesList;
