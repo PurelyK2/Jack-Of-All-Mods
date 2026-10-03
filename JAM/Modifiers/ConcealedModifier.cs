@@ -78,11 +78,11 @@ public sealed class ConcealedModifier : UniversalGameModifier, IWikiDiscoverable
 
         if (!Player.Data.IsDead)
         {
-            ShyModifier.SetVisibility(Player, 0.25f);
+            ShyModifier.SetVisibility(Player, OptionGroupSingleton<ConcealedOptions>.Instance.ConcealedOpacity);
         }
         else
         {
-            ShyModifier.SetVisibility(Player, 1);
+            ShyModifier.SetVisibility(Player, 1, OptionGroupSingleton<ConcealedOptions>.Instance.ConcealName);
         }
     }
 }
