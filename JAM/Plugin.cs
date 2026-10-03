@@ -92,4 +92,5 @@ public enum JAMRpcCalls : uint
  * Changed Micromanager To Use An RPC Call Instead Of A Modifier
  * Made This Mod's Neutrals Win/Lose Correctly When Dead
  * Added Concealed Modifier
+ * Renamed "Gossip" To "Informant"
 */
