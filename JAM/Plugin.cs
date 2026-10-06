@@ -93,4 +93,6 @@ public enum JAMRpcCalls : uint
  * Made This Mod's Neutrals Win/Lose Correctly When Dead
  * Added Concealed Modifier
  * Gave Bounty Target A Speed Boost
+ * Adjusted Micromanager To Work Better
+ * Changed Micromanager Role Assignment To Be Aligned With Others
 */
