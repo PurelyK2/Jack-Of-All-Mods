@@ -36,7 +36,6 @@ namespace JAM.Roles.Crewmate;
 public sealed class MicromanagerRole(IntPtr cppPtr) : CrewmateGhostRole(cppPtr),IWikiDiscoverable, ITownOfUsRole, IGhostRole
 {
     public string RoleName => "Micromanager";
-    //  public bool CompletedAllTasks => TaskStage is GhostTaskStage.CompletedTasks;
     public bool Setup { get; set; }
     public bool Caught { get; set; }
     public bool Faded { get; set; }
@@ -58,7 +57,6 @@ public sealed class MicromanagerRole(IntPtr cppPtr) : CrewmateGhostRole(cppPtr),
         CanUseVent = false,
         GetsVentData = true,
         ShowInFreeplay = true,
-        // GhostRole = RoleTypes.CrewmateGhost
     };
 
     private bool _tasksAdded;
@@ -450,11 +448,7 @@ public sealed class MicromanagerRole(IntPtr cppPtr) : CrewmateGhostRole(cppPtr),
         var clickableAt = (int)opts.NumTasksLeftBeforeClickable;
 
         GhostTaskStage newStage;
-        // if (totalTasks > 0 && completedTasks == totalTasks)
-        // {
-        //     newStage = GhostTaskStage.CompletedTasks;
-        // }
-        // else if
+
         if (tasksRemaining <= clickableAt)
         {
             newStage = GhostTaskStage.Clickable;
@@ -482,11 +476,6 @@ public sealed class MicromanagerRole(IntPtr cppPtr) : CrewmateGhostRole(cppPtr),
         }
         else
         {
-            if (TaskStage != newStage)
-            {
-                
-            }
-
             TaskStage = newStage;
             HandleStageChange(newStage, silent);
         }
@@ -508,16 +497,6 @@ public sealed class MicromanagerRole(IntPtr cppPtr) : CrewmateGhostRole(cppPtr),
                 notif1.AdjustNotification();
             }
         }
-        // else if (stage is GhostTaskStage.CompletedTasks)
-        // {
-        //     foreach (var player in PlayerControl.AllPlayerControls)
-        //     {
-        //         if (player == null)
-        //         {
-        //             continue;
-        //         }
-        //     }
-        // }
     }
 
     private static void GetTaskCounts(PlayerControl player, out int completed, out int total)

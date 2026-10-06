@@ -144,6 +144,16 @@ public sealed class BountyTargetModifier : BaseModifier
                 p.RemoveModifier<BountyTargetModifier>();
         });
     }
+
+    [HarmonyPatch(typeof(LogicOptions), nameof(LogicOptions.GetPlayerSpeedMod))]
+    [HarmonyPostfix]
+    public static void TargetSpeedPatch(PlayerControl pc, ref float __result)
+    {
+        if (pc.HasModifier<BountyTargetModifier>())
+        {
+            __result *= 2;
+        }
+    }
 }
 public sealed class BountyArrowModifier(PlayerControl owner, Color color, float update) : ArrowTargetModifier(owner, color, update)
 {
