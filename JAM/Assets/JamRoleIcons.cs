@@ -20,8 +20,8 @@ public static class JamRoleIcons
     public static LoadableAsset<Sprite> Gossip { get; } = new LoadableResourceAsset($"{ShortPath}.Gossip.png", 200);
     public static LoadableAsset<Sprite> Scrubber { get; } = new LoadableResourceAsset($"{ShortPath}.Scrubber.png", 200);
     // Nulls Roles
-    public static LoadableAsset<Sprite> Micromanager { get; } = new LoadableResourceAsset($"{ShortPath}.RoleIcons.Micromanager.png", 200);
-    public static LoadableAsset<Sprite> Workaholic { get; } = new LoadableResourceAsset($"{ShortPath}.RoleIcons.Workaholic.png", 200);
-    public static LoadableAsset<Sprite> Mortician { get; } = new LoadableResourceAsset($"{ShortPath}.RoleIcons.Mortician.png", 200);
-    public static LoadableAsset<Sprite> Camouflager { get; } = new LoadableResourceAsset($"{ShortPath}.RoleIcons.Camouflager.png", 200);
+    public static LoadableAsset<Sprite> Micromanager { get; } = new LoadableResourceAsset($"{ShortPath}.Micromanager.png", 200);
+    public static LoadableAsset<Sprite> Workaholic { get; } = new LoadableResourceAsset($"{ShortPath}.Workaholic.png", 200);
+    public static LoadableAsset<Sprite> Mortician { get; } = new LoadableResourceAsset($"{ShortPath}.Mortician.png", 200);
+    public static LoadableAsset<Sprite> Camouflager { get; } = new LoadableResourceAsset($"{ShortPath}.Camouflager.png", 200);
 }
