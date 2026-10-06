@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TownOfUs.Modifiers;
 
-namespace JAM.Modifiers;
+namespace JAM.Modifiers.Role;
 
 public sealed class BountyRevealModifier : BaseRevealModifier
 {

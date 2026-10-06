@@ -1,5 +1,5 @@
 using JAM.Assets;
-using JAM.Modifiers.Crewmate;
+using JAM.Modifiers.Role;
 using JAM.Options.Roles.Crewmate;
 using MiraAPI.GameOptions;
 using MiraAPI.Modifiers;

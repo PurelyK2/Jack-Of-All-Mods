@@ -24,5 +24,5 @@ public static class JamRoleIcons
     public static LoadableAsset<Sprite> Workaholic { get; } = new LoadableResourceAsset($"{ShortPath}.RoleIcons.Workaholic.png", 200);
     public static LoadableAsset<Sprite> Mortician { get; } = new LoadableResourceAsset($"{ShortPath}.RoleIcons.Mortician.png", 200);
     public static LoadableAsset<Sprite> Camouflager { get; } = new LoadableResourceAsset($"{ShortPath}.RoleIcons.Camouflager.png", 200);
-    public static LoadableAsset<Sprite> Revenant { get; } = new LoadableResourceAsset($"{ShortPath}.RoleIcons.Revenant.png", 200);
+    public static LoadableAsset<Sprite> Projector { get; } = new LoadableResourceAsset($"{ShortPath}.RoleIcons.Projector.png", 200);
 }

@@ -8,7 +8,7 @@ using TownOfUs.Modifiers;
 using TownOfUs.Modules.Anims;
 using UnityEngine;
 
-namespace JAM.Modifiers;
+namespace JAM.Modifiers.Role;
 
 public sealed class DeceiverMedicShield : BaseShieldModifier, IAnimated
 {

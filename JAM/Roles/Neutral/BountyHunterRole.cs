@@ -2,7 +2,7 @@ using AmongUs.GameOptions;
 using HarmonyLib;
 using JAM.Assets;
 using JAM.Modifiers;
-using JAM.Modifiers.Crewmate;
+using JAM.Modifiers.Role;
 using JAM.Options.Roles.Neutral;
 using MiraAPI.Events;
 using MiraAPI.Events.Vanilla.Meeting;
@@ -118,7 +118,7 @@ public sealed class BountyHunterRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITown
 
     private bool IsExempt(PlayerVoteArea voteArea)
     {
-        return voteArea.AmDead || voteArea.GetPlayer().AmOwner || voteArea.GetPlayer().HasModifier<BountySparedModifier>();
+        return voteArea.AmDead || voteArea.GetPlayer().AmOwner;
     }
     #endregion
 

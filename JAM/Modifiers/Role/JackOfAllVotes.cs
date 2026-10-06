@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using TownOfUs.Interfaces;
 using UnityEngine;
 
-namespace JAM.Modifiers.Crewmate;
+namespace JAM.Modifiers.Role;
 
 internal class JackOfAllVotes : BaseModifier, IContinuesGame
 {

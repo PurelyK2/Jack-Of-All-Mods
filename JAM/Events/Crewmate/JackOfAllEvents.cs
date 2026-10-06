@@ -1,4 +1,4 @@
-using JAM.Modifiers.Crewmate;
+using JAM.Modifiers.Role;
 using JAM.Options.Roles.Crewmate;
 using JAM.Roles.Crewmate;
 using JAM.Roles.Neutral;

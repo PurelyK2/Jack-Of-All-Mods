@@ -482,11 +482,6 @@ public sealed class MicromanagerRole(IntPtr cppPtr) : CrewmateGhostRole(cppPtr),
         }
         else
         {
-            if (TaskStage != newStage)
-            {
-                
-            }
-
             TaskStage = newStage;
             HandleStageChange(newStage, silent);
         }

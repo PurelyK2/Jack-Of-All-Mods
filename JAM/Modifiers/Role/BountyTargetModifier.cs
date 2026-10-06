@@ -34,7 +34,7 @@ using TownOfUs.Roles;
 using TownOfUs.Utilities;
 using UnityEngine;
 
-namespace JAM.Modifiers;
+namespace JAM.Modifiers.Role;
 
 public sealed class BountyTargetModifier : BaseModifier
 {
@@ -53,13 +53,13 @@ public sealed class BountyTargetModifier : BaseModifier
 
         if (Player.HasModifier<BountySparedModifier>())
         {
-            ModifierComponent.RemoveModifier(this);
+            ModifierComponent?.RemoveModifier(this);
             return;
         }
 
         if (Player.Data.IsDead || !MiraAPI.Utilities.Helpers.GetAlivePlayers().Any(p => p.Data.Role is BountyHunterRole))
         {
-            ModifierComponent.RemoveModifier(this);
+            ModifierComponent?.RemoveModifier(this);
             return;
         }
 
@@ -93,14 +93,14 @@ public sealed class BountyTargetModifier : BaseModifier
         {
             MiraAPI.Utilities.Helpers.CreateAndShowNotification("The Bounty Hunter Has Died, They Can No Longer Give A Reward...", Colors.BountyHunter, new UnityEngine.Vector3(0f, 1f, -20f), null, JamRoleIcons.BountyHunter.LoadAsset());
         
-            ModifierComponent.RemoveModifier(this);
+            ModifierComponent?.RemoveModifier(this);
         }
     }
 
     public override void OnMeetingStart()
     {
         base.OnMeetingStart();
-        ModifierComponent.RemoveModifier(this);
+        ModifierComponent?.RemoveModifier(this);
     }
 
     static void GivePlayerBonus(PlayerControl player, PlayerControl target)
@@ -168,7 +168,7 @@ public sealed class BountyArrowModifier(PlayerControl owner, Color color, float 
     {
         base.OnMeetingStart();
 
-        ModifierComponent.RemoveModifier(this);
+        ModifierComponent?.RemoveModifier(this);
     }
 
     public override void OnDeath(DeathReason reason)
@@ -178,11 +178,11 @@ public sealed class BountyArrowModifier(PlayerControl owner, Color color, float 
         base.OnDeath(reason);
     }
 
-    public void Update()
+    public override void Update()
     {
         if(Player.Data.IsDead)
         {
-            ModifierComponent.RemoveModifier(this);
+            ModifierComponent?.RemoveModifier(this);
         }
     }
 }
@@ -204,7 +204,7 @@ public sealed class BountyRewardModifier : BaseModifier
     {
         if (!Player.AmOwner)
         {
-            ModifierComponent.RemoveModifier(this);
+            ModifierComponent?.RemoveModifier(this);
             return;
         }
 
@@ -422,7 +422,7 @@ public sealed class BountySparedModifier : BaseModifier
 
     public override void OnDeath(DeathReason reason)
     {
-        ModifierComponent.RemoveModifier(this);
+        ModifierComponent?.RemoveModifier(this);
     }
 
     [RegisterEvent(0)]

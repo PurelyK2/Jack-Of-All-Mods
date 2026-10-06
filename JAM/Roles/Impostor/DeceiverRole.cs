@@ -3,10 +3,6 @@ using HarmonyLib;
 using Hazel;
 using Il2CppInterop.Runtime.Attributes;
 using InnerNet;
-using JAM.Assets;
-using JAM.Options.Roles.Crewmate;
-using JAM.Options.Roles.Impostor;
-using JAM.Modifiers.HiddenModifiers;
 using MiraAPI.Events;
 using MiraAPI.Events.Vanilla.Gameplay;
 using MiraAPI.GameOptions;
@@ -33,7 +29,11 @@ using TownOfUs.Utilities;
 using UnityEngine;
 using Reactor.Networking.Attributes;
 using JAM;
-using JAM.Modifiers;
+using JAM.Assets;
+using JAM.Options.Roles.Crewmate;
+using JAM.Options.Roles.Impostor;
+using JAM.Modifiers.Role;
+using JAM.Modifiers.Hidden;
 
 //Note: This Role Was Suggested By: ‧₊˚✧ 𝒥𝒶𝓎 :3 ✧˚₊‧ (Discord)
 public sealed class DeceiverRole(IntPtr cppPtr) : ImpostorRole(cppPtr), ITownOfUsRole, IWikiDiscoverable, ICrewVariant

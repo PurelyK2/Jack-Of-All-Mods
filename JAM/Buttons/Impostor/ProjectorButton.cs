@@ -19,14 +19,14 @@ using JAM.Assets;
 
 namespace JAM.Buttons.Impostor;
 
-public sealed class RevenantButton : TownOfUsRoleButton<RevenantRole>, IAftermathableButton, ILegacyCapable
+public sealed class ProjectorButton : TownOfUsRoleButton<ProjectorRole>, IAftermathableButton, ILegacyCapable
 {
-    public override string Name => "Detach";
+    public override string Name => "Project";
     public override Color TextOutlineColor => TownOfUsColors.Impostor;
     public override BaseKeybind Keybind => Keybinds.SecondaryAction;
-    public override LoadableAsset<Sprite> Sprite => LegacyAssets.IsLegacy ? JamAssets.DetachButton : JamAssets.DetachButton;
-    public override float Cooldown => Math.Clamp(OptionGroupSingleton<RevenantOptions>.Instance.DetachCd + MapCooldown, 5f, 120f);
-    public override float EffectDuration => OptionGroupSingleton<RevenantOptions>.Instance.DetachDuration;
+    public override LoadableAsset<Sprite> Sprite => LegacyAssets.IsLegacy ? JamAssets.ProjectButton : JamAssets.ProjectButton;
+    public override float Cooldown => Math.Clamp(OptionGroupSingleton<ProjectorOptions>.Instance.ProjectCd + MapCooldown, 5f, 120f);
+    public override float EffectDuration => OptionGroupSingleton<ProjectorOptions>.Instance.ProjectDuration;
 
     public override void ClickHandler()
     {

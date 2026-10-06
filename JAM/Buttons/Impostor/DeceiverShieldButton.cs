@@ -1,5 +1,5 @@
 using JAM.Modifiers;
-using JAM.Modifiers.Hidden;
+using JAM.Modifiers.Role;
 using JAM.Options.Roles.Impostor;
 using MiraAPI.GameOptions;
 using MiraAPI.Keybinds;
@@ -9,10 +9,6 @@ using MiraAPI.Utilities.Assets;
 using TownOfUs;
 using TownOfUs.Assets;
 using TownOfUs.Buttons;
-using TownOfUs.Modifiers;
-using TownOfUs.Options.Maps;
-using TownOfUs.Options.Roles.Crewmate;
-using TownOfUs.Roles.Crewmate;
 using TownOfUs.Utilities;
 using UnityEngine;
 

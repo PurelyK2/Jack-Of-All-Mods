@@ -1,24 +1,17 @@
-using Il2CppSystem.Web.Util;
-using JAM.Modifiers;
-using JAM.Modifiers.Game.Universal;
+using JAM.Modifiers.Role;
+using JAM.Modifiers.Universal;
 using JAM.Options.Roles.Neutral;
 using JAM.Roles.Neutral;
 using MiraAPI.GameOptions;
-using MiraAPI.Keybinds;
 using MiraAPI.Modifiers;
 using MiraAPI.Networking;
 using MiraAPI.Utilities.Assets;
-using Reactor.Utilities.Extensions;
-using TownOfUs;
-using TownOfUs.Assets;
 using TownOfUs.Buttons;
-using TownOfUs.Modifiers;
-using TownOfUs.Modules;
 using TownOfUs.Utilities;
 using JAM.Assets;
 using UnityEngine;
 
-namespace JAM.Buttons.Game.Universal;
+namespace JAM.Buttons.Universal;
 
 public sealed class BountyHuntingButton : TownOfUsKillRoleButton<RoleBehaviour, PlayerControl>
 {
