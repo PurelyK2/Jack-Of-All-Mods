@@ -40,7 +40,7 @@ public sealed class DeceiverShieldButton : TownOfUsRoleButton<DeceiverRole, Play
             return;
         }
 
-        DeceiverRole.RpcDeceiverShield(PlayerControl.LocalPlayer, Target, UnityEngine.Random.Range(0f, 1f) < 0.5f);
+        DeceiverRole.RpcDeceiverShield(PlayerControl.LocalPlayer, Target, UnityEngine.Random.Range(0f, 1f) < 0.9f);
     }
     public override bool CanUse()
     {
