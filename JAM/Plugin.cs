@@ -97,4 +97,6 @@ public enum JAMRpcCalls : uint
  * Fixed Bounty Reveal Modifier
  * Made it so 100% on Bounty Rewards Works Correctly
  * Micromanager No Longer Spawns On Crewmate Death
+ * Jack Of All Can No Longer Get Circumvent
+ * Added Custom Intro Sounds For Jack Of All and Time Keeper
 */

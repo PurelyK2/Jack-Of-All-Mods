@@ -40,7 +40,7 @@ public sealed class JackOfAllRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOf
     public CustomRoleConfiguration Configuration => new(this)
     {
         IconTmp = TmpSpriteUtils.CreateSpriteAsset(JamRoleIcons.JackOfAll.LoadAsset(), "JackOfAllMods.Roles.Crewmate.JackOfAll", 1.45f),
-        IntroSound = TouAudio.DetectiveIntroSound,
+        IntroSound = JamAudio.JackOfAllIntro,
         Icon = JamRoleIcons.JackOfAll
     };
 
@@ -77,6 +77,7 @@ public sealed class JackOfAllRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOf
                     && (m as GameModifier)?.CanSpawnOnCurrentMode() == true
                     && (!player.HasModifier(m.TypeId))
                     && m is not DeadlyQuotaModifier
+                    && m is not CircumventModifier
                     && m is not AllianceGameModifier
                     && m.GetModifierFaction() != ModifierFaction.UniversalVisibility
                     && (m is not TelepathModifier || player.HasModifier<EgotistModifier>() || player.HasModifier<CrewpostorModifier>())
