@@ -41,15 +41,38 @@
 
 -----------------------
 <p align="center">
-  <img src="./JAM/Resources/Headers/CrewInvestigative.png" alt="Crewmate Investigative"/>
-  <img width="10%" src="./JAM/Resouces/RoleIcons/Gossip.png" alt="Gossip" />
-  <!-- <img src="./Resouces/RoleIcons/Snoop.png" alt="Snoop" /> -->
   <img src="./JAM/Resources/Headers/CrewAfterlife.png" alt="Crewmate Afterlife" />
-  <img width="10%" src="./JAM/Resources/RoleIcons/Micromanager.png" alt="Micromanager"/>
+  <img width="20%" src="./JAM/Resources/RoleIcons/Micromanager.png" alt="Micromanager"/>
+  <img src="./JAM/Resources/Headers/CrewInvestigative.png" alt="Crewmate Investigative"/>
+  <img width="20%" src="./JAM/Resources/RoleIcons/Gossip.png" alt="Gossip" />
+  <img src="./Resouces/RoleIcons/Snoop.png" alt="Snoop" />
+  <img src="./JAM/Resources/Headers/CrewPower.png" alt="Crewmate Power" />
+  <img width="20%" src="./JAM/Resources/RoleIcons/JackOfAll.png" alt="Jack Of All" />
+  <img src="./JAM/Resources/Headers/CrewSupport.png" alt="Crewmate Support" />
+  <img width="20%" src="./JAM/Resources/RoleIcons/Mortician.png" alt="Mortician" />
+  <img src="./JAM/Resources/Headers/ImpConcealing.png" alt="Impostor Concealing" />
+  <img width="20%" src="./JAM/Resources/RoleIcons/Camouflager.png" alt="Camouflager" />
+  <img width="20%" src="./JAM/Resources/RoleIcons/Deceiver.png" alt="Deceiver" />
+  <!-- <img src="./JAM/Resources/Headers/ImpConcealing.png" alt="Impostor Killing" />
+  <img width="20%" src="./JAM/Resources/RoleIcons/Projector.png" alt="Projector" /> -->
   <img src="./JAM/Resources/Headers/NeutEvil.png" alt="Neutral Evil" />
-  <img width="10%" src="./JAM/Resources/RoleIcons/Workaholic.png" alt="Workaholic" />
+  <img width="20%" src="./JAM/Resources/RoleIcons/Workaholic.png" alt="Workaholic" />
+  <img width="20%" src="./JAM/Resources/RoleIcons/ZombieLeader.png" alt="Zombie Leader" />
+  <img src="./JAM/Resources/Headers/NeutKilling.png" alt="Neutral Killing" />
+  <img width="20%" src="./JAM/Resources/RoleIcons/TimeKeeper.png" alt="Time Keeper" />
+  <img src="./JAM/Resources/Headers/NeutOutlier.png" alt="Neutral Outlier" />
+  <img width="20%" src="./JAM/Resources/RoleIcons/BountyHunter.png" alt="Bounty Hunter" />
+  <img width="20%" src="./JAM/Resources/RoleIcons/Scrubber.png" alt="Scrubber" />
   <img src="./JAM/Resources/Headers/UniMods.png" alt="Universal Modifiers" />
-  <img width="10%" src="./JAM/Resources/RoleIcons/Shackled.png" alt="Shackled"/>
+  <img width="20%" src="./JAM/Resources/ModifierIcons/Shackled.png" alt="Shackled"/>
+  <img width="20%" src="./JAM/Resources/ModifierIcons/Battery.png" alt="Battery"/>
+  <img width="20%" src="./JAM/Resources/ModifierIcons/Blind.png" alt="Blind"/>
+  <img width="20%" src="./JAM/Resources/ModifierIcons/Concealed.png" alt="Concealed"/>
+  <img width="20%" src="./JAM/Resources/ModifierIcons/Concealed.png" alt="Exposed"/>
+  <img width="20%" src="./JAM/Resources/ModifierIcons/Unstable.png" alt="Unstable"/>
+  <img width="20%" src="./JAM/Resources/ModifierIcons/Ventable.png" alt="Ventable"/>
+  <img src="./JAM/Resources/Headers/CrewMods.png" alt="Crewmate Modifiers" />
+  <img width="20%" src="./JAM/Resources/ModifierIcons/Hyperfocus.png" alt="Hyperfocus"/>
 </p>
 
 <!--   
