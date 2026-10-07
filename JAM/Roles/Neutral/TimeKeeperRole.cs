@@ -36,7 +36,7 @@ public sealed class TimeKeeperRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOf
     public RoleAlignment RoleAlignment => RoleAlignment.NeutralKilling;
     public CustomRoleConfiguration Configuration => new(this)
     {
-        IconTmp = TmpSpriteUtils.CreateSpriteAsset(JamRoleIcons.TimeKeeper.LoadAsset(), "JackOfAllMods.Roles.Neutral.Forbearing", 1.45f),
+        IconTmp = TmpSpriteUtils.CreateSpriteAsset(JamRoleIcons.TimeKeeper.LoadAsset(), "JackOfAllMods.Roles.Neutral.TimeKeeper", 1.45f),
         IntroSound = TouAudio.SinisterIntro,
         Icon = JamRoleIcons.TimeKeeper,
         CanUseVent = true,
