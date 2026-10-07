@@ -1,39 +1,37 @@
-using HarmonyLib;
-using System.Collections;
-using System.Text.RegularExpressions;
-using Il2CppSystem.Text;
-using UnityEngine;
-using UnityEngine.UI;
 using AmongUs.GameOptions;
+using HarmonyLib;
+using Il2CppSystem.Text;
+using JAM.Assets;
+using JAM.Options.Roles.Crewmate;
 using MiraAPI.GameOptions;
 using MiraAPI.Modifiers;
 using MiraAPI.Patches.Stubs;
 using MiraAPI.Roles;
 using MiraAPI.Utilities;
 using MiraAPI.Utilities.Assets;
+using Reactor.Networking.Attributes;
 using Reactor.Utilities;
+using System.Collections;
+using System.Text.RegularExpressions;
 using TownOfUs;
+using TownOfUs.Assets;
 using TownOfUs.Events;
 using TownOfUs.Modifiers;
 using TownOfUs.Modifiers.Game;
-using TownOfUs.Modules.Wiki;
-using TownOfUs.Patches;
-using TownOfUs.Roles.Neutral;
-using TownOfUs.Utilities.Appearances;
-using TownOfUs.Utilities;
 using TownOfUs.Modules;
+using TownOfUs.Modules.Wiki;
 using TownOfUs.Options;
-using TownOfUs.Assets;
+using TownOfUs.Patches;
 using TownOfUs.Roles;
-using JAM.Options.Roles.Crewmate;
-using JAM.Events.Crewmate;
-using JAM.Modifiers.Hidden;
-using JAM.Assets;
-using Reactor.Networking.Attributes;
+using TownOfUs.Roles.Neutral;
+using TownOfUs.Utilities;
+using TownOfUs.Utilities.Appearances;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace JAM.Roles.Crewmate;
 
-public sealed class MicromanagerRole(IntPtr cppPtr) : CrewmateGhostRole(cppPtr),IWikiDiscoverable, ITownOfUsRole, IGhostRole
+public sealed class MicromanagerRole(IntPtr cppPtr) : CrewmateGhostRole(cppPtr), IWikiDiscoverable, ITownOfUsRole, IGhostRole
 {
     public string RoleName => "Micromanager";
     public bool Setup { get; set; }
@@ -106,7 +104,7 @@ public sealed class MicromanagerRole(IntPtr cppPtr) : CrewmateGhostRole(cppPtr),
             }
         }
     }
-    
+
     public bool CanBeClicked
     {
         get
@@ -124,15 +122,12 @@ public sealed class MicromanagerRole(IntPtr cppPtr) : CrewmateGhostRole(cppPtr),
     public bool GhostActive => Setup && !Caught;
     public bool CanCatch()
     {
-        if (opts.MicromanagerCanBeClickedBy == MicromanagerRoleClickableType.ImpsOnly &&
-            !PlayerControl.LocalPlayer.IsImpostorAligned())
+        if (opts.MicromanagerCanBeClickedBy == MicromanagerRoleClickableType.ImpsOnly && !PlayerControl.LocalPlayer.IsImpostorAligned())
         {
             return false;
         }
 
-        if (opts.MicromanagerCanBeClickedBy == MicromanagerRoleClickableType.NonCrew &&
-            !(PlayerControl.LocalPlayer.IsImpostorAligned() || PlayerControl.LocalPlayer.Is(RoleAlignment.NeutralKilling)
-            || PlayerControl.LocalPlayer.TryGetModifier<AllianceGameModifier>(out var allyMod) && allyMod.GetsPunished))
+        if (opts.MicromanagerCanBeClickedBy == MicromanagerRoleClickableType.NonCrew && PlayerControl.LocalPlayer.Data.Role.IsCrewmate())
         {
             return false;
         }
@@ -307,8 +302,6 @@ public sealed class MicromanagerRole(IntPtr cppPtr) : CrewmateGhostRole(cppPtr),
 
         var targetMessage =
             $"<b>{microColor.ToTextColor()}The Micromanager completed the</color> {TownOfUsColors.Doomsayer.ToTextColor()}{taskText} </color>{microColor.ToTextColor()}task for you.</color></b>";
-
-        MicromanagerEvents.SendMicromanagerNotif(randomCrew, targetMessage);
     }
 
     public override void Initialize(PlayerControl player)
@@ -542,6 +535,14 @@ public sealed class MicromanagerRole(IntPtr cppPtr) : CrewmateGhostRole(cppPtr),
         if (player.AmOwner)
         {
             player.RpcCompleteTask(taskId);
+
+            string taskName = player.Data.FindTaskById(taskId)?.ToString() ?? "Null";
+
+            Helpers.CreateAndShowNotification(
+                $"<b>{Colors.Micromanager.ToTextColor()}Your {TownOfUsColors.Doomsayer.ToTextColor()}{taskName}</color> Task Was Completed By The {Colors.Micromanager.ToTextColor()}Micromanager</color>. </color></b>",
+                Color.white,
+                new Vector3(0f, 1f, -20f),
+                spr: JamRoleIcons.Micromanager.LoadAsset());
         }
     }
 }
