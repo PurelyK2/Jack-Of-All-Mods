@@ -10,7 +10,7 @@ public static class JamAssets
     public static LoadableAsset<Sprite> BountyTarget { get; } = new LoadableResourceAsset($"{ShortPath}.Bounty Target.png", 200);
     // Nulls Buttons & Assets
     public static LoadableAsset<Sprite> CamouflagerButton { get; } = new LoadableResourceAsset($"{ShortPath}.CamouflagerButton.png", 200);
-    public static LoadableAsset<Sprite> ProjectButton { get; } = new LoadableResourceAsset($"{ShortPath}.DetachButton.png", 200);
+    public static LoadableAsset<Sprite> ProjectButton { get; } = new LoadableResourceAsset($"{ShortPath}.RecoilButton.png", 200);
     public static LoadableAsset<Sprite> RecoilButton { get; } = new LoadableResourceAsset($"{ShortPath}.RecoilButton.png", 200);
 
     public static LoadableAsset<Sprite> MorticianAbility { get; } = new LoadableResourceAsset($"{ShortPath}.MorticianAbility.png", 200);

@@ -42,7 +42,7 @@ public sealed class TimeKeeperRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOf
         CanUseVent = true,
         GhostRole = (RoleTypes)RoleId.Get<NeutralGhostRole>()
     };
-    public RoleBehaviour CrewVariant => (RoleBehaviour)RoleId.Get<SheriffRole>();
+    public RoleBehaviour CrewVariant => RoleManager.Instance.GetRole((RoleTypes)RoleId.Get<SheriffRole>());
     public override void OnVotingComplete()
     {
         if (MeetingHud.Instance.exiledPlayer == null)
