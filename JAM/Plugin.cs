@@ -96,4 +96,5 @@ public enum JAMRpcCalls : uint
  * Adjusted Micromanager To Work Better
  * Fixed Bounty Reveal Modifier
  * Made it so 100% on Bounty Rewards Works Correctly
+ * Micromanager No Longer Spawns On Crewmate Death
 */
