@@ -43,15 +43,13 @@
 > I put role icons here :3
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/AU-Avengers/TOU-Mira/main/Images/Groups/CrewAfterlife.png" align="center" />
-  <a href =https://www.youtube.com/watch?v=E4WlUXrJgy4><img width="10%"
-  src="https://github.com/ozjudi4705-cloud/NullsMod/Resources/RoleIcons/Micromanager.png" ></a>
-  <img src="https://raw.githubusercontent.com/AU-Avengers/TOU-Mira/main/Images/Groups/NeutEvil.png" />
-  <a href =https://www.youtube.com/watch?v=E4WlUXrJgy4><img width="10%"
-  src=https://github.com/ozjudi4705-cloud/NullsMod/Resources/RoleIcons/Workaholic.png>
-  <img src="https://raw.githubusercontent.com/AU-Avengers/TOU-Mira/main/Images/Groups/UniMods.png" />
-  <a href=https://www.youtube.com/watch?v=E4WlUXrJgy4><img width="10%"
-  src="https://github.com/ozjudi4705-cloud/NullsMod/Resources/RoleIcons/Shackled.png">
+  <img src="./Resources/Headers/CrewInvestigative.png" alt="Crewmate Investigative"/>
+  <img src="./Resources/Headers/CrewAfterlife.png" alt="Crewmate Afterlife" />
+  <img src="https://github.com/ozjudi4705-cloud/NullsMod/Resources/RoleIcons/Micromanager.png" />
+  <img src="./Resources/Headers/NeutEvil.png" />
+  <img src="./Resources/RoleIcons/Workaholic.png" />
+  <img src="./Resources/Headers/UniMods.png" />
+  <img src="./Resources/RoleIcons/Shackled.png" />
 </p>
 
 <!--   
