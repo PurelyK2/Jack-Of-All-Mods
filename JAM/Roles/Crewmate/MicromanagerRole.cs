@@ -2,10 +2,7 @@ using AmongUs.GameOptions;
 using HarmonyLib;
 using Il2CppSystem.Text;
 using JAM.Assets;
-using JAM.Events.Crewmate;
-using JAM.Modifiers.Hidden;
 using JAM.Options.Roles.Crewmate;
-using MiraAPI.GameModes;
 using MiraAPI.GameOptions;
 using MiraAPI.Modifiers;
 using MiraAPI.Patches.Stubs;
@@ -31,7 +28,6 @@ using TownOfUs.Utilities;
 using TownOfUs.Utilities.Appearances;
 using UnityEngine;
 using UnityEngine.UI;
-using static Il2CppSystem.Globalization.CultureInfo;
 
 namespace JAM.Roles.Crewmate;
 
