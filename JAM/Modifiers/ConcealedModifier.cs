@@ -32,7 +32,7 @@ public sealed class ConcealedModifier : UniversalGameModifier, IWikiDiscoverable
      
     public string GetAdvancedDescription()
     {
-        return GetDescription() + MiscUtils.AppendOptionsText(base.GetType());
+        return GetDescription() + MiscUtils.AppendOptionsText(GetType());
     }
      
     public override ModifierFaction FactionType => ModifierFaction.UniversalVisibility;
@@ -52,7 +52,7 @@ public sealed class ConcealedModifier : UniversalGameModifier, IWikiDiscoverable
     {
         get
         {
-            return new ModifierUiConfiguration(Colors.Concealed, TmpSpriteUtils.CreateSpriteAsset(TouModifierIcons.Shy.LoadAsset(), "TouMira.Modifier.Game.Universal.Concealed", 1.45f));
+            return new ModifierUiConfiguration(Colors.Concealed, TmpSpriteUtils.CreateSpriteAsset(JamModifierIcons.Concealed.LoadAsset(), "TouMira.Modifier.Game.Universal.Concealed", 1.45f));
         }
     }
 
@@ -61,7 +61,7 @@ public sealed class ConcealedModifier : UniversalGameModifier, IWikiDiscoverable
      
     public override bool HideOnUi => false;
      
-    public override LoadableAsset<Sprite> ModifierIcon => TouModifierIcons.Shy;
+    public override LoadableAsset<Sprite> ModifierIcon => JamModifierIcons.Concealed;
      
     public override int GetAmountPerGame()
     {

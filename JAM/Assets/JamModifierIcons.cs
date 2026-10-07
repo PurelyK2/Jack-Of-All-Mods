@@ -12,6 +12,8 @@ public static class JamModifierIcons
     public static LoadableAsset<Sprite> Rivalry { get; } = new LoadableResourceAsset($"{ShortPath}.Rivalry.png", 200);
     public static LoadableAsset<Sprite> Unstable { get; } = new LoadableResourceAsset($"{ShortPath}.Unstable.png", 200);
     public static LoadableAsset<Sprite> Ventable { get; } = new LoadableResourceAsset($"{ShortPath}.Ventable.png", 200);
+    public static LoadableAsset<Sprite> Concealed { get; } = new LoadableResourceAsset($"{ShortPath}.Concealed.png", 200);
+
     // Nulls Modifiers
     public static LoadableAsset<Sprite> Battery { get; } = new LoadableResourceAsset($"{ShortPath}.Battery.png", 200);
     public static LoadableAsset<Sprite> Exposed { get; } = new LoadableResourceAsset($"{ShortPath}.Exposed.png", 200);
