@@ -14,6 +14,7 @@ using MiraAPI.Events.Vanilla.Player;
 using MiraAPI.GameOptions;
 using MiraAPI.Modifiers;
 using MiraAPI.Modifiers.Types;
+using MiraAPI.Roles;
 using MiraAPI.Utilities.Assets;
 using Rewired;
 using System;
@@ -31,6 +32,7 @@ using TownOfUs.Modifiers.Game.Universal;
 using TownOfUs.Modules.RainbowMod;
 using TownOfUs.Options.Roles.Crewmate;
 using TownOfUs.Roles;
+using TownOfUs.Roles.Crewmate;
 using TownOfUs.Utilities;
 using UnityEngine;
 
@@ -291,6 +293,45 @@ public sealed class BountyRewardModifier : BaseModifier
 
         rewards.Shuffle();
         RewardType thisReward = rewards[0];
+
+        //Handle 100% chance
+        #region Guaranteed Rewards
+        List<RewardType> guaranteedRewards = new List<RewardType>();
+        if ((int)opts.RandFactMod == 100 && rewards.Contains(RewardType.GoodFactMod))
+        {
+            guaranteedRewards.Add(RewardType.GoodFactMod);
+        }
+        if ((int)opts.RandUnivMod == 100 && rewards.Contains(RewardType.GoodUnivMod))
+        {
+            guaranteedRewards.Add(RewardType.GoodUnivMod);
+        }
+        if ((int)opts.GiveVentable == 100 && rewards.Contains(RewardType.GiveVentable))
+        {
+            guaranteedRewards.Add(RewardType.GiveVentable);
+        }
+        if ((int)opts.GiveExtraVote == 100 && rewards.Contains(RewardType.ExtraVote))
+        {
+            guaranteedRewards.Add(RewardType.ExtraVote);
+        }
+        if ((int)opts.RevealCKRole == 100 && rewards.Contains(RewardType.RevealRole))
+        {
+            guaranteedRewards.Add(RewardType.RevealRole);
+        }
+        if ((int)opts.GiveDblShot == 100 && rewards.Contains(RewardType.DoubleShot))
+        {
+            guaranteedRewards.Add(RewardType.DoubleShot);
+        }
+        if ((int)opts.ShieldNextRound == 100 && rewards.Contains(RewardType.GiveShield))
+        {
+            guaranteedRewards.Add(RewardType.GiveShield);
+        }
+
+        if(guaranteedRewards.Count > 0)
+        {
+            guaranteedRewards.Shuffle();
+            thisReward = guaranteedRewards[0];
+        }
+        #endregion
 
         List<BaseModifier> modifiers = MiscUtils.AllModifiers.ToList();
         List<Type> possibleModifiers = new List<Type>();

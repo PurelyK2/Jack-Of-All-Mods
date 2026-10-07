@@ -94,5 +94,6 @@ public enum JAMRpcCalls : uint
  * Added Concealed Modifier
  * Gave Bounty Target A Speed Boost
  * Adjusted Micromanager To Work Better
- * Changed Micromanager Role Assignment To Be Aligned With Others
+ * Fixed Bounty Reveal Modifier
+ * Made it so 100% on Bounty Rewards Works Correctly
 */
