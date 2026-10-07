@@ -23,6 +23,7 @@ using TownOfUs.Modules.Wiki;
 using TownOfUs.Options;
 using TownOfUs.Patches;
 using TownOfUs.Roles;
+using TownOfUs.Roles.Crewmate;
 using TownOfUs.Roles.Neutral;
 using TownOfUs.Utilities;
 using TownOfUs.Utilities.Appearances;
@@ -543,6 +544,17 @@ public sealed class MicromanagerRole(IntPtr cppPtr) : CrewmateGhostRole(cppPtr),
                 Color.white,
                 new Vector3(0f, 1f, -20f),
                 spr: JamRoleIcons.Micromanager.LoadAsset());
+        }
+    }
+
+    //Stop Micromanager From Happening On Death
+    [HarmonyPatch(typeof(TouRoleManagerPatches), "GhostRoleSetup")]
+    public static class DontMicromanageOnDeathPatch
+    {
+        public static void Postfix(ref List<RoleTypes> ___CrewmateGhostRolePool)
+        {
+            Info("Meep Moop");
+            ___CrewmateGhostRolePool.RemoveAll(x => x == (RoleTypes)RoleId.Get<MicromanagerRole>());
         }
     }
 }
