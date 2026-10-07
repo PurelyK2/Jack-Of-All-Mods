@@ -40,16 +40,16 @@
 - [**Copyright**](#copyright)
 
 -----------------------
-> I put role icons here :3
-
 <p align="center">
   <img src="./Resources/Headers/CrewInvestigative.png" alt="Crewmate Investigative"/>
+  <img src="./Resouces/RoleIcons/Gossip.png" alt="Gossip" />
+  <!-- <img src="./Resouces/RoleIcons/Snoop.png" alt="Snoop" /> -->
   <img src="./Resources/Headers/CrewAfterlife.png" alt="Crewmate Afterlife" />
-  <img src="https://github.com/ozjudi4705-cloud/NullsMod/Resources/RoleIcons/Micromanager.png" />
-  <img src="./Resources/Headers/NeutEvil.png" />
-  <img src="./Resources/RoleIcons/Workaholic.png" />
-  <img src="./Resources/Headers/UniMods.png" />
-  <img src="./Resources/RoleIcons/Shackled.png" />
+  <img width="10%" src="./Resources/RoleIcons/Micromanager.png" alt="Micromanager"/>
+  <img src="./Resources/Headers/NeutEvil.png" alt="Neutral Evil" />
+  <img src="./Resources/RoleIcons/Workaholic.png" alt="Workaholic" />
+  <img src="./Resources/Headers/UniMods.png" alt="Universal Modifiers" />
+  <img src="./Resources/RoleIcons/Shackled.png" alt="Shackled"/>
 </p>
 
 <!--   
