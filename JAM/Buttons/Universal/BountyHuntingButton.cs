@@ -39,7 +39,7 @@ public sealed class BountyHuntingButton : TownOfUsKillRoleButton<RoleBehaviour, 
 
         bool alignmentCanHuntBounty = role.GetRoleAlignment() != TownOfUs.Roles.RoleAlignment.CrewmateProtective;
         bool canHuntBounty = role.IsCrewmate() || role.GetRoleAlignment() != bountyTarget.Data.Role.GetRoleAlignment();
-        return canHuntBounty && alignmentCanHuntBounty && role is not BountyHunterRole;
+        return canHuntBounty && alignmentCanHuntBounty && role is not BountyHunterRole && !role.Player.Data.IsDead;
     }
 
     public override bool CanUse()

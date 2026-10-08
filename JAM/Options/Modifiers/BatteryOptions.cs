@@ -14,5 +14,5 @@ public sealed class BatteryOptions : AbstractOptionGroup<BatteryModifier>
     public float BatteryAmount { get; set; } = 1f;
 
     [ModdedNumberOption("Battery Chance", 0f, 100f, 10f, MiraNumberSuffixes.Percent)]
-    public float BatteryChance { get; set; } = 0f;
+    public float BatteryChance { get; set; } = 50f;
 }

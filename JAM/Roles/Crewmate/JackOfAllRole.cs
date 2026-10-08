@@ -135,7 +135,7 @@ public sealed class JackOfAllRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOf
         }
     }
 
-        public static void CheckAddModifier(PlayerControl player)
+    public static void CheckAddModifier(PlayerControl player)
     {
         if(player.AmOwner && player.Data.Role is JackOfAllRole)
         {
@@ -143,4 +143,6 @@ public sealed class JackOfAllRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOf
             GiveRandModifiers(1, player);
         }
     }
+
+    //If Crew should win -> Remove Assassin Modifier
 }

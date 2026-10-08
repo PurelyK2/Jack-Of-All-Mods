@@ -87,6 +87,7 @@ public class ZombieRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOfUsRole, IWi
         }
 
         Player.RpcAddModifier<ZombieRevealedModifier>();
+        Player.RemainingEmergencies = 0;
     }
 
     public bool WinConditionMet()
@@ -196,7 +197,7 @@ public sealed class ZombieLeaderRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITown
     public Color RoleColor => Colors.Zombie;
     public ModdedRoleTeams Team => ModdedRoleTeams.Custom;
     public RoleBehaviour AppearAs => (RoleBehaviour)RoleId.Get<ZombieLeaderRole>();
-    public bool IsGuessable => PlayerControl.LocalPlayer != null && PlayerControl.LocalPlayer.Data.Role is VigilanteRole;
+    public bool IsGuessable => Helpers.GetAlivePlayers().Count > 3;
     public CustomRoleConfiguration Configuration => new(this)
     {
         IconTmp = TmpSpriteUtils.CreateSpriteAsset(JamRoleIcons.ZombieLeader.LoadAsset(), "JackOfAllMods.Roles.Neutral.ZombieLeader", 1.45f),
@@ -216,7 +217,7 @@ public sealed class ZombieLeaderRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITown
     float timer;
     public void Update()
     {
-        if(Player == null || Player.Data.IsDead) return;
+        if (Player == null || Player.Data.IsDead) return;
 
         List<DeadBody> bodiesInRange = Helpers.GetNearestDeadBodies(Player.transform.position, ShipStatus.Instance.MaxLightRadius * 100, Helpers.CreateFilter(Constants.NotShipMask));
         bodiesInRange.RemoveAll(b => !(MiscUtils.PlayerById(b.ParentId).GetRoleWhenAlive() is ZombieRole));

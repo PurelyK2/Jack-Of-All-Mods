@@ -128,7 +128,7 @@ public sealed class MicromanagerRole(IntPtr cppPtr) : CrewmateGhostRole(cppPtr),
             return false;
         }
 
-        if (opts.MicromanagerCanBeClickedBy == MicromanagerRoleClickableType.NonCrew && PlayerControl.LocalPlayer.Data.Role.IsCrewmate())
+        if (opts.MicromanagerCanBeClickedBy == MicromanagerRoleClickableType.NonCrew && PlayerControl.LocalPlayer.IsCrewmate())
         {
             return false;
         }
@@ -242,7 +242,7 @@ public sealed class MicromanagerRole(IntPtr cppPtr) : CrewmateGhostRole(cppPtr),
         }
 
         var crewPlayers = PlayerControl.AllPlayerControls.ToArray().Where(x => 
-            x && x != Player && x.Data != null && x.IsCrewmate() &&
+            x && x != Player && x.Data != null && x.IsCrewmate() && !x.HasModifier<AllianceGameModifier>() &&
                 opts.MicromanagerManagesCrewTasks switch
                 {
                     MicromanagerRoleCrewType.AliveCrew => !x.Data.IsDead,
@@ -283,8 +283,6 @@ public sealed class MicromanagerRole(IntPtr cppPtr) : CrewmateGhostRole(cppPtr),
 
         HudManager.Instance.ShowTaskComplete();
 
-        RpcCompleteTask(randomCrew, randomTask.Id);
-
         var sb = new StringBuilder();
         randomTask.AppendTaskText(sb);
 
@@ -301,8 +299,10 @@ public sealed class MicromanagerRole(IntPtr cppPtr) : CrewmateGhostRole(cppPtr),
 
         notif.AdjustNotification();
 
+
+        RpcCompleteTask(randomCrew, randomTask.Id, taskText);
         var targetMessage =
-            $"<b>{microColor.ToTextColor()}The Micromanager completed the</color> {TownOfUsColors.Doomsayer.ToTextColor()}{taskText} </color>{microColor.ToTextColor()}task for you.</color></b>";
+            $"<b>{microColor.ToTextColor()}The Micromanager completed the</color> {TownOfUsColors.Doomsayer.ToTextColor()}{taskText}</color>{microColor.ToTextColor()}task for you.</color></b>";
     }
 
     public override void Initialize(PlayerControl player)
@@ -531,13 +531,11 @@ public sealed class MicromanagerRole(IntPtr cppPtr) : CrewmateGhostRole(cppPtr),
     }
 
     [MethodRpc((uint) JAMRpcCalls.MicromanageTask)]
-    public static void RpcCompleteTask(PlayerControl player, uint taskId)
+    public static void RpcCompleteTask(PlayerControl player, uint taskId, string taskName)
     {
         if (player.AmOwner)
         {
             player.RpcCompleteTask(taskId);
-
-            string taskName = player.Data.FindTaskById(taskId)?.ToString() ?? "Null";
 
             Helpers.CreateAndShowNotification(
                 $"<b>{Colors.Micromanager.ToTextColor()}Your {TownOfUsColors.Doomsayer.ToTextColor()}{taskName}</color> Task Was Completed By The {Colors.Micromanager.ToTextColor()}Micromanager</color>. </color></b>",
@@ -553,7 +551,6 @@ public sealed class MicromanagerRole(IntPtr cppPtr) : CrewmateGhostRole(cppPtr),
     {
         public static void Postfix(ref List<RoleTypes> ___CrewmateGhostRolePool)
         {
-            Info("Meep Moop");
             ___CrewmateGhostRolePool.RemoveAll(x => x == (RoleTypes)RoleId.Get<MicromanagerRole>());
         }
     }

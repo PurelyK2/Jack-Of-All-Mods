@@ -117,14 +117,11 @@ public sealed class DeceiverRole(IntPtr cppPtr) : ImpostorRole(cppPtr), ITownOfU
     }
 
     [MethodRpc((uint)JAMRpcCalls.DeceiverShield)]
-    public static void RpcDeceiverShield(PlayerControl deceiver, PlayerControl target, bool medicShield)
+    public static void RpcDeceiverShield(PlayerControl deceiver, PlayerControl target)
     {
         if(PlayerControl.LocalPlayer == deceiver || PlayerControl.LocalPlayer == target)
         {
-            if (medicShield)
-                target.AddModifier<DeceiverMedicShield>();
-            else
-                target.AddModifier<DeceiverWardenShield>();
+            target.AddModifier<DeceiverMedicShield>();
         }
     }
 
@@ -255,7 +252,7 @@ public sealed class DeceiverRole(IntPtr cppPtr) : ImpostorRole(cppPtr), ITownOfU
         }
     }
 
-    static void ReConfuse()
+    public static void ReConfuse()
     {
         if (!hasGameStarted) return;
         if (PlayerControl.LocalPlayer.Data.Role.IsImpostor() || PlayerControl.LocalPlayer.Data.IsDead || PlayerControl.LocalPlayer.Data.Role is IGhostRole) return;

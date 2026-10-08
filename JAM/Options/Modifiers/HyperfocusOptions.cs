@@ -20,5 +20,5 @@ public sealed class HyperfocusOptions : AbstractOptionGroup<HyperfocusModifier>
     public float HyperfocusCount { get; set; } = 1f;
     
     [ModdedNumberOption("Hyperfocus Chance", 0f, 100f, 10f, MiraNumberSuffixes.Percent)]
-    public float HyperfocusChance { get; set; } = 0f;
+    public float HyperfocusChance { get; set; } = 50f;
 }

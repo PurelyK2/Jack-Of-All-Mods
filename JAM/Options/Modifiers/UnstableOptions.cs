@@ -20,7 +20,7 @@ public sealed class UnstableOptions : AbstractOptionGroup<UnstableModifier>
     public float UnstableCount { get; set; } = 1f;
 
         [ModdedNumberOption("Unstable Chance", 0f, 100f, 10f, MiraNumberSuffixes.Percent)]
-    public float UnstableChance { get; set; } = 0f;
+    public float UnstableChance { get; set; } = 50f;
 
         [ModdedNumberOption("Minimum TP Cooldown", 0f, 120f, 5f, MiraNumberSuffixes.Seconds)]
     public float UnstableMinCooldown { get; set; } = 30f;

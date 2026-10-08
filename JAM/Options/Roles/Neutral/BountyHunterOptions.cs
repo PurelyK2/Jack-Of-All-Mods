@@ -34,7 +34,7 @@ public sealed class BountyHunterOptions : AbstractOptionGroup<BountyHunterRole>
     public float GiveVentable { get; set; } = 10f;
     [ModdedNumberOption("Extra Vote Weight", 0f, 100f, 5f, MiraNumberSuffixes.Percent)]
     public float GiveExtraVote { get; set; } = 10f;
-    [ModdedNumberOption("Reveal Role Weight (CK Only)", 0f, 100f, 5f, MiraNumberSuffixes.Percent)]
+    [ModdedNumberOption("Reveal Role Weight (Crew Only)", 0f, 100f, 5f, MiraNumberSuffixes.Percent)]
     public float RevealCKRole { get; set; } = 10f;
     [ModdedNumberOption("Double Shot Weight", 0f, 100f, 5f, MiraNumberSuffixes.Percent)]
     public float GiveDblShot { get; set; } = 10f;
