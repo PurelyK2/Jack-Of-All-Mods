@@ -21,7 +21,7 @@ public static class ShackledEvents
         var source = @event.Source;
         var target = @event.Target;
 
-        if (!target.HasModifier<ShackledModifier>() || !source.AmOwner || MeetingHud.Instance || target.HasDied())
+        if (!target.HasModifier<ShackledModifier>() || !source.AmOwner || MeetingHud.Instance || source.HasDied())
         {
             return;
         }
