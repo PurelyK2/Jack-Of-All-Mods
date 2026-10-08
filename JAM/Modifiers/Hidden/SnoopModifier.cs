@@ -15,7 +15,7 @@ using TownOfUs.Utilities;
 using TownOfUs.Utilities.Appearances;
 using UnityEngine;
 
-namespace JAM.Modifiers.Crewmate;
+namespace JAM.Modifiers.Hidden;
 
 public sealed class StealthySwoopModifier : ConcealedModifier, IVisualAppearance
 {

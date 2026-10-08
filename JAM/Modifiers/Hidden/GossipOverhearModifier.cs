@@ -13,7 +13,7 @@ using TownOfUs.Roles.Crewmate;
 using TownOfUs.Roles;
 using TownOfUs.Extensions;
 
-namespace JAM.Modifiers.Crewmate;
+namespace JAM.Modifiers.Hidden;
 
 public sealed class GossipOverhearModifier : BaseModifier
 {

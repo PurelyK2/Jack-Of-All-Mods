@@ -1,16 +1,8 @@
-using JAM.Options.Modifiers.UniversalModifierOptions;
-using MiraAPI.GameOptions;
 using MiraAPI.Modifiers;
 using MiraAPI.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TownOfUs.Interfaces;
 using TownOfUs.Roles;
 using TownOfUs.Utilities;
-using UnityEngine;
 
 namespace JAM.Modifiers.Role;
 

@@ -1,7 +1,6 @@
 using JAM.Modifiers.Role;
 using JAM.Options.Roles.Crewmate;
 using JAM.Roles.Crewmate;
-using JAM.Roles.Neutral;
 using MiraAPI.Events;
 using MiraAPI.Events.Vanilla.Player;
 using MiraAPI.GameOptions;

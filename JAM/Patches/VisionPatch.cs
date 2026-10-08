@@ -1,9 +1,9 @@
 using HarmonyLib;
-using JAM.Modifiers.Game.Universal;
+using JAM.Modifiers;
 using MiraAPI.GameOptions;
 using MiraAPI.Modifiers;
 using TownOfUs.Utilities;
-using JAM.Options.Modifiers.UniversalModifierOptions;
+using JAM.Options.Modifiers;
 
 namespace JAM.Patches;
 

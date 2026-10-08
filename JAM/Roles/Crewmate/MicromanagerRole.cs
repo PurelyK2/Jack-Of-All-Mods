@@ -23,7 +23,6 @@ using TownOfUs.Modules.Wiki;
 using TownOfUs.Options;
 using TownOfUs.Patches;
 using TownOfUs.Roles;
-using TownOfUs.Roles.Crewmate;
 using TownOfUs.Roles.Neutral;
 using TownOfUs.Utilities;
 using TownOfUs.Utilities.Appearances;

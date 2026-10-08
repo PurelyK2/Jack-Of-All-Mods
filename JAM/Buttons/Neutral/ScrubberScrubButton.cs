@@ -1,16 +1,12 @@
 using JAM.Assets;
-using JAM.Modifiers.Neutral;
 using JAM.Options.Roles.Neutral;
 using JAM.Roles.Neutral;
 using MiraAPI.GameOptions;
-using MiraAPI.Hud;
 using MiraAPI.Keybinds;
 using MiraAPI.Modifiers;
 using MiraAPI.Utilities.Assets;
 using Reactor.Utilities;
-using TownOfUs.Assets;
 using TownOfUs.Buttons;
-using TownOfUs.Options.Roles.Crewmate;
 using TownOfUs.Utilities;
 using UnityEngine;
 

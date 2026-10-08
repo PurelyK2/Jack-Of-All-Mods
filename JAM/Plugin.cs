@@ -102,4 +102,8 @@ public enum JAMRpcCalls : uint
  * Dead no longer get bounty hunting button
  * Removed Warden Shield From Deceiver Shields
  * Jack Of All with Assassin No Longer Continues Game When Crew Should Win
+
+ * Fixed Shackled Modifier not working
+ * Fixed a bunch of namespaces being wrong and causing errors
+ * Fixed Concealed Modifier overlapping with TOUM Concealed Modifier
 */

@@ -1,24 +1,12 @@
-using MiraAPI.GameOptions;
-using MiraAPI.LocalSettings;
 using MiraAPI.Modifiers;
 using MiraAPI.Utilities.Assets;
 using Reactor.Utilities.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TownOfUs;
 using TownOfUs.Assets;
 using TownOfUs.Modifiers;
 using TownOfUs.Modules.Anims;
-using TownOfUs.Options;
-using TownOfUs.Patches;
-using TownOfUs.Roles.Other;
-using TownOfUs.Utilities.Appearances;
 using UnityEngine;
 
-namespace JAM.Modifiers;
+namespace JAM.Modifiers.Role;
 
 public sealed class BountyShieldModifier : BaseShieldModifier, IAnimated
 {

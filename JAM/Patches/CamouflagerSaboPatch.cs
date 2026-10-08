@@ -1,7 +1,5 @@
 using HarmonyLib;
 using MiraAPI.GameOptions;
-using TownOfUs.Options;
-using TownOfUs.Utilities;
 using JAM.Options.Roles.Impostor;
 using JAM.Modifiers.Hidden;
 using MiraAPI.Modifiers;

@@ -1,13 +1,10 @@
 using MiraAPI.Events;
 using MiraAPI.Events.Vanilla.Gameplay;
-using MiraAPI.Hud;
 using MiraAPI.Modifiers;
 using MiraAPI.Utilities;
-using TownOfUs.Buttons;
 using TownOfUs.Utilities;
-using TownOfUs;
 using UnityEngine;
-using JAM.Modifiers.Universal;
+using JAM.Modifiers;
 using JAM.Modifiers.Hidden;
 using JAM.Assets;
 

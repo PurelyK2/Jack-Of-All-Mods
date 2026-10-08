@@ -6,11 +6,11 @@ using MiraAPI.Keybinds;
 using MiraAPI.Modifiers;
 using MiraAPI.Utilities;
 using MiraAPI.Utilities.Assets;
-using TownOfUs;
 using TownOfUs.Assets;
 using TownOfUs.Buttons;
 using TownOfUs.Utilities;
 using UnityEngine;
+using JAM.Modifiers.Role;
 
 namespace JAM.Buttons.Roles.Impostor;
 

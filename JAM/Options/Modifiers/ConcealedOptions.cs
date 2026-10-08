@@ -1,16 +1,12 @@
-using JAM.Modifiers.Game.Universal;
+using JAM.Modifiers;
 using MiraAPI.GameOptions;
 using MiraAPI.GameOptions.Attributes;
 using MiraAPI.GameOptions.OptionTypes;
 using MiraAPI.Utilities;
-using JAM.Roles.Crewmate;
-using JAM.Roles.Neutral;
-using TownOfUs.Extensions;
-using TownOfUs.Modules.Localization;
 
-namespace JAM.Options.Modifiers.Game.Universal;
+namespace JAM.Options.Modifiers;
 
-public sealed class ConcealedOptions : AbstractOptionGroup<ConcealedModifier>
+public sealed class ConcealedOptions : AbstractOptionGroup<JamConcealedModifier>
 {
     public override string GroupName => "Concealed Options";
     

@@ -1,4 +1,4 @@
-using JAM.Modifiers.Crewmate;
+using JAM.Modifiers.Hidden;
 using MiraAPI.GameOptions;
 using MiraAPI.Keybinds;
 using MiraAPI.Modifiers;
@@ -8,11 +8,8 @@ using JAM.Options.Roles.Crewmate;
 using JAM.Roles.Crewmate;
 using TownOfUs.Assets;
 using TownOfUs.Buttons;
-using TownOfUs.Extensions;
-using TownOfUs.Modules;
 using TownOfUs.Utilities;
 using UnityEngine;
-using MiraAPI.Roles;
 using MiraAPI.Utilities;
 
 namespace JAM.Buttons.Crewmate;

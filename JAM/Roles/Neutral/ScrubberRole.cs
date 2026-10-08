@@ -1,7 +1,7 @@
 using AmongUs.GameOptions;
 using Il2CppInterop.Runtime.Attributes;
 using JAM.Assets;
-using JAM.Modifiers.Neutral;
+using JAM.Modifiers;
 using JAM;
 using MiraAPI.Events;
 using MiraAPI.Events.Vanilla.Gameplay;

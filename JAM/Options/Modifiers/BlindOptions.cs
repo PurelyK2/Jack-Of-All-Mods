@@ -1,4 +1,4 @@
-using JAM.Modifiers.Game.Universal;
+using JAM.Modifiers;
 using System;
 using System.Runtime.CompilerServices;
 using MiraAPI.GameOptions;
@@ -10,7 +10,7 @@ using TownOfUs.Modules.Localization;
 using TownOfUs.Options.Modifiers;
 using UnityEngine;
 
-namespace JAM.Options.Modifiers.UniversalModifierOptions;
+namespace JAM.Options.Modifiers;
 
 public sealed class BlindOptions : AbstractOptionGroup<BlindModifier>
 {

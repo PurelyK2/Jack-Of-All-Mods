@@ -1,7 +1,7 @@
 using AmongUs.GameOptions;
 using HarmonyLib;
 using JAM.Assets;
-using JAM.Modifiers.Neutral;
+using JAM.Modifiers.Hidden;
 using JAM.Options.Roles.Neutral;
 using JAM.Patches.WinConditions;
 using MiraAPI.Events;
@@ -16,23 +16,16 @@ using MiraAPI.Utilities;
 using MiraAPI.Utilities.Assets;
 using Reactor.Utilities;
 using TownOfUs.Assets;
-using TownOfUs.Events;
-using TownOfUs.Events.TouEvents;
 using TownOfUs.Extensions;
 using TownOfUs.Interfaces;
-using TownOfUs.Modifiers;
 using TownOfUs.Modules;
 using TownOfUs.Modules.Wiki;
 using TownOfUs.Networking;
-using TownOfUs.Patches;
 using TownOfUs.Roles;
 using TownOfUs.Roles.Crewmate;
 using TownOfUs.Roles.Neutral;
 using TownOfUs.Utilities;
-using TownOfUs.Utilities.Appearances;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEngine.GraphicsBuffer;
 
 namespace JAM.Roles.Neutral;
 

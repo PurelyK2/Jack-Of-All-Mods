@@ -1,4 +1,4 @@
-using JAM.Modifiers.Game.Universal;
+using JAM.Modifiers;
 using MiraAPI.GameOptions;
 using MiraAPI.GameOptions.Attributes;
 using MiraAPI.GameOptions.OptionTypes;
@@ -8,7 +8,7 @@ using JAM.Roles.Neutral;
 using TownOfUs.Extensions;
 using TownOfUs.Modules.Localization;
 
-namespace JAM.Options.Modifiers.Game.Universal;
+namespace JAM.Options.Modifiers;
 
 public sealed class VentableOptions : AbstractOptionGroup<VentableModifier>
 {

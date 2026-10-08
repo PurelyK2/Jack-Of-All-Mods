@@ -7,7 +7,7 @@ using TownOfUs.Options;
 using TownOfUs.Roles.Crewmate;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using JAM.Modifiers.Universal;
+using JAM.Modifiers;
 using TMPro;
 
 

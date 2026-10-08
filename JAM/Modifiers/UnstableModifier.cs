@@ -1,36 +1,24 @@
 using JAM.Assets;
-using JAM.Options.Modifiers.UniversalModifierOptions;
+using JAM.Options.Modifiers;
 using MiraAPI.Events;
 using MiraAPI.GameOptions;
 using MiraAPI.Hud;
-using MiraAPI.LocalSettings;
 using MiraAPI.Modifiers;
-using MiraAPI.Networking;
-using MiraAPI.Roles;
 using MiraAPI.Utilities;
 using MiraAPI.Utilities.Assets;
-using Reactor.Utilities;
-using TownOfUs;
-using TownOfUs.Assets;
-using TownOfUs.Buttons.Crewmate;
 using TownOfUs.Buttons.Impostor;
-using TownOfUs.Events.Crewmate;
 using TownOfUs.Events.TouEvents;
 using TownOfUs.Interfaces;
 using TownOfUs.Modifiers;
-using TownOfUs.Modifiers.Crewmate;
 using TownOfUs.Modifiers.Game;
 using TownOfUs.Modifiers.Game.Universal;
 using TownOfUs.Modifiers.Impostor;
-using TownOfUs.Modifiers.Neutral;
 using TownOfUs.Modules;
 using TownOfUs.Modules.Wiki;
-using TownOfUs.Roles.Crewmate;
-using TownOfUs.Roles.Neutral;
 using TownOfUs.Utilities;
 using UnityEngine;
 
-namespace JAM.Modifiers.Game.Universal;
+namespace JAM.Modifiers;
 
  
 public sealed class UnstableModifier : TouGameModifier, IWikiDiscoverable

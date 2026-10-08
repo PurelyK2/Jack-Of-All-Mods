@@ -1,5 +1,4 @@
 using JAM.Modifiers.Role;
-using JAM.Modifiers.Universal;
 using JAM.Options.Roles.Neutral;
 using JAM.Roles.Neutral;
 using MiraAPI.GameOptions;

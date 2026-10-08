@@ -1,24 +1,21 @@
 using HarmonyLib;
 using JAM.Assets;
-using JAM.Options.Modifiers.Game.Universal;
+using JAM.Options.Modifiers;
 using MiraAPI.GameOptions;
 using MiraAPI.Modifiers;
-using MiraAPI.Roles;
 using MiraAPI.Utilities.Assets;
-using TownOfUs.Assets;
 using TownOfUs.Modifiers;
 using TownOfUs.Modifiers.Game;
 using TownOfUs.Modifiers.Game.Universal;
 using TownOfUs.Modules.Wiki;
 using TownOfUs.Options.Maps;
 using TownOfUs.Utilities;
-using TownOfUs.Utilities.Appearances;
 using UnityEngine;
 
-namespace JAM.Modifiers.Game.Universal;
+namespace JAM.Modifiers;
 
  
-public sealed class ConcealedModifier : UniversalGameModifier, IWikiDiscoverable
+public sealed class JamConcealedModifier : UniversalGameModifier, IWikiDiscoverable
 {
      
     public override string ModifierName => "Concealed";

@@ -16,7 +16,7 @@ using TownOfUs.Networking;
 using TownOfUs.Roles.Crewmate;
 using UnityEngine;
 
-namespace JAM.Modifiers.Neutral;
+namespace JAM.Modifiers.Hidden;
 public sealed class ZombieRevealedModifier : BaseRevealModifier
 {
     public override string ModifierName => "Zombie Reveal";
