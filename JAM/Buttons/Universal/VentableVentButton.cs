@@ -7,7 +7,7 @@ using TownOfUs.Modifiers;
 using TownOfUs.Modules;
 using TownOfUs.Utilities;
 using Reactor.Utilities.Extensions;
-using JAM.Modifiers.Game.Universal;
+using JAM.Modifiers;
 using TownOfUs.Buttons;
 
 namespace JAM.Buttons.Crewmate;

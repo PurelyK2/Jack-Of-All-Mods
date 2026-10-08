@@ -1,5 +1,5 @@
 using JAM.Assets;
-using JAM.Options.Modifiers.UniversalModifierOptions;
+using JAM.Options.Modifiers;
 using MiraAPI.GameOptions;
 using MiraAPI.Utilities.Assets;
 using TownOfUs.Assets;
@@ -9,7 +9,7 @@ using TownOfUs.Modules.Wiki;
 using TownOfUs.Utilities;
 using UnityEngine;
 
-namespace JAM.Modifiers.Game.Universal;
+namespace JAM.Modifiers;
 
  
 public sealed class HyperfocusModifier : TouGameModifier, IWikiDiscoverable

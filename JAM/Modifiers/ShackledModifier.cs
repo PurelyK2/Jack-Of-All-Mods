@@ -8,7 +8,7 @@ using UnityEngine;
 using JAM.Options.Modifiers;
 using JAM.Assets;
 
-namespace JAM.Modifiers.Universal;
+namespace JAM.Modifiers;
 
 public sealed class ShackledModifier : UniversalGameModifier, IWikiDiscoverable
 {

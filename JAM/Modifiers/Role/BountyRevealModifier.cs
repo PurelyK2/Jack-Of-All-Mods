@@ -10,7 +10,7 @@ using TownOfUs.Modifiers;
 using TownOfUs.Modules;
 using TownOfUs.Roles.Crewmate;
 
-namespace JAM.Modifiers;
+namespace JAM.Modifiers.Role;
 
 public sealed class BountyRevealModifier : BaseRevealModifier
 {

@@ -1,16 +1,10 @@
-using JAM.Modifiers.Game.Universal;
-using System;
-using System.Runtime.CompilerServices;
 using MiraAPI.GameOptions;
 using MiraAPI.GameOptions.Attributes;
 using MiraAPI.GameOptions.OptionTypes;
 using MiraAPI.Utilities;
-using TownOfUs.Modifiers.Game.Alliance;
-using TownOfUs.Modules.Localization;
-using TownOfUs.Options.Modifiers;
-using UnityEngine;
+using JAM.Modifiers;
 
-namespace JAM.Options.Modifiers.UniversalModifierOptions;
+namespace JAM.Options.Modifiers;
 
 public sealed class HyperfocusOptions : AbstractOptionGroup<HyperfocusModifier>
 {

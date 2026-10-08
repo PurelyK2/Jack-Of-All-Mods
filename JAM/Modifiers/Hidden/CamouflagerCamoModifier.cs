@@ -1,13 +1,11 @@
 using MiraAPI.Events;
 using MiraAPI.GameOptions;
 using TownOfUs.Events.TouEvents;
-using TownOfUs.Options.Roles.Impostor;
-using TownOfUs.Modifiers;
 using TownOfUs.Utilities.Appearances;
 using UnityEngine;
+using TownOfUs.Modifiers;
 using JAM.Options.Roles.Impostor;
 using JAM.Roles.Impostor;
-
 namespace JAM.Modifiers.Hidden;
 
 public sealed class CamouflagerCamoModifier : ConcealedModifier, IVisualAppearance

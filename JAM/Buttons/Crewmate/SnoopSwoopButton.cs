@@ -8,7 +8,7 @@ using TownOfUs.Assets;
 using TownOfUs.Buttons;
 using TownOfUs.Modifiers;
 using UnityEngine;
-using JAM.Modifiers.Crewmate;
+using JAM.Modifiers.Hidden;
 
 namespace JAM.Buttons.Crewmate;
 

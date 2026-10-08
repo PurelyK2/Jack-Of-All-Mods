@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JAM.Modifiers.HiddenModifiers;
+namespace JAM.Modifiers.Hidden;
 
 internal class DeceiverModifier : BaseModifier
 {

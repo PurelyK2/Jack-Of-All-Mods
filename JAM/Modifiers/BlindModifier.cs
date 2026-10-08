@@ -1,17 +1,14 @@
 using JAM.Assets;
-using JAM.Options.Modifiers.UniversalModifierOptions;
+using JAM.Options.Modifiers;
 using MiraAPI.GameOptions;
 using MiraAPI.Utilities.Assets;
-using TownOfUs;
-using TownOfUs.Assets;
-using TownOfUs.Extensions;
 using TownOfUs.Modifiers;
 using TownOfUs.Modifiers.Game;
 using TownOfUs.Modules.Wiki;
 using TownOfUs.Utilities;
 using UnityEngine;
 
-namespace JAM.Modifiers.Game.Universal;
+namespace JAM.Modifiers;
 
  
 public sealed class BlindModifier : TouGameModifier, IWikiDiscoverable

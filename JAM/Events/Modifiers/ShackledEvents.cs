@@ -1,13 +1,10 @@
 using MiraAPI.Events;
 using MiraAPI.Events.Vanilla.Gameplay;
-using MiraAPI.Hud;
 using MiraAPI.Modifiers;
 using MiraAPI.Utilities;
-using TownOfUs.Buttons;
 using TownOfUs.Utilities;
-using TownOfUs;
 using UnityEngine;
-using JAM.Modifiers.Universal;
+using JAM.Modifiers;
 using JAM.Modifiers.Hidden;
 using JAM.Assets;
 
@@ -21,7 +18,7 @@ public static class ShackledEvents
         var source = @event.Source;
         var target = @event.Target;
 
-        if (!target.HasModifier<ShackledModifier>() || !source.AmOwner || MeetingHud.Instance || target.HasDied())
+        if (!target.HasModifier<ShackledModifier>() || !source.AmOwner || MeetingHud.Instance || source.HasDied())
         {
             return;
         }
