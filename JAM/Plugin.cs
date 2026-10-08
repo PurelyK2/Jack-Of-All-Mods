@@ -101,4 +101,5 @@ public enum JAMRpcCalls : uint
  * Changed Bounty Hunter Sprite
  * Dead no longer get bounty hunting button
  * Removed Warden Shield From Deceiver Shields
+ * Jack Of All with Assassin No Longer Continues Game When Crew Should Win
 */

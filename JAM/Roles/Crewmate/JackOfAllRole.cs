@@ -1,3 +1,5 @@
+using HarmonyLib;
+using Il2CppSystem.Web.Util;
 using JAM.Assets;
 using JAM.Modifiers.Role;
 using JAM.Options.Roles.Crewmate;
@@ -6,15 +8,18 @@ using MiraAPI.Modifiers;
 using MiraAPI.Modifiers.Types;
 using MiraAPI.Patches.Stubs;
 using MiraAPI.Roles;
+using MiraAPI.Utilities;
 using MiraAPI.Utilities.Assets;
 using TownOfUs.Assets;
 using TownOfUs.Extensions;
+using TownOfUs.Interfaces;
 using TownOfUs.Modifiers;
 using TownOfUs.Modifiers.Game;
 using TownOfUs.Modifiers.Game.Alliance;
 using TownOfUs.Modifiers.Game.Assailant;
 using TownOfUs.Modifiers.Game.Impostor;
 using TownOfUs.Modifiers.Game.Universal;
+using TownOfUs.Modules;
 using TownOfUs.Modules.Wiki;
 using TownOfUs.Roles;
 using TownOfUs.Utilities;
@@ -22,7 +27,7 @@ using UnityEngine;
 
 namespace JAM.Roles.Crewmate;
 
-public sealed class JackOfAllRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOfUsRole, IWikiDiscoverable, IDoomable
+public sealed class JackOfAllRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOfUsRole, IWikiDiscoverable, IDoomable, IContinuesGame
 {
     public int NumTasksUntilMod = (int)OptionGroupSingleton<JackOfAllOptions>.Instance.TasksPerMod;
 
@@ -44,6 +49,33 @@ public sealed class JackOfAllRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOf
         Icon = JamRoleIcons.JackOfAll
     };
 
+    public bool ContinuesGame
+    {
+        get
+        {
+            if (Player.Data.IsDead) return false;
+
+            //Assassin ONLY when there are killers
+            if(Player.HasModifier<AssassinModifier>())
+            {
+                if (MiscUtils.RealKillersAliveCount > 0)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
+            //Tasks ONLY when there are killers
+            if(!Player.AllTasksCompleted() && MiscUtils.RealKillersAliveCount > 0)
+            {
+                return true;
+            }
+
+            //Regular Check
+            return Player.GetModifiers<BaseModifier>().Any(m => m is IContinuesGame gameHalt && gameHalt.ContinuesGame);
+        }
+    }
 
     public string GetAdvancedDescription() { return RoleLongDescription + MiscUtils.AppendOptionsText(base.GetType()); }
 
@@ -144,5 +176,21 @@ public sealed class JackOfAllRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOf
         }
     }
 
-    //If Crew should win -> Remove Assassin Modifier
+    [HarmonyPatch(typeof(MiscUtils), "GameHaltersAliveCount", MethodType.Getter)]
+    public static class ModsDontContinueOnJack
+    {
+        public static void Postfix(ref int __result)
+        {
+            foreach(PlayerControl player in MiraAPI.Utilities.Helpers.GetAlivePlayers().Where(p => p.Data.Role is JackOfAllRole))
+            {
+                if(!(player is IContinuesGame contGame && contGame.ContinuesGame))
+                {
+                    if (player.GetModifiers<BaseModifier>().Any(m => m is IContinuesGame contGame && contGame.ContinuesGame))
+                    {
+                        __result--;
+                    }
+                }
+            }
+        }
+    }
 }
