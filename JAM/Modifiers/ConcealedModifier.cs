@@ -10,6 +10,7 @@ using TownOfUs.Modifiers;
 using TownOfUs.Modifiers.Game;
 using TownOfUs.Modifiers.Game.Universal;
 using TownOfUs.Modules.Wiki;
+using TownOfUs.Options.Maps;
 using TownOfUs.Utilities;
 using TownOfUs.Utilities.Appearances;
 using UnityEngine;
@@ -23,8 +24,7 @@ public sealed class ConcealedModifier : UniversalGameModifier, IWikiDiscoverable
     public override string ModifierName => "Concealed";
      
     public override string IntroInfo => "You Are Harder To See";
-
-     
+    
     public override string GetDescription()
     {
         return "You Are Slightly Less Opaque";
@@ -45,7 +45,18 @@ public sealed class ConcealedModifier : UniversalGameModifier, IWikiDiscoverable
      
     public override bool IsModifierValidOn(RoleBehaviour role)
     {
-        return !role.CanVent && base.IsModifierValidOn(role);
+        return base.IsModifierValidOn(role) && !role.Player.HasModifier<ShyModifier>();
+    }
+    [HarmonyPatch(typeof(ShyModifier), nameof(ShyModifier.IsModifierValidOn))]
+    public static class MakeShyExclusive
+    {
+        public static void Postfix(RoleBehaviour role, ref bool __result)
+        {
+            if (role.Player.HasModifier<ConcealedModifier>())
+            {
+                __result = false;
+            }
+        }
     }
 
     public override ModifierUiConfiguration Configuration
@@ -76,13 +87,29 @@ public sealed class ConcealedModifier : UniversalGameModifier, IWikiDiscoverable
     {
         base.Update();
 
-        if (!Player.Data.IsDead)
+        bool commsActive;
+
+        switch ((ExpandedMapNames)GameOptionsManager.Instance.currentGameOptions.MapId)
+        {
+            case ExpandedMapNames.MiraHq:
+            case ExpandedMapNames.Fungle:
+                var hqComms = ShipStatus.Instance.Systems[SystemTypes.Comms]
+                    .Cast<HqHudSystemType>();
+
+                commsActive = hqComms.IsActive;
+                break;
+
+            default:
+                var hudComms = ShipStatus.Instance.Systems[SystemTypes.Comms]
+                    .Cast<HudOverrideSystemType>();
+
+                commsActive = hudComms.IsActive;
+                break;
+        }
+
+        if (!Player.Data.IsDead && !(commsActive && TownOfUsMapOptions.IsCamoCommsOn()))
         {
             ShyModifier.SetVisibility(Player, OptionGroupSingleton<ConcealedOptions>.Instance.ConcealedOpacity);
-        }
-        else
-        {
-            ShyModifier.SetVisibility(Player, 1, OptionGroupSingleton<ConcealedOptions>.Instance.ConcealName);
         }
     }
 }

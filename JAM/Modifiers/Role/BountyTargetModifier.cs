@@ -148,12 +148,14 @@ public sealed class BountyTargetModifier : BaseModifier
     }
 
     [HarmonyPatch(typeof(LogicOptions), nameof(LogicOptions.GetPlayerSpeedMod))]
-    [HarmonyPostfix]
-    public static void TargetSpeedPatch(PlayerControl pc, ref float __result)
+    public static class TargetSpeedPatch
     {
-        if (pc.HasModifier<BountyTargetModifier>())
+        public static void Postfix(PlayerControl pc, ref float __result)
         {
-            __result *= 2;
+            if (pc.HasModifier<BountyTargetModifier>())
+            {
+                __result *= 2;
+            }
         }
     }
 }

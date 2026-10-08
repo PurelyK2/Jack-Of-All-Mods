@@ -23,7 +23,7 @@ public sealed class OverhearButton : TownOfUsRoleButton<GossipRole, PlayerContro
     public override BaseKeybind Keybind => Keybinds.PrimaryAction;
     public override Color TextOutlineColor => Colors.Gossip;
     public override float Cooldown => OptionGroupSingleton<GossipOptions>.Instance.GossipCooldown;
-    public override LoadableAsset<Sprite> Sprite => TouModifierIcons.Crewpostor;
+    public override LoadableAsset<Sprite> Sprite => Assets.JamAssets.GossipOverhear;
 
     public override void CreateButton(Transform parent)
     {

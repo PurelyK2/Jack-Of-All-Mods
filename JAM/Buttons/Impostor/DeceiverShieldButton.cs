@@ -34,16 +34,16 @@ public sealed class DeceiverShieldButton : TownOfUsRoleButton<DeceiverRole, Play
             Error("Deceiver Shield: Target is null");
             return;
         }
-        else if (MiraAPI.Utilities.Helpers.GetAlivePlayers().Any(p => p.HasModifier<DeceiverMedicShield>() || p.HasModifier<DeceiverWardenShield>()))
+        else if (MiraAPI.Utilities.Helpers.GetAlivePlayers().Any(p => p.HasModifier<DeceiverMedicShield>()))
         {
-            Error("There Is Already A Shielded Target: " + Helpers.GetAlivePlayers().FirstOrDefault(p => p.HasModifier<DeceiverMedicShield>() || p.HasModifier<DeceiverWardenShield>())?.Data.PlayerName);
+            Error("There Is Already A Shielded Target: " + Helpers.GetAlivePlayers().FirstOrDefault(p => p.HasModifier<DeceiverMedicShield>())?.Data.PlayerName);
             return;
         }
 
-        DeceiverRole.RpcDeceiverShield(PlayerControl.LocalPlayer, Target, UnityEngine.Random.Range(0f, 1f) < 0.9f);
+        DeceiverRole.RpcDeceiverShield(PlayerControl.LocalPlayer, Target);
     }
     public override bool CanUse()
     {
-        return base.CanUse() && !MiraAPI.Utilities.Helpers.GetAlivePlayers().Any(p => p.HasModifier<DeceiverMedicShield>() || p.HasModifier<DeceiverWardenShield>());
+        return base.CanUse() && !MiraAPI.Utilities.Helpers.GetAlivePlayers().Any(p => p.HasModifier<DeceiverMedicShield>());
     }
 }

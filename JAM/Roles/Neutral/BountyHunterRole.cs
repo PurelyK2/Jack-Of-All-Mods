@@ -33,7 +33,7 @@ using TownOfUs.Modifiers.Neutral;
 
 namespace JAM.Roles.Neutral;
 
-// I DON'T REMEMBER WHO GAVE ME THIS IDEA!!! :sob:
+// IAmBoogarz gave the role idea
 public sealed class BountyHunterRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOfUsRole, IWikiDiscoverable, IDoomable
 {
     public string RoleName => "Bounty Hunter";

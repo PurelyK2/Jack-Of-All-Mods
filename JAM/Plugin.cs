@@ -80,23 +80,25 @@ public enum JAMRpcCalls : uint
     MicromanageTask = 2
 }
 
+// Jack Of All assassin continues game even when all crew
+
+// Concealed looks odd... (icon in-game)
+
 // =============== FIXES ===============
 /*
- * Added Fake Shield Ability To Deceiver
- * Bounty Target No Longer Shows Up In Win/Loss Screen
- * Removed Zombie Alliance Modifier
- * Bounty Reward Modifier No Longer Shows Up In The Wiki
- * Made Bounty Target Modifier Hidden
- * Zombies No Longer Win With Crew Without The Alliance Modifier
- * Fixed Role Option Description Text (RoleMedDescription) For Roles
- * Changed Micromanager To Use An RPC Call Instead Of A Modifier
- * Made This Mod's Neutrals Win/Lose Correctly When Dead
- * Added Concealed Modifier
- * Gave Bounty Target A Speed Boost
- * Adjusted Micromanager To Work Better
- * Fixed Bounty Reveal Modifier
- * Made it so 100% on Bounty Rewards Works Correctly
- * Micromanager No Longer Spawns On Crewmate Death
- * Jack Of All Can No Longer Get Circumvent
- * Added Custom Intro Sounds For Jack Of All and Time Keeper
+ * Fixed Bounty Target Speed Modifier
+ * Fixed Concealed Options Appearance
+ * Micromanager Can No Longer Manager Alliance Modified Crew
+ * Zombies Can No Longer Call Meetings
+ * Zombie Leader Is Now Guessable Until Final 3
+ * Made Concealed And Shy Mutually Exclusive
+ * You Are No Longer Concealed During Camo Comms
+ * Adjusted Wording In Bounty Hunter Options
+ * Micromanager Task Completion Names Look Right
+ * Changed Gossip Sprite
+ * Slighty Brightened Bounty Hunter's Color
+ * Deceiver Shield Goes Away When Deceiver Is Dead Now
+ * Changed Bounty Hunter Sprite
+ * Dead no longer get bounty hunting button
+ * Removed Warden Shield From Deceiver Shields
 */

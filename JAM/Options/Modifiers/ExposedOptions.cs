@@ -14,5 +14,5 @@ public sealed class ExposedOptions : AbstractOptionGroup<ExposedModifier>
     public float ExposedAmount { get; set; } = 1f;
 
     [ModdedNumberOption("Exposed Chance", 0f, 100f, 10f, MiraNumberSuffixes.Percent)]
-    public float ExposedChance { get; set; } = 0f;
+    public float ExposedChance { get; set; } = 50f;
 }

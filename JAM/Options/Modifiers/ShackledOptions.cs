@@ -14,7 +14,7 @@ public sealed class ShackledOptions : AbstractOptionGroup<ShackledModifier>
     public float ShackledAmount { get; set; } = 1f;
 
     [ModdedNumberOption("Shackled Chance", 0f, 100f, 10f, MiraNumberSuffixes.Percent)]
-    public float ShackledChance { get; set; } = 0f;
+    public float ShackledChance { get; set; } = 50f;
 
     [ModdedNumberOption("Shackled Duration", 3f, 25f, 1f, MiraNumberSuffixes.Seconds)]
     public float ShackledDuration { get; set; } = 5f;

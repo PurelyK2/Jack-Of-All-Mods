@@ -20,7 +20,7 @@ public sealed class ConcealedOptions : AbstractOptionGroup<ConcealedModifier>
     [ModdedNumberOption("Concealed Chance", 0f, 100f, 10f, MiraNumberSuffixes.Percent)]
     public float ConcealedChance { get; set; } = 50f;
 
-    [ModdedNumberOption("Concealed Opacity", 0f, 1f, 0.05f, MiraNumberSuffixes.Percent)]
+    [ModdedNumberOption("Concealed Opacity", 0f, 1f, 0.05f)]
     public float ConcealedOpacity { get; set; } = 0.25f;
 
     [ModdedToggleOption("Conceal Name")]

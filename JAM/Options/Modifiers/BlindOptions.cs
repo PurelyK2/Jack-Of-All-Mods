@@ -20,7 +20,7 @@ public sealed class BlindOptions : AbstractOptionGroup<BlindModifier>
     public float BlindCount { get; set; } = 1f;
     
     [ModdedNumberOption("Blind Chance", 0f, 100f, 10f, MiraNumberSuffixes.Percent)]
-    public float BlindChance { get; set; } = 0f;
+    public float BlindChance { get; set; } = 50f;
 
     [ModdedNumberOption("Blind Amount", 5f, 100f, 5f, MiraNumberSuffixes.Percent)]
     public float BlindAmount { get; set; } = 30f;
