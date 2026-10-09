@@ -1,5 +1,6 @@
 using HarmonyLib;
 using JAM.Assets;
+using JAM.Modifiers.Hidden;
 using JAM.Options.Modifiers;
 using MiraAPI.GameOptions;
 using MiraAPI.Modifiers;
@@ -104,9 +105,9 @@ public sealed class JamConcealedModifier : UniversalGameModifier, IWikiDiscovera
                 break;
         }
 
-        if (!Player.Data.IsDead && !(commsActive && TownOfUsMapOptions.IsCamoCommsOn()))
+        if (!Player.Data.IsDead && !(commsActive && TownOfUsMapOptions.IsCamoCommsOn()) && !Player.HasModifier<CamouflagerCamoModifier>())
         {
-            ShyModifier.SetVisibility(Player, OptionGroupSingleton<ConcealedOptions>.Instance.ConcealedOpacity);
+            ShyModifier.SetVisibility(Player, OptionGroupSingleton<ConcealedOptions>.Instance.ConcealedOpacity / 100f);
         }
     }
 }
