@@ -105,4 +105,6 @@ public enum JAMRpcCalls : uint
  * Fixed Concealed Modifier overlapping with TOUM Concealed Modifier
  * Bounty Now Correctly Goes Away When Bounty Hunter Dies
  * Bounty Target Can Now Optionally Have A Timed Period Where It Can Be Caught
+ * Deceiver Shield Now Shows Up Correctly And Hides In Comms Correctly
+ * Added "Indecisive" Role
 */
