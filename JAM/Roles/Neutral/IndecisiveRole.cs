@@ -1,5 +1,8 @@
 ﻿using AmongUs.GameOptions;
 using JAM.Assets;
+using JAM.Options.Roles.Neutral;
+using MiraAPI.GameOptions;
+using MiraAPI.Modifiers;
 using MiraAPI.Roles;
 using System;
 using System.Collections.Generic;
@@ -9,6 +12,7 @@ using System.Threading.Tasks;
 using TownOfUs.Assets;
 using TownOfUs.Extensions;
 using TownOfUs.Interfaces;
+using TownOfUs.Modifiers.Game.Alliance;
 using TownOfUs.Modules.Wiki;
 using TownOfUs.Roles;
 using TownOfUs.Roles.Neutral;
@@ -19,15 +23,25 @@ namespace JAM.Roles.Neutral;
 
 public sealed class IndecisiveRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOfUsRole, IWikiDiscoverable, IDoomable, IUnlovable
 {
+    public int SafeShotsLeft = (int)OptionGroupSingleton<IndecisiveOptions>.Instance.SafeShots;
     public string RoleName => "Indecisive";
     public string RoleDescription => "Pick Your Team";
     public string RoleMedDescription => "Decide Who You Want To Win With";
-    public string RoleLongDescription => "Select A Team To Win With.\nYou Cannot Win Before Selecting";
+    public string RoleLongDescription
+    {
+        get
+        {
+            string descAddOn = OptionGroupSingleton<IndecisiveOptions>.Instance.RoleStyle == IndecisiveOptions.IndecisiveStyle.Decider
+                        ? "You Cannot Win Before Selecting"
+                        : "Current Alignment: " + (Player.HasModifier<EgotistModifier>() ? "Non-Crew" : "Crewmate");
+            return "Select A Team To Win With.\n" + descAddOn + "\nShots Until Team Is Forced: " + SafeShotsLeft;
+        }
+    }
     public string GetAdvancedDescription() { return RoleLongDescription + TownOfUs.Utilities.MiscUtils.AppendOptionsText(base.GetType()); }
 
     public DoomableType DoomHintType => DoomableType.Perception;
 
-    public RoleAlignment RoleAlignment => RoleAlignment.NeutralBenign;
+    public RoleAlignment RoleAlignment => OptionGroupSingleton<IndecisiveOptions>.Instance.RoleStyle == IndecisiveOptions.IndecisiveStyle.Decider ? RoleAlignment.NeutralBenign : RoleAlignment.NeutralOutlier;
 
     public Color RoleColor => Color.grey;
 
@@ -42,12 +56,8 @@ public sealed class IndecisiveRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOf
 
     public bool IsUnlovable => true;
 
-    public bool WinConditionMet()
-    {
-        return false;
-    }
     public override bool DidWin(GameOverReason gameOverReason)
     {
-        return false;
+        return OptionGroupSingleton<IndecisiveOptions>.Instance.RoleStyle == IndecisiveOptions.IndecisiveStyle.Killer && DestroyableSingleton<RoleManager>.Instance.GetRole(RoleTypes.Crewmate).DidWin(gameOverReason);
     }
 }
