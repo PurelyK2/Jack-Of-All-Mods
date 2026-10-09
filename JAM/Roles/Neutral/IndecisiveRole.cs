@@ -32,29 +32,22 @@ public sealed class IndecisiveRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOf
         get
         {
             string descAddOn = OptionGroupSingleton<IndecisiveOptions>.Instance.RoleStyle == IndecisiveOptions.IndecisiveStyle.Decider
-                        ? "You Cannot Win Before Selecting"
-                        : "Current Alignment: " + (Player.HasModifier<EgotistModifier>() ? "Non-Crew" : "Crewmate");
-            return "Select A Team To Win With.\n" + descAddOn + "\nShots Until Team Is Forced: " + SafeShotsLeft;
+                        ? "You Cannot Win Before Selecting" : "Current Alignment: " + (Player.HasModifier<EgotistModifier>() ? "Non-Crew" : "Crewmate") + "\nShots Until Team Is Forced: " + SafeShotsLeft;
+            return "Select A Team To Win With.\n" + descAddOn;
         }
     }
     public string GetAdvancedDescription() { return RoleLongDescription + TownOfUs.Utilities.MiscUtils.AppendOptionsText(base.GetType()); }
-
     public DoomableType DoomHintType => DoomableType.Perception;
-
     public RoleAlignment RoleAlignment => OptionGroupSingleton<IndecisiveOptions>.Instance.RoleStyle == IndecisiveOptions.IndecisiveStyle.Decider ? RoleAlignment.NeutralBenign : RoleAlignment.NeutralOutlier;
-
     public Color RoleColor => Color.grey;
-
+    public bool IsUnlovable => true;
     public ModdedRoleTeams Team => ModdedRoleTeams.Custom;
-
     public CustomRoleConfiguration Configuration => new(this)
     {
         IntroSound = TouAudio.OtherIntroSound,
         Icon = TouModifierIcons.Colorblind,
         GhostRole = (RoleTypes)RoleId.Get<NeutralGhostRole>()
     };
-
-    public bool IsUnlovable => true;
 
     public override bool DidWin(GameOverReason gameOverReason)
     {
