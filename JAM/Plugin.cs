@@ -80,8 +80,6 @@ public enum JAMRpcCalls : uint
     MicromanageTask = 2
 }
 
-// Jack Of All assassin continues game even when all crew
-
 // Concealed looks odd... (icon in-game)
 
 // =============== FIXES ===============
@@ -102,8 +100,9 @@ public enum JAMRpcCalls : uint
  * Dead no longer get bounty hunting button
  * Removed Warden Shield From Deceiver Shields
  * Jack Of All with Assassin No Longer Continues Game When Crew Should Win
-
  * Fixed Shackled Modifier not working
  * Fixed a bunch of namespaces being wrong and causing errors
  * Fixed Concealed Modifier overlapping with TOUM Concealed Modifier
+ * Bounty Now Correctly Goes Away When Bounty Hunter Dies
+ * Bounty Target Can Now Optionally Have A Timed Period Where It Can Be Caught
 */
