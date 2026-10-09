@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TMPro;
 using TownOfUs.Assets;
 using TownOfUs.Events;
 using TownOfUs.Modifiers;
@@ -35,6 +36,7 @@ using TownOfUs.Roles;
 using TownOfUs.Roles.Crewmate;
 using TownOfUs.Utilities;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace JAM.Modifiers;
 
@@ -81,22 +83,84 @@ public sealed class BountyTargetModifier : BaseModifier
 
         buttonsLeft = Player.RemainingEmergencies;
         Player.RemainingEmergencies = 0;
+
+        if(OptionGroupSingleton<BountyHunterOptions>.Instance.LimitedHuntingTime)
+        {
+            ActivateBountyTimer();
+        }
     }
     public override void OnDeactivate()
     {
         Player.RemainingEmergencies = buttonsLeft;
+        GameObject.Destroy(timerCanvasObject);
+
+        if(Player.HasModifier<BountyArrowModifier>())
+            Player.RemoveModifier<BountyArrowModifier>();
 
         base.OnDeactivate();
     }
-
-    public void Update()
+    TextMeshProUGUI? bountyTimerTMP;
+    GameObject? timerCanvasObject;
+    void ActivateBountyTimer()
     {
+        TimeRemaining = OptionGroupSingleton<BountyHunterOptions>.Instance.BountyTimeframe + 5;
+
+        //Add Timer Onto Arrow
+        timerCanvasObject = new GameObject("Bounty Canvas");
+        timerCanvasObject.AddComponent<RectTransform>();
+        Canvas canvas = timerCanvasObject.AddComponent<Canvas>();
+        timerCanvasObject.AddComponent<CanvasScaler>();
+        timerCanvasObject.AddComponent<GraphicRaycaster>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+
+        GameObject timerObject = new GameObject("Bounty Timer");
+        RectTransform timerRect = timerObject.AddComponent<RectTransform>();
+        timerObject.AddComponent<CanvasRenderer>();
+        bountyTimerTMP = timerObject.AddComponent<TextMeshProUGUI>();
+        bountyTimerTMP.text = "000";
+        bountyTimerTMP.alignment = TextAlignmentOptions.Center;
+        bountyTimerTMP.enableAutoSizing = true;
+        bountyTimerTMP.fontWeight = FontWeight.Heavy;
+
+        timerObject.transform.SetParent(timerCanvasObject.transform, false);
+        timerRect.sizeDelta = new Vector2(800, 200);
+        timerRect.anchoredPosition = Vector2.up * 400;
+
+        bountyTimerTMP.gameObject.SetActive(false);
+    }
+
+    float TimeRemaining = 0f;
+    public override void FixedUpdate()
+    {
+
         if (!MiraAPI.Utilities.Helpers.GetAlivePlayers().Any(p => p.Data.Role is BountyHunterRole))
         {
             MiraAPI.Utilities.Helpers.CreateAndShowNotification("The Bounty Hunter Has Died, They Can No Longer Give A Reward...", Colors.BountyHunter, new UnityEngine.Vector3(0f, 1f, -20f), null, JamRoleIcons.BountyHunter.LoadAsset());
-        
+
             ModifierComponent.RemoveModifier(this);
         }
+
+        if (!OptionGroupSingleton<BountyHunterOptions>.Instance.LimitedHuntingTime)
+        {
+            //Just to remove this possibility
+        }
+        else if (TimeRemaining <= 0)
+        {
+            MiraAPI.Utilities.Helpers.CreateAndShowNotification("The Bounty Has Expired!", Colors.BountyHunter, new UnityEngine.Vector3(0f, 1f, -20f), null, JamRoleIcons.BountyHunter.LoadAsset());
+
+            ModifierComponent.RemoveModifier(this);
+        }
+        else if (MeetingHud.Instance == null)
+        {
+            TimeRemaining -= 0.02f;
+            bountyTimerTMP.text = TimeRemaining.ToString("###");
+            bountyTimerTMP?.gameObject.SetActive(TimeRemaining < OptionGroupSingleton<BountyHunterOptions>.Instance.BountyTimeframe);
+        }
+
+        base.FixedUpdate();
+    }
+    public void Update()
+    {
     }
 
     public override void OnMeetingStart()

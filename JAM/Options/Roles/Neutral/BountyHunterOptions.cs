@@ -19,9 +19,10 @@ public sealed class BountyHunterOptions : AbstractOptionGroup<BountyHunterRole>
     [ModdedToggleOption("Arrow To Bounty Target")]
     public bool TargetArrow { get; set; } = true;
 
-    [ModdedNumberOption("Hunted Player Grace Period", 0f, 60f, 5f, MiraNumberSuffixes.Seconds)]
+    [ModdedNumberOption("Hunted Player Grace Period", 0f, 30f, 5f, MiraNumberSuffixes.Seconds)]
     public float HuntedGracePeriod { get; set; } = 15;
 
+    //Reward Stuff
     [ModdedNumberOption("Faction Modifier Weight", 0f, 100f, 5f, MiraNumberSuffixes.Percent)]
     public float RandFactMod { get; set; } = 10f;
     [ModdedNumberOption("Universal Modifier Weight", 0f, 100f, 5f, MiraNumberSuffixes.Percent)]
@@ -40,4 +41,11 @@ public sealed class BountyHunterOptions : AbstractOptionGroup<BountyHunterRole>
     public float GiveDblShot { get; set; } = 10f;
     [ModdedNumberOption("Temporary Shield Weight", 0f, 100f, 5f, MiraNumberSuffixes.Percent)]
     public float ShieldNextRound { get; set; } = 10f;
+
+    //Hunting Period
+    [ModdedToggleOption("Hunting Time Is Limited")]
+    public bool LimitedHuntingTime { get; set; } = false;
+
+    [ModdedNumberOption("Bounty Hunting Timeframe", 30f, 120f, 5f, MiraNumberSuffixes.Seconds)]
+    public float BountyTimeframe { get; set; } = 30;
 }
