@@ -118,7 +118,7 @@ public sealed class ProjectorRole(IntPtr cppPtr) : ImpostorRole(cppPtr), ITownOf
         RpcMultiMediate(source, newTargets);
     }
 
-    [MethodRpc((uint)TownOfUsRpc.MultiMediate)]
+    [MethodRpc((uint)JAMRpcCalls.MultiProject)]
     public static void RpcMultiMediate(PlayerControl player, Dictionary<byte, string> targets)
     {
         if (LobbyBehaviour.Instance)

@@ -45,7 +45,7 @@ public partial class Plugin : BasePlugin, IMiraPlugin
         {
             Harmony.PatchAll();
         }
-        catch(System.Exception e)
+        catch(Exception e)
         {
             _ = ConstantlyError(e.ToString());
         }
@@ -77,7 +77,8 @@ public enum JAMRpcCalls : uint
 {
     ScrubModifiers = 0,
     DeceiverShield = 1,
-    MicromanageTask = 2
+    MicromanageTask = 2,
+    MultiProject = 3
 }
 
 // Jack Of All assassin continues game even when all crew

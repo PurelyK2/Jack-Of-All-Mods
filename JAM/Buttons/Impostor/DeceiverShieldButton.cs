@@ -1,7 +1,4 @@
-using JAM.Modifiers;
 using JAM.Modifiers.Role;
-using JAM.Options.Roles.Impostor;
-using MiraAPI.GameOptions;
 using MiraAPI.Keybinds;
 using MiraAPI.Modifiers;
 using MiraAPI.Utilities;
@@ -10,7 +7,6 @@ using TownOfUs.Assets;
 using TownOfUs.Buttons;
 using TownOfUs.Utilities;
 using UnityEngine;
-using JAM.Modifiers.Role;
 
 namespace JAM.Buttons.Roles.Impostor;
 
