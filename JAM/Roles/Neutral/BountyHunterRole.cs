@@ -134,6 +134,8 @@ public sealed class BountyHunterRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITown
     public int NumBountiesCollected;
     public bool WinConditionMet()
     {
+        Info(NumBountiesCollected >= (int)OptionGroupSingleton<BountyHunterOptions>.Instance.BountiesToWin);
+
         return NumBountiesCollected >= (int)OptionGroupSingleton<BountyHunterOptions>.Instance.BountiesToWin;
     }
 

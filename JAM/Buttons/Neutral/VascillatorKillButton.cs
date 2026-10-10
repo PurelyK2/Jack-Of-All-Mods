@@ -1,6 +1,5 @@
 using AmongUs.GameOptions;
 using Il2CppSystem.Web.Util;
-using JAM.Modules;
 using JAM.Options.Roles.Neutral;
 using JAM.Roles.Neutral;
 using MiraAPI.GameOptions;
@@ -18,20 +17,14 @@ using TownOfUs.Options.Modifiers.Alliance;
 using TownOfUs.Patches.Options;
 using TownOfUs.Utilities;
 using UnityEngine;
-using static JAM.Modules.IndeciveDecideMinigame;
 
 namespace JAM.Buttons.Neutral;
 
-public sealed class IndecisiveKillButton : TownOfUsKillRoleButton<IndecisiveRole, PlayerControl>, IKillButton
+public sealed class VascillatorKillButton : TownOfUsKillRoleButton<VacillatorRole, PlayerControl>, IKillButton
 {
     public override float Cooldown => GameManager.Instance.LogicOptions.GetKillCooldown();
     public override string Name => "Kill";
     public override LoadableAsset<Sprite> Sprite => TouAssets.KillSprite;
-
-    public override bool Enabled(RoleBehaviour? role)
-    {
-        return base.Enabled(role) && OptionGroupSingleton<IndecisiveOptions>.Instance.RoleStyle == IndecisiveOptions.IndecisiveStyle.Killer;
-    }
 
     public override PlayerControl? GetTarget()
     {
@@ -54,14 +47,13 @@ public sealed class IndecisiveKillButton : TownOfUsKillRoleButton<IndecisiveRole
 
         if(Role.SafeShotsLeft > 0)
         {
-            if (Role.Player.HasModifier<EgotistModifier>())
-                Role.Player.RpcRemoveModifier<EgotistModifier>();
+            Role.winsWithCrew = true;
 
             if (Target.IsCrewmate() && !Target.HasModifier<AllianceGameModifier>())
             {
                 MiraAPI.Utilities.Helpers.CreateAndShowNotification("You Killed A Crewmate. You Now Win With Non-Crew.", Color.white, null, Role.GetRoleIcon());
-
-                Role.Player.RpcAddModifier<EgotistModifier>();
+                
+                Role.winsWithCrew = false;
             }
             else
             {
@@ -73,15 +65,13 @@ public sealed class IndecisiveKillButton : TownOfUsKillRoleButton<IndecisiveRole
             return;
         }
 
-        bool isCrewmate = !Role.Player.HasModifier<EgotistModifier>();
-
-        if(Target.IsCrewmate() && !Target.HasModifier<AllianceGameModifier>() && isCrewmate)
+        if(Target.IsCrewmate() && !Target.HasModifier<AllianceGameModifier>() && Role.winsWithCrew)
         {
             //Killed Crewmate on crew team, misfire
             IndecisiveMisfire();
             return;
         }
-        else if(!isCrewmate && (!Target.IsCrewmate() || Target.HasModifier<AllianceGameModifier>()))
+        else if(!Role.winsWithCrew && (!Target.IsCrewmate() || Target.HasModifier<AllianceGameModifier>()))
         {
             //Killed Non-Crew On Non-Crew Team, misfire
             IndecisiveMisfire();

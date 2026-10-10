@@ -31,9 +31,13 @@
 
     <ItemGroup>
       <None Include="Assets\JamModifierIcons.cs" />
-      <None Include="Options\Roles\Neutral\IndecisiveOptions.cs" />
+      <None Include="Options\Roles\Neutral\VacillatorOptions.cs" />
       <None Include="Roles\Impostor\CamouflagerRole.cs" />
       <None Include="Roles\Impostor\DeceiverRole.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Modules\" />
     </ItemGroup>
 
     <Import Project="../AmongUs.props" />

@@ -106,6 +106,5 @@ public enum JAMRpcCalls : uint
  * Bounty Now Correctly Goes Away When Bounty Hunter Dies
  * Bounty Target Can Now Optionally Have A Timed Period Where It Can Be Caught
  * Deceiver Shield Now Shows Up Correctly And Hides In Comms Correctly
- * Added "Indecisive" Role
- * Made 2 Versions Of Indecisive To Test Out (Toggle With In-Game Setting)
+ * Added "Vacillator" Role
 */
