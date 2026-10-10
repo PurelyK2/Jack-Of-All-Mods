@@ -78,8 +78,8 @@ public enum JAMRpcCalls : uint
     ScrubModifiers = 0,
     DeceiverShield = 1,
     MicromanageTask = 2,
-    BountyCollected = 4,
-    MultiProject = 3
+    BountyCollected = 3,
+    MultiProject = 4
 }
 
 // Jack Of All assassin continues game even when all crew
