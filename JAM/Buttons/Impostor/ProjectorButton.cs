@@ -1,21 +1,23 @@
+using JAM.Assets;
+using JAM.Modifiers.Hidden;
+using JAM.Options.Roles.Impostor;
+using JAM.Roles.Impostor;
 using MiraAPI.GameOptions;
-using MiraAPI.Modifiers;
 using MiraAPI.Keybinds;
+using MiraAPI.Modifiers;
 using MiraAPI.Utilities;
 using MiraAPI.Utilities.Assets;
 using TownOfUs;
-using TownOfUs.Utilities;
 using TownOfUs.Assets;
-using TownOfUs.Modifiers;
-using TownOfUs.Roles.Impostor;
 using TownOfUs.Buttons;
+using TownOfUs.Modifiers;
+using TownOfUs.Modules;
+using TownOfUs.Modules.Components;
 using TownOfUs.Options.Maps;
+using TownOfUs.Roles.Impostor;
+using TownOfUs.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
-using JAM.Options.Roles.Impostor;
-using JAM.Modifiers.Hidden;
-using JAM.Roles.Impostor;
-using JAM.Assets;
 
 namespace JAM.Buttons.Impostor;
 
@@ -59,36 +61,26 @@ public sealed class ProjectorButton : TownOfUsRoleButton<ProjectorRole>, ILegacy
     {
         if (EffectActive)
         {
+            ResetCooldownAndOrEffect();
+            EffectActive = false;
             if (Role.Spirit != null)
             {
                 ProjectorRole.RpcRemoveMediumSpirit(PlayerControl.LocalPlayer, Role.Spirit);
             }
+            else Info("No Spirit Found");
             return;
         }
+        ProjectorRole.RpcMediate(PlayerControl.LocalPlayer);
     }
 
     public override void OnEffectEnd()
     {
         if (Role.Spirit == null)
         {
+            Info("No Spirit");
             return;
         }
+        Info("Removing Spirit");
         ProjectorRole.RpcRemoveMediumSpirit(PlayerControl.LocalPlayer, Role.Spirit);
     }
-
-    public override bool CanUse()
-    {
-        if (HudManager.Instance.Chat.IsOpenOrOpening || MeetingHud.Instance)
-        {
-            return false;
-        }
-
-        if (PlayerControl.LocalPlayer.GetModifiers<DisabledModifier>().Any(x => !x.CanUseAbilities))
-        {
-            return false;
-        }
-
-        return ((Timer <= 0 && !EffectActive) || (EffectActive && Timer <= EffectDuration - OptionGroupSingleton<ProjectorOptions>.Instance.ProjectDuration - 1f));
-    }
-
 }

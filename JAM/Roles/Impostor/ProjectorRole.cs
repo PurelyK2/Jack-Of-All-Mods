@@ -84,19 +84,6 @@ public sealed class ProjectorRole(IntPtr cppPtr) : ImpostorRole(cppPtr), ITownOf
             MiscUtils.RunAnticheatWarning(player);
             return;
         }
-        var hidden = true;
-        if (player.AmOwner && hidden)
-        {
-            foreach (var plr in Helpers.GetAlivePlayers())
-            {
-                if (plr.AmOwner)
-                {
-                    continue;
-                }
-
-                plr.AddModifier<ProjectorHiddenModifier>();
-            }
-        }
 
         if (!AmongUsClient.Instance.AmHost)
         {
@@ -104,6 +91,7 @@ public sealed class ProjectorRole(IntPtr cppPtr) : ImpostorRole(cppPtr), ITownOf
         }
 
         var spirit = Instantiate(TouAssets.MediumSpirit.LoadAsset()).GetComponent<MedSpiritObject>();
+        (player.Data.Role as ProjectorRole)?.Spirit = spirit;
         AmongUsClient.Instance.Spawn(spirit, player.OwnerId);
     }
 
