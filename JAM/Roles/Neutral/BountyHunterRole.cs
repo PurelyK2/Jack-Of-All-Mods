@@ -105,7 +105,7 @@ public sealed class BountyHunterRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITown
 
     private bool IsExempt(PlayerVoteArea voteArea)
     {
-        return voteArea.AmDead || voteArea.GetPlayer().AmOwner || voteArea.GetPlayer().HasModifier<BountySparedModifier>();
+        return voteArea.AmDead || voteArea.GetPlayer().AmOwner;
     }
     #endregion
 

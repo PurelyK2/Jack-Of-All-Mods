@@ -10,7 +10,7 @@ using TownOfUs.Utilities;
 using JAM.Assets;
 using UnityEngine;
 
-namespace JAM.Buttons.Game.Universal;
+namespace JAM.Buttons.Universal;
 
 public sealed class BountyHuntingButton : TownOfUsKillRoleButton<RoleBehaviour, PlayerControl>
 {

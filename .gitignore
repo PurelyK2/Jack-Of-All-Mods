@@ -15,6 +15,13 @@
 .idea/
 *.log
 
+# Ignore compiler / build outputs
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+bbin/
+
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
 /[Mm]emoryCaptures/

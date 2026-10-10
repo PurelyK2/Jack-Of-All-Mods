@@ -24,4 +24,5 @@ public static class JamRoleIcons
     public static LoadableAsset<Sprite> Workaholic { get; } = new LoadableResourceAsset($"{ShortPath}.Workaholic.png", 200);
     public static LoadableAsset<Sprite> Mortician { get; } = new LoadableResourceAsset($"{ShortPath}.Mortician.png", 200);
     public static LoadableAsset<Sprite> Camouflager { get; } = new LoadableResourceAsset($"{ShortPath}.Camouflager.png", 200);
+    public static LoadableAsset<Sprite> Projector { get; } = new LoadableResourceAsset($"{ShortPath}.Projector.png", 200);
 }
