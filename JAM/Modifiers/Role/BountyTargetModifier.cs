@@ -482,7 +482,7 @@ public sealed class BountyRewardModifier : BaseModifier
             {
                 if (bountyHunter != null)
                 {
-                    bountyHunter.NumBountiesCollected++;
+                    bountyHunter.RpcAddBountyCollected();
                 }
             }
         }

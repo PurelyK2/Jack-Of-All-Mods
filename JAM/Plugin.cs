@@ -17,7 +17,7 @@ using UnityEngine;
 
 namespace JAM;
 
-[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.0.1")]
+[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.0.2")]
 [BepInProcess("Among Us.exe")]
 [BepInDependency(ReactorPlugin.Id)]
 [BepInDependency(MiraApiPlugin.Id)]
@@ -77,7 +77,8 @@ public enum JAMRpcCalls : uint
 {
     ScrubModifiers = 0,
     DeceiverShield = 1,
-    MicromanageTask = 2
+    MicromanageTask = 2,
+    BountyCollected = 3
 }
 
 // Concealed looks odd... (icon in-game)
@@ -105,6 +106,7 @@ public enum JAMRpcCalls : uint
  * Fixed Concealed Modifier overlapping with TOUM Concealed Modifier
  * Bounty Now Correctly Goes Away When Bounty Hunter Dies
  * Bounty Target Can Now Optionally Have A Timed Period Where It Can Be Caught
- * Deceiver Shield Now Shows Up Correctly And Hides In Comms Correctly
+ * Deceiver Shield Now Hides In Comms
  * Added "Vacillator" Role
+ * Bounty Hunter Now Wins Correctly
 */

@@ -11,6 +11,7 @@ using TownOfUs.Buttons;
 using TownOfUs.Utilities;
 using UnityEngine;
 using MiraAPI.Utilities;
+using JAM.Assets;
 
 namespace JAM.Buttons.Crewmate;
 
@@ -59,6 +60,6 @@ public sealed class OverhearButton : TownOfUsRoleButton<GossipRole, PlayerContro
         }
 
         string notifyString = "You are overhearing " + Target.Data.PlayerName + ".\nYou will " + (OptionGroupSingleton<GossipOptions>.Instance.ShowGossip ? "tell everyone" : "learn") + " something about them next meeting.";
-        MiraAPI.Utilities.Helpers.CreateAndShowNotification(notifyString, Colors.Gossip, new Vector3(0f, 1f, -20f), null, TouModifierIcons.Crewpostor.LoadAsset());
+        MiraAPI.Utilities.Helpers.CreateAndShowNotification(notifyString, Colors.Gossip, new Vector3(0f, 1f, -20f), null, JamAssets.GossipOverhear.LoadAsset());
     }
 }

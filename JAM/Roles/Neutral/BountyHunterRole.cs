@@ -7,6 +7,7 @@ using MiraAPI.Modifiers;
 using MiraAPI.Roles;
 using MiraAPI.Utilities;
 using MiraAPI.Utilities.Assets;
+using Reactor.Networking.Attributes;
 using TownOfUs.Assets;
 using TownOfUs.Extensions;
 using TownOfUs.Modifiers.Crewmate;
@@ -137,6 +138,12 @@ public sealed class BountyHunterRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITown
         Info(NumBountiesCollected >= (int)OptionGroupSingleton<BountyHunterOptions>.Instance.BountiesToWin);
 
         return NumBountiesCollected >= (int)OptionGroupSingleton<BountyHunterOptions>.Instance.BountiesToWin;
+    }
+
+    [MethodRpc((uint) JAMRpcCalls.BountyCollected)]
+    public void RpcAddBountyCollected()
+    {
+        NumBountiesCollected++;
     }
 
     public override bool DidWin(GameOverReason gameOverReason)

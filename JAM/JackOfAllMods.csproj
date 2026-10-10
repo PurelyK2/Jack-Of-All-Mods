@@ -36,10 +36,6 @@
       <None Include="Roles\Impostor\DeceiverRole.cs" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Modules\" />
-    </ItemGroup>
-
     <Import Project="../AmongUs.props" />
 
     <Target Name="Copy" AfterTargets="Build" Condition="'$(AmongUs)' != ''">

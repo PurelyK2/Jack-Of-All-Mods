@@ -16,6 +16,7 @@ public static class Colors
     public static Color BountyHunter => TownOfUsColors.UseBasic ? Palette.CrewmateBlue : new Color32(24, 102, 31, byte.MaxValue);
     public static Color TimeKeeper => TownOfUsColors.UseBasic ? Palette.CrewmateBlue : new Color32(230, 242, 200, byte.MaxValue);
     public static Color Zombie => TownOfUsColors.UseBasic ? Palette.CrewmateBlue : new Color32(84, 192, 113, byte.MaxValue);
+    public static Color Mimic => TownOfUsColors.UseBasic ? Palette.CrewmateBlue : new Color32(200, 200, 0, byte.MaxValue);
 
     //Modifiers
     public static Color Blind => TownOfUsColors.UseBasic ? Palette.CrewmateBlue : Color.grey;

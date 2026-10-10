@@ -21,9 +21,9 @@ public sealed class VentableVentButton : TownOfUsTargetButton<Vent>
         public override LoadableAsset<Sprite> Sprite => TouNeutAssets.JuggVentSprite;
 
         public override bool Enabled(RoleBehaviour? role)
-    {
-        return !Disabled && role?.Player.HasModifier<VentableModifier>() == true;
-    }
+        {
+            return !Disabled && role?.Player?.HasModifier<VentableModifier>() == true;
+        }
 
         public override Vent GetTarget()
     {
