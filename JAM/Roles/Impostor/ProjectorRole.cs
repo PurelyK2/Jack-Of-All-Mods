@@ -1,31 +1,30 @@
+using UnityEngine;
 using AmongUs.GameOptions;
-using BepInEx.Unity.IL2CPP.Utils.Collections;
 using Il2CppInterop.Runtime.Attributes;
-using InnerNet;
-using JAM.Assets;
-using JAM.Modifiers.Hidden;
-using JAM.Options.Roles.Impostor;
-using MiraAPI.GameOptions;
-using MiraAPI.Hud;
+using System.Collections;
+using BepInEx.Unity.IL2CPP.Utils.Collections;
 using MiraAPI.Modifiers;
-using MiraAPI.Patches.Stubs;
-using MiraAPI.Roles;
 using MiraAPI.Utilities;
-using MiraAPI.Utilities.Assets;
 using Reactor.Networking.Attributes;
 using Reactor.Networking.Rpc;
 using Reactor.Utilities;
-using System.Collections;
-using TownOfUs;
-using TownOfUs.Assets;
-using TownOfUs.Buttons.Impostor;
-using TownOfUs.Extensions;
 using TownOfUs.Modules.MedSpirit;
+using MiraAPI.Hud;
+using MiraAPI.GameOptions;
+using MiraAPI.Utilities.Assets;
+using MiraAPI.Patches.Stubs;
+using MiraAPI.Roles;
+using TownOfUs.Buttons.Impostor;
+using TownOfUs;
 using TownOfUs.Modules.Wiki;
+using TownOfUs.Utilities;
+using TownOfUs.Assets;
 using TownOfUs.Roles;
 using TownOfUs.Roles.Crewmate;
-using TownOfUs.Utilities;
-using UnityEngine;
+using TownOfUs.Extensions;
+using JAM.Options.Roles.Impostor;
+using JAM.Assets;
+using JAM.Modifiers.Hidden;
 
 namespace JAM.Roles.Impostor;
 
@@ -77,7 +76,7 @@ public sealed class ProjectorRole(IntPtr cppPtr) : ImpostorRole(cppPtr), ITownOf
 
     public MedSpiritObject? Spirit { get; set; }
 
-    [MethodRpc((uint)JAMRpcCalls.Project)]
+    [MethodRpc((uint)TownOfUsRpc.Mediate)]
     public static void RpcMediate(PlayerControl player)
     {
         if (LobbyBehaviour.Instance)
@@ -175,7 +174,7 @@ public sealed class ProjectorRole(IntPtr cppPtr) : ImpostorRole(cppPtr), ITownOf
     //     }
     // }
 
-    [MethodRpc((uint)JAMRpcCalls.RemoveProjection)]
+    [MethodRpc((uint)TownOfUsRpc.RemoveMediumSpirit)]
     public static void RpcRemoveMediumSpirit(PlayerControl medium, MedSpiritObject spirit)
     {
         if (LobbyBehaviour.Instance)
@@ -184,7 +183,7 @@ public sealed class ProjectorRole(IntPtr cppPtr) : ImpostorRole(cppPtr), ITownOf
             return;
         }
 
-        spirit.StartCoroutine(CoDestroy().WrapToIl2Cpp());
+        spirit.StartCoroutine(spirit.CoDestroy().WrapToIl2Cpp());
     }
 
     [HideFromIl2Cpp]

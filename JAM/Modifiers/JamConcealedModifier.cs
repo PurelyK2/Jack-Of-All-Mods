@@ -1,6 +1,5 @@
 using HarmonyLib;
 using JAM.Assets;
-using JAM.Modifiers.Hidden;
 using JAM.Options.Modifiers;
 using MiraAPI.GameOptions;
 using MiraAPI.Modifiers;

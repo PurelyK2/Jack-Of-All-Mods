@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace JAM.Roles.Neutral;
 
-public sealed class MimicRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOfUsRole, IWikiDiscoverable, IDoomable
+public sealed class MimicRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOfUsRole, IWikiDiscoverable, IDoomable, IContinuesGame
 {
     public string RoleName => "Mimic";
     public RoleAlignment RoleAlignment => RoleAlignment.NeutralKilling;
