@@ -20,6 +20,7 @@ public static class JamRoleIcons
     public static LoadableAsset<Sprite> Gossip { get; } = new LoadableResourceAsset($"{ShortPath}.Gossip.png", 200);
     public static LoadableAsset<Sprite> Scrubber { get; } = new LoadableResourceAsset($"{ShortPath}.Scrubber.png", 200);
     public static LoadableAsset<Sprite> Professor { get; } = new LoadableResourceAsset($"{ShortPath}.Educator.png", 200);
+    public static LoadableAsset<Sprite> Snoop { get; } = new LoadableResourceAsset($"{ShortPath}.Snoop.png", 200);
     // Nulls Roles
     public static LoadableAsset<Sprite> Micromanager { get; } = new LoadableResourceAsset($"{ShortPath}.Micromanager.png", 200);
     public static LoadableAsset<Sprite> Workaholic { get; } = new LoadableResourceAsset($"{ShortPath}.Workaholic.png", 200);

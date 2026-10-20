@@ -17,7 +17,7 @@ using UnityEngine;
 
 namespace JAM;
 
-[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.1")]
+[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.2")]
 [BepInProcess("Among Us.exe")]
 [BepInDependency(ReactorPlugin.Id)]
 [BepInDependency(MiraApiPlugin.Id)]
@@ -91,50 +91,10 @@ public enum JAMRpcCalls : uint
 
 // MIMIC STILL SEES IMPS!?! (Did A "Fix" for now that stops imp cards from being in selections)
 
+// Make Scrubber Work In Rounds
+
 // =============== FIXES ===============
 /*
- * Fixed Concealed Options Appearance
- * Micromanager Can No Longer Manager Alliance Modified Crew
- * Zombies Can No Longer Call Meetings
- * Zombie Leader Is Now Guessable Until Final 3
- * Made Concealed And Shy Mutually Exclusive
- * Conceal Name Now Works
- * You Are No Longer Concealed During Camo Comms
- * Adjusted Wording In Bounty Hunter Options
- * Micromanager Task Completion Names Look Right
- * Changed Gossip Sprite
- * Slighty Brightened Bounty Hunter's Color
- * Deceiver Shield Goes Away When Deceiver Is Dead Now
- * Changed Bounty Hunter Sprite
- * Dead no longer get bounty hunting button
- * Removed Warden Shield From Deceiver Shields
- * Jack Of All with Assassin No Longer Continues Game When Crew Should Win
- * Fixed Shackled Modifier not working
- * Fixed a bunch of namespaces being wrong and causing errors
- * Fixed Concealed Modifier overlapping with TOUM Concealed Modifier
- * Bounty Now Correctly Goes Away When Bounty Hunter Dies
- * Bounty Target Can Now Optionally Have A Timed Period Where It Can Be Caught
- * Deceiver Shield Now Hides In Comms
- * Bounty Hunter Now Wins Correctly
- * Battery Modifier Now Shows Up Right
- * Increased Bounty Hunting Range
- * Bounty Target Speed Modifier Now Is Optional And Changeable
- * Crew Protective Can Now Kill The Bounty Target
- * Made Option For "breaks" between bounties
- * You Can No Longer Create Bounties When You've Won As Bounty Hunter
- * You Can Now Collect More Than One Bounty In A Game.
- * Zombie Leader Can No Longer Get Exposed
- * Gave Jack Of All A Notification When They Get A Modifier
- * Gave Jack Of All A List For The In-Game Description That Shows All Its Current Modifiers
- * Overhauled Scrubber
- * Made Options Look Good
- * Zombies Can No Longer Report
-
- * Added ModdedRolesOption Option Type
- * Added "Vacillator" Role
- * Added "Mimic" Role
- * Added "Projector" Role
- * Added "Professor" Role
-
- * Removed "Bounty Hunter" Role For Now
+ * Made Work In v19
+ * Added Snoop Icon
 */

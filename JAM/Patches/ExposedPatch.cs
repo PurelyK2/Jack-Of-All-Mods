@@ -1,65 +1,58 @@
-using HarmonyLib;
+/*using HarmonyLib;
+using JAM.Modifiers;
 using MiraAPI.GameOptions;
 using MiraAPI.Modifiers;
-using TownOfUs.Utilities;
+using System.Reflection;
+using System.Reflection.Emit;
 using TownOfUs.Options;
 using TownOfUs.Roles.Crewmate;
+using TownOfUs.Utilities;
 using UnityEngine;
+using static Il2CppSystem.Xml.XmlWellFormedWriter.AttributeValueCache;
 using Object = UnityEngine.Object;
-using JAM.Modifiers;
 
 namespace JAM.Patches;
 
 [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.BloopAVoteIcon))]
 public static class ExposedPatch
 {
-    [HarmonyPrefix]
-    public static bool Prefix(
-        MeetingHud __instance,
-        [HarmonyArgument(0)] NetworkedPlayerInfo voterPlayer,
-        [HarmonyArgument(1)] int index,
-        [HarmonyArgument(2)] Transform parent)
+    [HarmonyTranspiler]
+    public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
     {
-        var spriteRenderer = Object.Instantiate(__instance.PlayerVotePrefab);
-        var player = MiscUtils.PlayerById(voterPlayer.PlayerId);
+        MethodInfo hookMethod = AccessTools.Method(typeof(ExposedPatch), nameof(ExposedPatch.GetAnonymousVoteColor));
+        
+        FieldInfo targetField = AccessTools.Field(typeof(Palette), nameof(Palette.DisabledGrey));
 
-        if (PlayerControl.LocalPlayer.Data.Role is ProsecutorRole)
+        var matchAnyAccess = new CodeMatch(instruction =>
+            (instruction.opcode == OpCodes.Ldsfld)
+            && (FieldInfo)instruction.operand == targetField
+        );
+
+        var matcher = new CodeMatcher(instructions).Start().MatchStartForward(matchAnyAccess);
+
+        if (matcher.IsValid)
         {
-            PlayerMaterial.SetColors(voterPlayer.DefaultOutfit.ColorId, spriteRenderer);
-        }
-        else if (player != null && player.Data.Role is ProsecutorRole pros &&
-                 pros.HasProsecuted && !PlayerControl.LocalPlayer.Data.IsDead)
-        {
-            PlayerMaterial.SetColors(Palette.DisabledGrey, spriteRenderer);
-        }
-        else if (GameOptionsManager.Instance.currentNormalGameOptions.AnonymousVotes &&
-                 (player == null || !player.HasModifier<ExposedModifier>()) &&
-                 (!OptionGroupSingleton<PostmortemOptions>.Instance.DeadSeeVotes ||
-                  !PlayerControl.LocalPlayer.Data.IsDead))
-        {
-            PlayerMaterial.SetColors(Palette.DisabledGrey, spriteRenderer);
+            Info("Found Patch Spot For Exposed Patch");
+            matcher.SetAndAdvance(OpCodes.Call, AccessTools.Method(typeof(ExposedPatch), nameof(ExposedPatch.GetAnonymousVoteColor)));
         }
         else
         {
-            PlayerMaterial.SetColors(voterPlayer.DefaultOutfit.ColorId, spriteRenderer);
+            Info("Couldn't Find Patch Spot For Exposed Patch");
         }
 
-        spriteRenderer.transform.SetParent(parent);
-        spriteRenderer.transform.localScale = Vector3.zero;
+        return matcher.InstructionEnumeration();
+    }
 
-        var component = parent.GetComponent<PlayerVoteArea>();
-        if (component != null)
+    public static Color GetAnonymousVoteColor(NetworkedPlayerInfo voterPlayer)
+    {
+        if(TownOfUs.Utilities.MiscUtils.PlayerById(voterPlayer.PlayerId)?.HasModifier<ExposedModifier>() == true)
         {
-            spriteRenderer.material.SetInt(
-                PlayerMaterial.MaskLayer,
-                component.MaskLayer);
+            return Palette.PlayerColors[voterPlayer.DefaultOutfit.ColorId];
         }
-
-        __instance.StartCoroutine(
-            Effects.Bloop(index * 0.3f, spriteRenderer.transform));
-
-        parent.GetComponent<VoteSpreader>().AddVote(spriteRenderer);
-
-        return false;
+        else
+        {
+            return Palette.DisabledGrey;
+        }
     }
 }
+*/
