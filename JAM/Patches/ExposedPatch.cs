@@ -1,4 +1,4 @@
-/*using HarmonyLib;
+using HarmonyLib;
 using JAM.Modifiers;
 using MiraAPI.GameOptions;
 using MiraAPI.Modifiers;
@@ -55,4 +55,3 @@ public static class ExposedPatch
         }
     }
 }
-*/

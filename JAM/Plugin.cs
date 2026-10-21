@@ -93,8 +93,11 @@ public enum JAMRpcCalls : uint
 
 // Make Scrubber Work In Rounds
 
+// Exposed is broken
+
 // =============== FIXES ===============
 /*
- * Made Work In v19
- * Added Snoop Icon
+ * Changed Scrubber Icon
+ * Added Keybind To Projector Kill Button
+ * Fixed Scrubber Scrubbing To Only Scrub Certain Modifiers
 */

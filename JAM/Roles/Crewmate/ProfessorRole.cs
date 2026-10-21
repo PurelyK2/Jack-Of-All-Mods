@@ -54,7 +54,7 @@ public sealed class ProfessorRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOf
         Icon = JamRoleIcons.Professor
     };
 
-    public RoleBehaviour CrewVariant => RoleManager.Instance.GetRole((RoleTypes)RoleId.Get<MayorRole>());
+    public RoleBehaviour CrewVariant => RoleManager.Instance.GetRole((RoleTypes)RoleId.Get<SwapperRole>());
 
     #region Meeting Stuff
     private MeetingMenu? meetingMenu;

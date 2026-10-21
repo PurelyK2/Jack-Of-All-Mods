@@ -32,6 +32,7 @@ namespace JAM.Buttons.Impostor;
 public sealed class ProjectorKillButton : TownOfUsKillRoleButton<ProjectorRole, PlayerControl>
 {
     public override float Cooldown => GameManager.Instance.LogicOptions.GetKillCooldown();
+    public override BaseKeybind? Keybind => Keybinds.PrimaryAction;
     public override LoadableAsset<Sprite> Sprite => TouAssets.KillSprite;
     public override PlayerControl? GetTarget()
     {

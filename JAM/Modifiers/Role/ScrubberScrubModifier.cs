@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TownOfUs.Modifiers;
 using TownOfUs.Modifiers.Game;
 using TownOfUs.Modules.Wiki;
 using TownOfUs.Utilities;
@@ -29,6 +30,12 @@ public sealed class ScrubberScrubModifier : BaseModifier
             {
                 foreach (BaseModifier modifier in player.GetModifiers<BaseModifier>())
                 {
+                    if (modifier.HideOnUi) continue;
+                    if (modifier is not TouGameModifier) continue;
+                    if (modifier is TouGameModifier gameModifier && (gameModifier.GetAssignmentChance() == 0 || gameModifier.GetAmountPerGame() == 0)) continue;
+                    if (modifier is BaseShieldModifier) continue;
+                    if (modifier is AllianceGameModifier) continue;
+
                     player.RpcRemoveModifier(modifier.UniqueId);
                 }
                 MiraAPI.Utilities.Helpers.CreateAndShowNotification("Your Modifiers Have Been Scrubbed!", UnityEngine.Color.white, null, JamRoleIcons.Scrubber.LoadAsset());
