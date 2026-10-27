@@ -206,9 +206,9 @@ public sealed class DeceiverRole(IntPtr cppPtr) : ImpostorRole(cppPtr), ITownOfU
     {
 		public static void Postfix(ref RoleBehaviour __result, ref NetworkedPlayerInfo __instance)
 		{
-			if (__result?.Player == null || __instance?.PlayerId == null) return;
+            if (__result?.Player == null || __instance?.PlayerId == null) return;
 
-			if(__result.Player.HasModifier<DeceiverModifier>())
+			if(__result.Player.HasModifier<DeceiverModifier>() == true)
 			{
 				__result = DestroyableSingleton<RoleManager>.Instance.GetRole((RoleTypes)RoleId.Get<DeceiverRole>());
 			}
@@ -217,7 +217,7 @@ public sealed class DeceiverRole(IntPtr cppPtr) : ImpostorRole(cppPtr), ITownOfU
 			if (__result is not DeceiverRole || __instance.IsDead) return;
 			if(__instance.AmOwner
 				&& (__instance.IsDead
-                || __result.Player.HasModifier<BaseRevealModifier>())
+                || __result.Player.HasModifier<BaseRevealModifier>() == true)
                 || (__result.GetRoleAlignment() == RoleAlignment.CrewmateKilling && !OptionGroupSingleton<DeceiverOptions>.Instance.DeceiveCrewKillers)) return;
 
 			if(OptionGroupSingleton<DeceiverOptions>.Instance.DeceiverDisplayedAs == DeceiverOptions.DeceiverRoleDisplayed.Investigator)

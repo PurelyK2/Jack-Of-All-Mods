@@ -1,0 +1,16 @@
+{
+  "Name": "Jack Of All Mods",
+  "Description": "A Mod That Is Intended To Balance Town Of Us: Mira Game Mechanics With Ambiguous Data",
+  "Tags": [
+    "mods"
+  ],
+  "Icon": "JAM.Resources.Other.K2ModLogo.png",
+  "License": "GPLv3",
+  "Authors": [
+    "Purely_K2",
+    "Null"
+  ],
+  "Links": {
+    "Source": "https://github.com/PurelyK2/Jack-Of-All-Mods"
+    }
+}

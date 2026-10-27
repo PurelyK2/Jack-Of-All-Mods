@@ -24,3 +24,17 @@
 /Users/null/Mods/Projects/JackOfAllMods/JAM/obj/Debug/net6.0/refint/JackOfAllMods.dll
 /Users/null/Mods/Projects/JackOfAllMods/JAM/obj/Debug/net6.0/JackOfAllMods.xml
 /Users/null/Mods/Projects/JackOfAllMods/JAM/obj/Debug/net6.0/ref/JackOfAllMods.dll
+C:\Users\K2\Documents\All K2's Stuff\Among Us Stuff\K2-And-Null-Mod\JAM\bin\Debug\net6.0\JackOfAllMods.deps.json
+C:\Users\K2\Documents\All K2's Stuff\Among Us Stuff\K2-And-Null-Mod\JAM\bin\Debug\net6.0\JackOfAllMods.dll
+C:\Users\K2\Documents\All K2's Stuff\Among Us Stuff\K2-And-Null-Mod\JAM\bin\Debug\net6.0\JackOfAllMods.xml
+C:\Users\K2\Documents\All K2's Stuff\Among Us Stuff\K2-And-Null-Mod\JAM\obj\Debug\net6.0\JackOfAllMods.csproj.AssemblyReference.cache
+C:\Users\K2\Documents\All K2's Stuff\Among Us Stuff\K2-And-Null-Mod\JAM\obj\Debug\net6.0\JackOfAllMods.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\K2\Documents\All K2's Stuff\Among Us Stuff\K2-And-Null-Mod\JAM\obj\Debug\net6.0\JackOfAllMods.AssemblyInfoInputs.cache
+C:\Users\K2\Documents\All K2's Stuff\Among Us Stuff\K2-And-Null-Mod\JAM\obj\Debug\net6.0\JackOfAllMods.AssemblyInfo.cs
+C:\Users\K2\Documents\All K2's Stuff\Among Us Stuff\K2-And-Null-Mod\JAM\obj\Debug\net6.0\JackOfAllMods.csproj.CoreCompileInputs.cache
+C:\Users\K2\Documents\All K2's Stuff\Among Us Stuff\K2-And-Null-Mod\JAM\obj\Debug\net6.0\JackOfAllMods.sourcelink.json
+C:\Users\K2\Documents\All K2's Stuff\Among Us Stuff\K2-And-Null-Mod\JAM\obj\Debug\net6.0\JackOfAllMods.dll
+C:\Users\K2\Documents\All K2's Stuff\Among Us Stuff\K2-And-Null-Mod\JAM\obj\Debug\net6.0\refint\JackOfAllMods.dll
+C:\Users\K2\Documents\All K2's Stuff\Among Us Stuff\K2-And-Null-Mod\JAM\obj\Debug\net6.0\JackOfAllMods.xml
+C:\Users\K2\Documents\All K2's Stuff\Among Us Stuff\K2-And-Null-Mod\JAM\obj\Debug\net6.0\ref\JackOfAllMods.dll
+C:\Users\K2\Documents\All K2's Stuff\Among Us Stuff\K2-And-Null-Mod\JAM\obj\Debug\net6.0\JackOfAl.BCBC2794.Up2Date

@@ -4,19 +4,20 @@
     <RestoreSuccess Condition=" '$(RestoreSuccess)' == '' ">True</RestoreSuccess>
     <RestoreTool Condition=" '$(RestoreTool)' == '' ">NuGet</RestoreTool>
     <ProjectAssetsFile Condition=" '$(ProjectAssetsFile)' == '' ">$(MSBuildThisFileDirectory)project.assets.json</ProjectAssetsFile>
-    <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">/Users/null/.nuget/packages/</NuGetPackageRoot>
-    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">/Users/null/.nuget/packages/</NuGetPackageFolders>
+    <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
+    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\K2\.nuget\packages\;C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages</NuGetPackageFolders>
     <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
     <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">7.0.0</NuGetToolVersion>
   </PropertyGroup>
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <SourceRoot Include="/Users/null/.nuget/packages/" />
+    <SourceRoot Include="C:\Users\K2\.nuget\packages\" />
+    <SourceRoot Include="C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages\" />
   </ItemGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <Import Project="$(NuGetPackageRoot)bepinex.il2cpp.msbuild/2.1.0-rc.1/build/BepInEx.IL2CPP.MSBuild.props" Condition="Exists('$(NuGetPackageRoot)bepinex.il2cpp.msbuild/2.1.0-rc.1/build/BepInEx.IL2CPP.MSBuild.props')" />
-    <Import Project="$(NuGetPackageRoot)amongus.gamelibs.steam/2026.8.18/build/AmongUs.GameLibs.Steam.props" Condition="Exists('$(NuGetPackageRoot)amongus.gamelibs.steam/2026.8.18/build/AmongUs.GameLibs.Steam.props')" />
+    <Import Project="$(NuGetPackageRoot)bepinex.il2cpp.msbuild\2.1.0-rc.1\build\BepInEx.IL2CPP.MSBuild.props" Condition="Exists('$(NuGetPackageRoot)bepinex.il2cpp.msbuild\2.1.0-rc.1\build\BepInEx.IL2CPP.MSBuild.props')" />
+    <Import Project="$(NuGetPackageRoot)amongus.gamelibs.steam\2026.8.18\build\AmongUs.GameLibs.Steam.props" Condition="Exists('$(NuGetPackageRoot)amongus.gamelibs.steam\2026.8.18\build\AmongUs.GameLibs.Steam.props')" />
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgSonarAnalyzer_CSharp Condition=" '$(PkgSonarAnalyzer_CSharp)' == '' ">/Users/null/.nuget/packages/sonaranalyzer.csharp/10.12.0.118525</PkgSonarAnalyzer_CSharp>
+    <PkgSonarAnalyzer_CSharp Condition=" '$(PkgSonarAnalyzer_CSharp)' == '' ">C:\Users\K2\.nuget\packages\sonaranalyzer.csharp\10.12.0.118525</PkgSonarAnalyzer_CSharp>
   </PropertyGroup>
 </Project>

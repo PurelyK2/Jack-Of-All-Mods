@@ -4721,26 +4721,33 @@
     ]
   },
   "packageFolders": {
-    "/Users/null/.nuget/packages/": {}
+    "C:\\Users\\K2\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "0.1.0-v",
     "restore": {
-      "projectUniqueName": "/Users/null/Mods/Projects/JackOfAllMods/JAM/JackOfAllMods.csproj",
+      "projectUniqueName": "C:\\Users\\K2\\Documents\\All K2's Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\JackOfAllMods.csproj",
       "projectName": "JackOfAllMods",
-      "projectPath": "/Users/null/Mods/Projects/JackOfAllMods/JAM/JackOfAllMods.csproj",
-      "packagesPath": "/Users/null/.nuget/packages/",
-      "outputPath": "/Users/null/Mods/Projects/JackOfAllMods/JAM/obj/",
+      "projectPath": "C:\\Users\\K2\\Documents\\All K2's Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\JackOfAllMods.csproj",
+      "packagesPath": "C:\\Users\\K2\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\K2\\Documents\\All K2's Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/Users/null/Mods/Projects/JackOfAllMods/NuGet.Config",
-        "/Users/null/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\K2\\Documents\\All K2's Stuff\\Among Us Stuff\\K2-And-Null-Mod\\NuGet.Config",
+        "C:\\Users\\K2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "/Users/null/Mods/Projects/JackOfAllMods/lib/": {},
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {},
         "https://nuget.bepinex.dev/v3/index.json": {},
         "https://nuget.reactor.gg/v3/index.json": {},
@@ -4824,22 +4831,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[6.0.36, 6.0.36]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[6.0.36, 6.0.36]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.401/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }
