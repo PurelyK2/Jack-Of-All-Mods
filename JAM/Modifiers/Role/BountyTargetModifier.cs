@@ -27,7 +27,6 @@ using TownOfUs.Utilities;
 using JAM.Assets;
 using JAM.Options.Roles.Neutral;
 using JAM.Roles.Neutral;
-using UnityEngine;
 using UnityEngine.UI;
 
 namespace JAM.Modifiers.Role;

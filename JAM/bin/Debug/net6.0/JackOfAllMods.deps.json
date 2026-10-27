@@ -1,0 +1,80 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "JackOfAllMods/0.1-v": {
+        "dependencies": {
+          "AllOfUs.MiraAPI": "0.4.3",
+          "Reactor": "2.5.0-ci.371",
+          "TownOfUsMira": "1.7.1"
+        },
+        "runtime": {
+          "JackOfAllMods.dll": {}
+        }
+      },
+      "AllOfUs.MiraAPI/0.4.3": {
+        "dependencies": {
+          "Reactor": "2.5.0-ci.371"
+        },
+        "runtime": {
+          "lib/net6.0/MiraAPI.dll": {
+            "assemblyVersion": "0.4.3.0",
+            "fileVersion": "0.4.3.0"
+          }
+        }
+      },
+      "Reactor/2.5.0-ci.371": {
+        "runtime": {
+          "lib/net6.0/Reactor.dll": {
+            "assemblyVersion": "2.5.0.0",
+            "fileVersion": "2.5.0.0"
+          }
+        }
+      },
+      "TownOfUsMira/1.7.1": {
+        "dependencies": {
+          "AllOfUs.MiraAPI": "0.4.3",
+          "Reactor": "2.5.0-ci.371"
+        },
+        "runtime": {
+          "lib/net6.0/TownOfUsMira.dll": {
+            "assemblyVersion": "1.7.1.0",
+            "fileVersion": "1.7.1.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "JackOfAllMods/0.1-v": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "AllOfUs.MiraAPI/0.4.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-M6RFA9U7Sps+y2BmIhQAYnaYdmJjtfOhdoqdtwCgAOxkZAt8olytYjaA7P+v65OkonqmMDM+p3ruiLLz3RXZ+g==",
+      "path": "allofus.miraapi/0.4.3",
+      "hashPath": "allofus.miraapi.0.4.3.nupkg.sha512"
+    },
+    "Reactor/2.5.0-ci.371": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LMKHi2CPACJJkBK117HT6zKS8mkv1c/RUZusYlnFExS2nGCD/haqf+YkTXyK561T5+BSg0m0R4ubSG30cdYDNg==",
+      "path": "reactor/2.5.0-ci.371",
+      "hashPath": "reactor.2.5.0-ci.371.nupkg.sha512"
+    },
+    "TownOfUsMira/1.7.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qRKWOM4FCqkUQ3SHzo/EzVzGM2i/Xwo8FfIl2846knrHJKATkxTitCQrXOjn4KnFu3yM8l+GQ1sh7v9RfOlNdg==",
+      "path": "townofusmira/1.7.1",
+      "hashPath": "townofusmira.1.7.1.nupkg.sha512"
+    }
+  }
+}

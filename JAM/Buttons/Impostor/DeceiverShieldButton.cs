@@ -7,7 +7,6 @@ using TownOfUs.Assets;
 using TownOfUs.Buttons;
 using TownOfUs.Utilities;
 using UnityEngine;
-using JAM.Modifiers.Role;
 
 namespace JAM.Buttons.Roles.Impostor;
 

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>JackOfAllMods</name>
+    </assembly>
+    <members>
+        <member name="F:JAM.Plugin.Id">
+            <summary>
+            Id of the <see cref="T:JAM.Plugin"/>.
+            </summary>
+        </member>
+        <member name="P:JAM.Plugin.Name">
+            <summary>
+            Gets the name of the <see cref="T:JAM.Plugin"/>.
+            </summary>
+        </member>
+        <member name="P:JAM.Plugin.Version">
+            <summary>
+            Gets the version of the <see cref="T:JAM.Plugin"/>.
+            </summary>
+        </member>
+    </members>
+</doc>
