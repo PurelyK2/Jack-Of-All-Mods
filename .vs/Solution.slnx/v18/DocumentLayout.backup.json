@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|c:\\users\\k2\\documents\\all k2\u0027s stuff\\among us stuff\\k2-and-null-mod\\jam\\patches\\exposedpatch.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|solutionrelative:jam\\patches\\exposedpatch.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|c:\\users\\k2\\documents\\all k2\u0027s stuff\\among us stuff\\k2-and-null-mod\\jam\\modules\\moddedrolesoptionmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|solutionrelative:jam\\modules\\moddedrolesoptionmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\AmongUs.props||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:AmongUs.props||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+      "AbsoluteMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|c:\\users\\k2\\documents\\all k2\u0027s stuff\\among us stuff\\k2-and-null-mod\\jam\\options\\moddedrolesoption.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|solutionrelative:jam\\options\\moddedrolesoption.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ExposedPatch.cs",
-              "DocumentMoniker": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Patches\\ExposedPatch.cs",
-              "RelativeDocumentMoniker": "JAM\\Patches\\ExposedPatch.cs",
-              "ToolTip": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Patches\\ExposedPatch.cs",
-              "RelativeToolTip": "JAM\\Patches\\ExposedPatch.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAAADgAAAABAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "ModdedRolesOption.cs",
+              "DocumentMoniker": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Options\\ModdedRolesOption.cs",
+              "RelativeDocumentMoniker": "JAM\\Options\\ModdedRolesOption.cs",
+              "ToolTip": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Options\\ModdedRolesOption.cs",
+              "RelativeToolTip": "JAM\\Options\\ModdedRolesOption.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAA5wAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-27T15:31:00.745Z",
+              "WhenOpened": "2026-10-27T15:57:11.462Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AmongUs.props",
-              "DocumentMoniker": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\AmongUs.props",
-              "RelativeDocumentMoniker": "AmongUs.props",
-              "ToolTip": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\AmongUs.props",
-              "RelativeToolTip": "AmongUs.props",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
-              "WhenOpened": "2026-10-27T15:20:18.887Z",
+              "DocumentIndex": 0,
+              "Title": "ModdedRolesOptionMenu.cs",
+              "DocumentMoniker": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Modules\\ModdedRolesOptionMenu.cs",
+              "RelativeDocumentMoniker": "JAM\\Modules\\ModdedRolesOptionMenu.cs",
+              "ToolTip": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Modules\\ModdedRolesOptionMenu.cs",
+              "RelativeToolTip": "JAM\\Modules\\ModdedRolesOptionMenu.cs",
+              "ViewState": "AgIAAJMBAAAAAAAAAADwv6kBAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-27T15:53:34.352Z",
               "EditorCaption": ""
             }
           ]

@@ -416,16 +416,13 @@ public sealed class ModdedRolesMenu(IntPtr cppPtr) : Minigame(cppPtr)
 
         var roles = MiscUtils.GetPotentialRoles().Where(roleMatch).ToList();
 
-        var allRoles = MiscUtils.AllRoles.Where(roleMatch).Where(x => x is IGuessable && !roles.Contains(x)).ToList();
+        var allRoles = MiscUtils.AllRoles.Where(roleMatch).ToList();
 
         if (allRoles.Count > 0)
         {
             foreach (var addedRole in allRoles)
             {
-                if (addedRole is IGuessable guessable && guessable.CanBeGuessed)
-                {
-                    roles.Add(addedRole);
-                }
+                roles.Add(addedRole);
             }
         }
 

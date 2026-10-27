@@ -100,9 +100,15 @@ public sealed class MimicAllianceModifier : AllianceGameModifier, IWikiDiscovera
     }
 
     [RegisterEvent(0)]
-    public void OnGameEndEvent(GameEndEvent @event)
+    public static void OnGameEndEvent(GameEndEvent @event)
     {
-        ModifierComponent?.RemoveModifier(this);
-        Player?.RpcChangeRole(RoleId.Get<MimicRole>(), false);
+        foreach(PlayerControl player in PlayerControl.AllPlayerControls)
+        {
+            if(player.HasModifier<MimicAllianceModifier>())
+            {
+                player.RemoveModifier<MimicAllianceModifier>();
+                player?.RpcChangeRole(RoleId.Get<MimicRole>(), false);
+            }
+        }
     }
 }
