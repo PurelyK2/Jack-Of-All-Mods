@@ -14,7 +14,6 @@ namespace JAM.Modifiers;
  
 public sealed class VentableModifier : TouGameModifier, IWikiDiscoverable
 {
-     
     public override string ModifierName => "Ventable";
 
     public override bool HideFromGuessing => true;
@@ -55,10 +54,9 @@ public sealed class VentableModifier : TouGameModifier, IWikiDiscoverable
     {
         get
         {
-            return new ModifierUiConfiguration(Colors.Ventable, TmpSpriteUtils.CreateSpriteAsset(JamModifierIcons.Ventable.LoadAsset(), "TouMira.Modifier.Game.Universal.Blind", 1.45f));
+            return new ModifierUiConfiguration(Colors.Ventable, TmpSpriteUtils.CreateSpriteAsset(JamModifierIcons.Ventable.LoadAsset(), "TouMira.Modifier.Game.Universal.Ventable", 1.45f));
         }
     }
-
      
     public override float IntroSize => 3f;
      

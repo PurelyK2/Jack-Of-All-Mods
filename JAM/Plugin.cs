@@ -2,22 +2,26 @@ using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Unity.IL2CPP;
 using HarmonyLib;
+using JAM.Achievements;
 using JAM.Assets;
 using JAM.CommsPatches;
 using MiraAPI;
 using MiraAPI.PluginLoading;
+using MiraAPI.Translation;
 using PerfectComms.Api;
 using Reactor;
 using Reactor.Networking;
 using Reactor.Networking.Attributes;
 using Reactor.Utilities;
 using System.Globalization;
+using System.Text.RegularExpressions;
 using TownOfUs;
+using TownOfUs.Achievements;
 using UnityEngine;
 
 namespace JAM;
 
-[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.2")]
+[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.2.1")]
 [BepInProcess("Among Us.exe")]
 [BepInDependency(ReactorPlugin.Id)]
 [BepInDependency(MiraApiPlugin.Id)]
@@ -26,6 +30,8 @@ namespace JAM;
 [ReactorModFlags(ModFlags.RequireOnAllClients)]
 public partial class Plugin : BasePlugin, IMiraPlugin
 {
+    public string GetAbbreviatedModName() =>
+        $"<b><color=#00FF00>JAM</color></b>";
     public static CultureInfo Culture => TownOfUs.TownOfUsPlugin.Culture;
     public string OptionsTitleText => "Jack of All Mods";
     public static bool IsDevBuild => false;
@@ -39,7 +45,7 @@ public partial class Plugin : BasePlugin, IMiraPlugin
 
     public override void Load()
     {
-        ReactorCredits.Register("Jack of All Mods", Version, IsDevBuild, ReactorCredits.AlwaysShow);
+        ReactorCredits.Register<Plugin>(ReactorCredits.AlwaysShow);
 
         try
         {
@@ -51,7 +57,8 @@ public partial class Plugin : BasePlugin, IMiraPlugin
         {
             _ = ConstantlyError(e.ToString());
         }
-
+        
+        AchievementsAPIHelper.RegisterMod(JamAchievementGroups.Tab, JamAchievements.All);
         PerfectCommsSetup();
     }
     private static async Task ConstantlyError(string e)
@@ -73,6 +80,30 @@ public partial class Plugin : BasePlugin, IMiraPlugin
 
         PerfectCommsVoiceIntegration.Register();
     }
+
+    [HarmonyPatch(typeof(MiraLocaleManager), "Get", [typeof(string), typeof(string)])]
+    public static class GetJAMLocale
+    {
+        public static void Postfix(ref string __result)
+        {
+            foreach(string locale in JamLocales)
+            {
+                if (__result == "DiedTo" + locale)
+                {
+                    __result = locale;
+                }
+            }
+        }
+    }
+
+    static readonly List<string> JamLocales = new List<string>()
+    {
+        "Undead",
+        "Leaderless",
+        "Deceived", // Not Implemented
+        "Projected", // Not Implemented
+        "Scrubbed" // Not Implemented
+    };
 }
 
 public enum JAMRpcCalls : uint
@@ -84,20 +115,45 @@ public enum JAMRpcCalls : uint
     Project = 4,
     RemoveProjection = 5,
     AssignSpirit = 6,
-    SyncRolesList = 7
+    SyncRolesList = 7,
+    UpdateVacillatorAlignment
 }
 
-// Concealed looks odd... (icon in-game)
+// ================== FEATURES ====================
+// Make JAM green on summaries and such?
 
-// MIMIC STILL SEES IMPS!?! (Did A "Fix" for now that stops imp cards from being in selections)
+// ================== TEMP FIXES ===================
+// MIMIC STILL SEES IMPS!?! (stops imp cards from being in selections)
+// Deceiver Can't Be Guessed (Deceiver Is Unguessable)
 
-// Make Scrubber Work In Rounds
-
-// Exposed is broken
+// ================== MINOR BUGS ====================
+// Zombies lose-win if only zombie leader and crewmate are left on meeting end (after voting out evil)
+    // Edge case, minimal worry
+// Professor Sometimes Gives Wrong Alignment Roles???
+// JOA gets imp assassin???
+// Zombies Can't See Chat
+// Exposed Doesn't Work
+// Camouflager Reveals Invis People??? (Camouflager => snoop not being invis)
+// concealed is sometimes fully invisible?
+// Achievements Don't Work
 
 // =============== FIXES ===============
 /*
- * Changed Scrubber Icon
- * Added Keybind To Projector Kill Button
- * Fixed Scrubber Scrubbing To Only Scrub Certain Modifiers
+ * Changed Deceive Button Keybind
+ * Made Zombies Able To See Roles In Rounds After zombie leader dies
+ * Mimic Alliance Modifier Is No Longer Visible
+ * Projector No Longer Has Zero Cooldown When Killing Outside Projections
+ * Vacillator Now Globally Changes Alignment
+ * Professor's Limited Uses Now Work Properly
+ * "DiedToUndead" and "DiedToLeaderless" changed to "Undead" and "Leaderless" Respectively
+ * Mimic Can No Longer Do Tasks
+ * Mimic's Tasks No Longer Count When Crew
+ * Added A Few More Explicitly Blacklisted Roles For Mimic (Including All Neutral Evils)
+ * Added Option For Forbearing To Start With Kill Button
+ * Zombies Now Appear "Dead" In Vitals
+ * Scrubber Now Has The Option To Scrub In Rounds Or Meetings
+ * Implemented Deceiver Shield Better
+ * Added Foolish Modifier
+ * Fixed Deceiver Shield To Have A Medic Shield Icon Next To Name
+ * Zombie Leader Is In The Cleaning Bucket With Chef And Janitor Now
 */

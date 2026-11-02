@@ -14,7 +14,7 @@ public static class Colors
 
     //Neutral Colors
     public static Color BountyHunter => TownOfUsColors.UseBasic ? Palette.CrewmateBlue : new Color32(24, 102, 31, byte.MaxValue);
-    public static Color TimeKeeper => TownOfUsColors.UseBasic ? Palette.CrewmateBlue : new Color32(230, 242, 200, byte.MaxValue);
+    public static Color Forbearing => TownOfUsColors.UseBasic ? Palette.CrewmateBlue : new Color32(230, 242, 200, byte.MaxValue);
     public static Color Zombie => TownOfUsColors.UseBasic ? Palette.CrewmateBlue : new Color32(84, 192, 113, byte.MaxValue);
     public static Color Mimic => TownOfUsColors.UseBasic ? Palette.CrewmateBlue : new Color32(200, 200, 0, byte.MaxValue);
 
@@ -24,6 +24,7 @@ public static class Colors
     public static Color Unstable => TownOfUsColors.UseBasic ? Palette.CrewmateBlue : new Color32(57, 255, 20, byte.MaxValue);
     public static Color Ventable => TownOfUsColors.UseBasic ? Palette.CrewmateBlue : new Color32(88, 90, 204, byte.MaxValue);
     public static Color Concealed => TownOfUsColors.UseBasic ? Palette.CrewmateBlue : new Color32(100, 100, 100, byte.MaxValue);
+    public static Color Foolish => TownOfUsColors.UseBasic ? Palette.CrewmateBlue : new Color32(100, 100, 100, byte.MaxValue);
 
     //Null
     public static Color Micromanager => TownOfUsColors.UseBasic ? Palette.CrewmateBlue : new Color32(38, 104, 148, 255);

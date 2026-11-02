@@ -16,10 +16,11 @@ using TownOfUs.Roles.Crewmate;
 using TownOfUs.Roles.Neutral;
 using TownOfUs.Utilities;
 using UnityEngine;
+using JAM.Achievements;
 
 namespace JAM.Roles.Neutral;
 
-public sealed class TimeKeeperRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOfUsRole, IWikiDiscoverable, IDoomable, ICrewVariant
+public sealed class ForbearingRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOfUsRole, IWikiDiscoverable, IDoomable, ICrewVariant
 {
     public int numMeetingsSkipped = -1;
 
@@ -30,17 +31,18 @@ public sealed class TimeKeeperRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOf
     public string RoleLongDescription => "Decrease Your Cooldowns Whenever A Meeting Is Skipped Or Tied.";
     public string GetAdvancedDescription() { return RoleLongDescription + MiscUtils.AppendOptionsText(base.GetType()); }
 
-    public Color RoleColor => Colors.TimeKeeper;
+    public Color RoleColor => Colors.Forbearing;
     public ModdedRoleTeams Team => ModdedRoleTeams.Custom;
     public RoleAlignment RoleAlignment => RoleAlignment.NeutralKilling;
     public CustomRoleConfiguration Configuration => new(this)
     {
-        IconTmp = TmpSpriteUtils.CreateSpriteAsset(JamRoleIcons.TimeKeeper.LoadAsset(), "JackOfAllMods.Roles.Neutral.Forbearing", 1.45f),
-        IntroSound = JamAudio.TimeKeeperIntro,
-        Icon = JamRoleIcons.TimeKeeper,
+        IconTmp = TmpSpriteUtils.CreateSpriteAsset(JamRoleIcons.Forbearing.LoadAsset(), "JackOfAllMods.Roles.Neutral.Forbearing", 1.45f),
+        IntroSound = JamAudio.ForbearingIntro,
+        Icon = JamRoleIcons.Forbearing,
         CanUseVent = true,
         GhostRole = (RoleTypes)RoleId.Get<NeutralGhostRole>()
     };
+
     public RoleBehaviour CrewVariant => RoleManager.Instance.GetRole((RoleTypes)RoleId.Get<SheriffRole>());
     public override void OnVotingComplete()
     {
@@ -52,7 +54,7 @@ public sealed class TimeKeeperRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOf
             }
             numMeetingsSkipped++;
 
-            if (!OptionGroupSingleton<TimeKeeperOptions>.Instance.TimeNotif) return;
+            if (!OptionGroupSingleton<ForbearingOptions>.Instance.TimeNotif) return;
 
             if(numMeetingsSkipped < 0)
             {
@@ -66,7 +68,7 @@ public sealed class TimeKeeperRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOf
                     TouRoleIcons.Jackal.LoadAsset()
                 );
             }
-            else if(OptionGroupSingleton<TimeKeeperOptions>.Instance.AlwaysDecreaseCd)
+            else if(OptionGroupSingleton<ForbearingOptions>.Instance.AlwaysDecreaseCd)
             {
                 numMeetingsSkipped++;
 
@@ -78,6 +80,11 @@ public sealed class TimeKeeperRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOf
                     TouRoleIcons.Jackal.LoadAsset()
                 );
             }
+        }
+
+        if(Player.AmOwner)
+        {
+            NeutAchievementChecks.CheckForbearing(this);
         }
     }
 

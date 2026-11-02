@@ -54,7 +54,8 @@ public sealed class ProjectorKillButton : TownOfUsKillRoleButton<ProjectorRole, 
         }
 
         PlayerControl.LocalPlayer.RpcCustomMurder(Target);
-        ProjectorRole.RpcRemoveMediumSpirit(PlayerControl.LocalPlayer, Role.Spirit);
+        if(Role.Spirit != null)
+            ProjectorRole.RpcRemoveMediumSpirit(PlayerControl.LocalPlayer, Role.Spirit);
         Role.Spirit = null;
     }
 

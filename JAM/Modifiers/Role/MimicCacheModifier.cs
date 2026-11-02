@@ -52,15 +52,6 @@ public sealed class MimicCacheModifier : BaseModifier, ICachedRole
         base.OnActivate();
     }
 
-    [RegisterEvent(0)]
-    public static void OnEjectionEvent(EjectionEvent @event)
-    {
-        if(PlayerControl.LocalPlayer.HasModifier<MimicCacheModifier>())
-        {
-            PlayerControl.LocalPlayer.RpcChangeRole(RoleId.Get<MimicRole>(), false);
-        }
-    }
-
     //Remove On True Role Change
     [HarmonyPatch(typeof(TownOfUs.Utilities.Extensions), "RpcChangeRole", [typeof(PlayerControl), typeof(ushort), typeof(bool)])]
     public static class TrulyChangeRolePatch
@@ -82,6 +73,8 @@ public sealed class MimicAllianceModifier : AllianceGameModifier, IWikiDiscovera
     public override bool GetsPunished => false;
     public override AlliedFaction TrueFactionType => AlliedFaction.NeutralKiller;
     public override bool HideOnUi => true;
+    public override string IntroInfo => string.Empty;
+    public override void AddModifierToStats(PlayerStats stats) { }
     public override string Symbol => "";
 
     public bool ContinuesGame => (DestroyableSingleton<RoleManager>.Instance.GetRole((RoleTypes)RoleId.Get<MimicRole>()) as IContinuesGame)?.ContinuesGame == true;
@@ -91,24 +84,5 @@ public sealed class MimicAllianceModifier : AllianceGameModifier, IWikiDiscovera
         return 0;
     }
 
-    public override void OnDeath(DeathReason reason)
-    {
-        Player?.RpcChangeRole(RoleId.Get<MimicRole>(), false);
-        ModifierComponent?.RemoveModifier(this);
-
-        base.OnDeath(reason);
-    }
-
-    [RegisterEvent(0)]
-    public static void OnGameEndEvent(GameEndEvent @event)
-    {
-        foreach(PlayerControl player in PlayerControl.AllPlayerControls)
-        {
-            if(player.HasModifier<MimicAllianceModifier>())
-            {
-                player.RemoveModifier<MimicAllianceModifier>();
-                player?.RpcChangeRole(RoleId.Get<MimicRole>(), false);
-            }
-        }
-    }
+    public override bool DoesTasks => false;
 }

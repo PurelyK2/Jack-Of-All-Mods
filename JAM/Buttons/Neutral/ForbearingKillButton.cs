@@ -13,13 +13,13 @@ using UnityEngine;
 
 namespace JAM.Buttons.Neutral;
 
-public sealed class TimeKeeperKillButton : TownOfUsKillRoleButton<TimeKeeperRole, PlayerControl>, IDiseaseableButton,
+public sealed class ForbearingKillButton : TownOfUsKillRoleButton<ForbearingRole, PlayerControl>, IDiseaseableButton,
     IKillButton
 {
     public override string Name => TranslationController.Instance.GetStringWithDefault(StringNames.KillLabel, "Kill");
     public override BaseKeybind Keybind => Keybinds.PrimaryAction;
-    public override Color TextOutlineColor => Colors.TimeKeeper;
-    public override float Cooldown => Role != null ? Mathf.Max(0, OptionGroupSingleton<TimeKeeperOptions>.Instance.TimeKeeperCooldown - OptionGroupSingleton<TimeKeeperOptions>.Instance.CooldownDecrease * Role.numMeetingsSkipped) : OptionGroupSingleton<TimeKeeperOptions>.Instance.TimeKeeperCooldown;
+    public override Color TextOutlineColor => Colors.Forbearing;
+    public override float Cooldown => Role != null ? Mathf.Max(0, OptionGroupSingleton<ForbearingOptions>.Instance.ForbearingCooldown - OptionGroupSingleton<ForbearingOptions>.Instance.CooldownDecrease * Role.numMeetingsSkipped) : OptionGroupSingleton<ForbearingOptions>.Instance.ForbearingCooldown;
     public override LoadableAsset<Sprite> Sprite => TouAssets.KillSprite;
 
     public override void CreateButton(Transform parent)
@@ -30,7 +30,7 @@ public sealed class TimeKeeperKillButton : TownOfUsKillRoleButton<TimeKeeperRole
 
     public override bool Enabled(RoleBehaviour? role)
     {
-        return role is TimeKeeperRole && Role.numMeetingsSkipped >= 0;
+        return role is ForbearingRole && (Role.numMeetingsSkipped >= 0 || OptionGroupSingleton<ForbearingOptions>.Instance.StartWithKillButton);
     }
 
     public void SetDiseasedTimer(float multiplier)

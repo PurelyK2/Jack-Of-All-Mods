@@ -1,5 +1,6 @@
 using AmongUs.GameOptions;
 using HarmonyLib;
+using Il2CppInterop.Runtime.Attributes;
 using JAM.Assets;
 using JAM.Modifiers.Hidden;
 using JAM.Options.Roles.Neutral;
@@ -21,6 +22,8 @@ using TownOfUs.Interfaces;
 using TownOfUs.Modules;
 using TownOfUs.Modules.Wiki;
 using TownOfUs.Networking;
+using TownOfUs.Patches;
+using TownOfUs.Patches.Roles;
 using TownOfUs.Roles;
 using TownOfUs.Roles.Crewmate;
 using TownOfUs.Roles.Neutral;
@@ -145,6 +148,8 @@ public class ZombieRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOfUsRole, IWi
     {
         if (@event.TriggeredByIntro) return;
 
+        if (!Helpers.GetAlivePlayers().Any(p => p.Data.Role is ZombieLeaderRole)) return;
+
         Info("Respawning Zombies");
         foreach (PlayerControl player in PlayerControl.AllPlayerControls.ToArray().Where(p => p.GetRoleWhenAlive() is ZombieRole))
         {
@@ -153,20 +158,30 @@ public class ZombieRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOfUsRole, IWi
         }
     }
 
-    [HarmonyPatch(typeof(MiscTouRpcs), "RpcFullRevive", [ typeof(PlayerControl), typeof(bool), typeof(Vector2), typeof(ushort), typeof(ushort), typeof(bool) ])]
-    [HarmonyPostfix]
-    public static void SoundAndVisualOnRevive(ref PlayerControl player)
+    [HarmonyPatch(typeof(MiscTouRpcs), "RpcFullRevive")]
+    public static class RpcFullRevivePatch
     {
-        if(player.AmOwner && player.Data.Role is ZombieRole)
+        public static void Postfix(ref PlayerControl player)
         {
-            Coroutines.Start(MiscUtils.CoFlash(Colors.Zombie));
-            TouAudio.PlaySound(TouAudio.AltruistReviveSound);
+            SoundAndVisualOnRevive(ref player);
+        }
+        public static void SoundAndVisualOnRevive(ref PlayerControl player)
+        {
+            if (player.AmOwner && player.Data.Role is ZombieRole)
+            {
+                Coroutines.Start(MiscUtils.CoFlash(Colors.Zombie));
+                TouAudio.PlaySound(TouAudio.AltruistReviveSound);
+            }
         }
     }
 }
 
-public sealed class ZombieLeaderRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOfUsRole, IWikiDiscoverable, IDoomable, IUnguessable, ICrewVariant, IContinuesGame, IUnlovable
+public sealed class ZombieLeaderRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOfUsRole, IWikiDiscoverable, IDoomable, IUnguessable, ICrewVariant, IContinuesGame, IUnlovable, IExclusiveRole
 {
+
+    [HideFromIl2Cpp]
+    public IEnumerable<string> ExclusionBuckets => [RoleExclusionRegistry.Cleaning];
+
     public static bool hasZombies = false;
     public bool HasImpostorVision => true;
     public RoleAlignment RoleAlignment => RoleAlignment.NeutralEvil;
@@ -193,7 +208,7 @@ public sealed class ZombieLeaderRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITown
     public Color RoleColor => Colors.Zombie;
     public ModdedRoleTeams Team => ModdedRoleTeams.Custom;
     public RoleBehaviour AppearAs => (RoleBehaviour)RoleId.Get<ZombieLeaderRole>();
-    public bool IsGuessable => Helpers.GetAlivePlayers().Count > 3;
+    public bool IsGuessable => Helpers.GetAlivePlayers().Count > OptionGroupSingleton<ZombieOptions>.Instance.PlayersWhenUnguessable;
     public CustomRoleConfiguration Configuration => new(this)
     {
         IconTmp = TmpSpriteUtils.CreateSpriteAsset(JamRoleIcons.ZombieLeader.LoadAsset(), "JackOfAllMods.Roles.Neutral.ZombieLeader", 1.45f),
@@ -302,11 +317,9 @@ public sealed class ZombieLeaderRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITown
     {
         get
         {
-            bool killersAlive = TownOfUs.Utilities.MiscUtils.KillersAliveCount > 0;
             bool canGetDeadBody = Helpers.GetNearestDeadBodies(Player.transform.position, ShipStatus.Instance.MaxLightRadius * 100, Helpers.CreateFilter(Constants.NotShipMask)).Count > 0;
 
-            return killersAlive || hasZombies || canGetDeadBody
-                || Helpers.GetAlivePlayers().Any(p => p.Data.Role is SurvivorRole);
+            return hasZombies || canGetDeadBody;
         }
     }
 }

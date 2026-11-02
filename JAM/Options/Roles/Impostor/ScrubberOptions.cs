@@ -18,4 +18,7 @@ public sealed class ScrubberOptions : AbstractOptionGroup<ScrubberRole>
 
     [ModdedNumberOption("Scrub Delay", 0f, 10f, 0.5f, MiraNumberSuffixes.Seconds)]
     public float ScrubDelay { get; set; } = 5f;
+
+    [ModdedToggleOption("Scrubber Scrubs In Rounds")]
+    public bool ScrubsInRounds { get; set; } = true;
 }

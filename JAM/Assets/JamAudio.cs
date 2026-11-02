@@ -15,5 +15,5 @@ public static class JamAudio
     private const string ShortPath = "JAM.Resources.Audio";
 
     public static LoadableAsset<AudioClip> JackOfAllIntro => new LoadableAudioResourceAsset($"{ShortPath}.JackOfAllIntro.wav");
-    public static LoadableAsset<AudioClip> TimeKeeperIntro => new LoadableAudioResourceAsset($"{ShortPath}.TimeKeeperIntro.wav");
+    public static LoadableAsset<AudioClip> ForbearingIntro => new LoadableAudioResourceAsset($"{ShortPath}.ForbearingIntro.wav");
 }

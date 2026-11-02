@@ -1,3 +1,4 @@
+using JAM.Achievements;
 using JAM.Modifiers.Role;
 using MiraAPI.Keybinds;
 using MiraAPI.Modifiers;
@@ -13,7 +14,7 @@ namespace JAM.Buttons.Roles.Impostor;
 public sealed class DeceiverShieldButton : TownOfUsRoleButton<DeceiverRole, PlayerControl>
 {
     public override string Name => "DECEIVE";
-    public override BaseKeybind Keybind => Keybinds.PrimaryAction;
+    public override BaseKeybind Keybind => Keybinds.SecondaryAction;
 
     public override float Cooldown => Math.Clamp(TownOfUsTargetButton<PlayerControl>.MapCooldown, 0.001f, 120f);
     public override LoadableAsset<Sprite> Sprite => TouCrewAssets.MedicSprite;
@@ -37,6 +38,7 @@ public sealed class DeceiverShieldButton : TownOfUsRoleButton<DeceiverRole, Play
         }
 
         DeceiverRole.RpcDeceiverShield(PlayerControl.LocalPlayer, Target);
+        ImpAchievementChecks.ProgressDeceiverShields();
     }
     public override bool CanUse()
     {

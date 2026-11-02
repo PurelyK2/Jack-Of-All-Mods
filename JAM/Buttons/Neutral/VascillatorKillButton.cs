@@ -1,5 +1,6 @@
 using AmongUs.GameOptions;
 using Il2CppSystem.Web.Util;
+using JAM.Achievements;
 using JAM.Options.Roles.Neutral;
 using JAM.Roles.Neutral;
 using MiraAPI.GameOptions;
@@ -45,19 +46,21 @@ public sealed class VascillatorKillButton : TownOfUsKillRoleButton<VacillatorRol
         }
 
 
-        if(Role.SafeShotsLeft > 0)
+        if(Role.SafeShotsLeft > 0 || Role.winsWithCrew == null)
         {
-            Role.winsWithCrew = true;
+
 
             if (Target.IsCrewmate() && !Target.HasModifier<AllianceGameModifier>())
             {
                 MiraAPI.Utilities.Helpers.CreateAndShowNotification("You Killed A Crewmate. You Now Win With Non-Crew.", Color.white, null, Role.GetRoleIcon());
-                
-                Role.winsWithCrew = false;
+
+                VacillatorRole.RPCUpdateVacillatorAlignment(Role.Player, false);
             }
             else
             {
                 MiraAPI.Utilities.Helpers.CreateAndShowNotification("You Killed A Non-Crew. You Now Win With Crewmates.", Color.white, null, Role.GetRoleIcon());
+               
+                VacillatorRole.RPCUpdateVacillatorAlignment(Role.Player, true);
             }
             Role.SafeShotsLeft--;
 
@@ -69,12 +72,14 @@ public sealed class VascillatorKillButton : TownOfUsKillRoleButton<VacillatorRol
         {
             //Killed Crewmate on crew team, misfire
             IndecisiveMisfire();
+            NeutAchievementChecks.MisKill(true);
             return;
         }
         else if(Role.winsWithCrew == false && (!Target.IsCrewmate() || Target.HasModifier<AllianceGameModifier>()))
         {
             //Killed Non-Crew On Non-Crew Team, misfire
             IndecisiveMisfire();
+            NeutAchievementChecks.MisKill(false);
             return;
         }
 

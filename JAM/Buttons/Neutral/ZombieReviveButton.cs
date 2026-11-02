@@ -14,6 +14,7 @@ using TownOfUs.Modifiers;
 using TownOfUs.Utilities;
 using TownOfUs.Utilities.Appearances;
 using UnityEngine;
+using JAM.Achievements;
 
 namespace JAM.Buttons.Neutral;
 
@@ -65,6 +66,11 @@ public class ZombieReviveButton : TownOfUsButton
         foreach (BaseModifier modifier in player.GetModifiers<BaseModifier>().Where(m => m is not IVisualAppearance))
         {
             player.RpcRemoveModifier(modifier.UniqueId);
+        }
+
+        if(player.Data.Role is not ZombieRole && PlayerControl.LocalPlayer.Data.Role is ZombieLeaderRole)
+        {
+            NeutAchievementChecks.OnZombieLeaderRevive();
         }
 
         player.RpcFullRevive(false, body.TruePosition, RoleId.Get<ZombieRole>(), player.Data.Role is not ZombieRole);

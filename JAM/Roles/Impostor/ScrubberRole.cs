@@ -3,6 +3,7 @@ using Il2CppInterop.Runtime.Attributes;
 using JAM.Assets;
 using JAM.Modifiers;
 using JAM.Modifiers.Role;
+using JAM.Options.Roles.Impostor;
 using JAM.Options.Roles.Neutral;
 using MiraAPI.Events;
 using MiraAPI.Events.Vanilla.Gameplay;
@@ -67,6 +68,8 @@ public sealed class ScrubberRole(IntPtr cppPtr) : ImpostorRole(cppPtr), ITownOfU
     private NetworkedPlayerInfo? selectedPlr;
     public override void OnMeetingStart()
     {
+        if (OptionGroupSingleton<ScrubberOptions>.Instance.ScrubsInRounds) return;
+
         meetingMenu = new MeetingMenu(
             Player.Data.Role,
             Click,

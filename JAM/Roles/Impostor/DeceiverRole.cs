@@ -28,10 +28,16 @@ using JAM.Assets;
 using JAM.Options.Roles.Impostor;
 using JAM.Modifiers.Hidden;
 using JAM.Modifiers.Role;
+using JAM.Roles.Neutral;
 
 //Note: This Role Was Suggested By: ‧₊˚✧ 𝒥𝒶𝓎 :3 ✧˚₊‧ (Discord)
-public sealed class DeceiverRole(IntPtr cppPtr) : ImpostorRole(cppPtr), ITownOfUsRole, IWikiDiscoverable, ICrewVariant, IDoomable
+public sealed class DeceiverRole(IntPtr cppPtr) : ImpostorRole(cppPtr), ITownOfUsRole, IWikiDiscoverable, ICrewVariant, IDoomable, IUnguessable
 {
+    // Temp Fix To Deceiver Being Unguessable
+    public RoleBehaviour AppearAs => RoleManager.Instance.GetRole((RoleTypes)RoleId.Get<MimicRole>());
+    public bool IsGuessable => false;
+
+
     public RoleBehaviour randomizedRole;
     public static bool confuseRole;
     public static bool hasGameStarted;
@@ -114,10 +120,7 @@ public sealed class DeceiverRole(IntPtr cppPtr) : ImpostorRole(cppPtr), ITownOfU
     [MethodRpc((uint)JAMRpcCalls.DeceiverShield)]
     public static void RpcDeceiverShield(PlayerControl deceiver, PlayerControl target)
     {
-        if(PlayerControl.LocalPlayer == deceiver || PlayerControl.LocalPlayer == target)
-        {
-            target.AddModifier<DeceiverMedicShield>();
-        }
+        target.AddModifier<DeceiverMedicShield>();
     }
 
     #region Deceiver Deceive Exceptions

@@ -13,7 +13,7 @@ public static class JamRoleIcons
     public static LoadableAsset<Sprite> Mimic { get; } = new LoadableResourceAsset($"{ShortPath}.Mimic.png", 200);
     public static LoadableAsset<Sprite> Zombie { get; } = new LoadableResourceAsset($"{ShortPath}.Zombie.png", 200);
     public static LoadableAsset<Sprite> ZombieLeader { get; } = new LoadableResourceAsset($"{ShortPath}.ZombieLeader.png", 200);
-    public static LoadableAsset<Sprite> TimeKeeper { get; } = new LoadableResourceAsset($"{ShortPath}.TimeKeeper.png", 200);
+    public static LoadableAsset<Sprite> Forbearing { get; } = new LoadableResourceAsset($"{ShortPath}.Forbearing.png", 200);
     public static LoadableAsset<Sprite> JackOfAll { get; } = new LoadableResourceAsset($"{ShortPath}.JackOfAll.png", 200);
     public static LoadableAsset<Sprite> Deceiver { get; } = new LoadableResourceAsset($"{ShortPath}.Deceiver.png", 200);
     public static LoadableAsset<Sprite> BountyHunter { get; } = new LoadableResourceAsset($"{ShortPath}.BountyHunter.png", 200);

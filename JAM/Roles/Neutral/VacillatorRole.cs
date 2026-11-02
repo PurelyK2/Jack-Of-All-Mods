@@ -1,11 +1,13 @@
 ﻿using AmongUs.GameOptions;
 using HarmonyLib;
+using Il2CppSystem.Runtime.Remoting.Messaging;
 using JAM.Assets;
 using JAM.Modifiers;
 using JAM.Options.Roles.Neutral;
 using MiraAPI.GameOptions;
 using MiraAPI.Modifiers;
 using MiraAPI.Roles;
+using Reactor.Networking.Attributes;
 using Reactor.Utilities.Extensions;
 using System;
 using System.Collections.Generic;
@@ -31,6 +33,12 @@ namespace JAM.Roles.Neutral;
 public sealed class VacillatorRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOfUsRole, IWikiDiscoverable, IDoomable, IUnlovable, IContinuesGame
 {
     public bool? winsWithCrew;
+
+    [MethodRpc((uint)JAMRpcCalls.UpdateVacillatorAlignment)]
+    public static void RPCUpdateVacillatorAlignment(PlayerControl player, bool crewmate)
+    {
+        (player.Data.Role as VacillatorRole)?.winsWithCrew = crewmate;
+    }
 
     public bool HasImpostorVision => winsWithCrew == false;
     public int SafeShotsLeft = 1;
@@ -58,7 +66,7 @@ public sealed class VacillatorRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOf
         TasksCountForProgress = false
     };
 
-    public bool ContinuesGame => (winsWithCrew != true && MiraAPI.Utilities.Helpers.GetAlivePlayers().Count > 2) || (winsWithCrew == true && TownOfUs.Utilities.MiscUtils.KillersAliveCount > 0);
+    public bool ContinuesGame => (winsWithCrew != true && MiraAPI.Utilities.Helpers.GetAlivePlayers().Count > 2) || TownOfUs.Utilities.MiscUtils.KillersAliveCount > 0;
 
     public override bool DidWin(GameOverReason gameOverReason)
     {
@@ -98,7 +106,7 @@ public static class GetRoleNameTextPostfix
 {
     public static void Postfix(PlayerControl player, ref ValueTuple<Color, string> __result)
     {
-        if (player?.GetRoleWhenAlive() is VacillatorRole vacillator && (player.AmOwner || PlayerControl.LocalPlayer.HasDied() || FairyRole.FairySeesRoleVisibilityFlag(player)))
+        if (player?.GetRoleWhenAlive() is VacillatorRole vacillator && (player.AmOwner || (PlayerControl.LocalPlayer.HasDied() && PlayerControl.LocalPlayer.DiedOtherRound()) || FairyRole.FairySeesRoleVisibilityFlag(player)))
         {
             if(vacillator.winsWithCrew == true)
             {

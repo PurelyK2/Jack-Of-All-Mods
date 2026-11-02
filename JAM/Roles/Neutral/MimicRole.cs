@@ -19,6 +19,7 @@ using TownOfUs.Extensions;
 using TownOfUs.Interfaces;
 using TownOfUs.Modules.Wiki;
 using TownOfUs.Roles;
+using TownOfUs.Roles.Crewmate;
 using TownOfUs.Roles.Neutral;
 using TownOfUs.Utilities;
 using UnityEngine;
@@ -73,20 +74,39 @@ public sealed class MimicRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOfUsRol
         if (roleData.Count == 0 || roleData.Chance == 0) return false; // Only If It Can Currenlty Be In The Game
         if (!CustomRoleUtils.CanSpawnOnCurrentMode(role)) return false; // Only If It Can Spawn On The Current Mode
         if (role is IGhostRole) return false; // No Ghost Roles
-        if (role is MimicRole) return false; // Not Self
         if (role is IAssignableTargets) return false; // Not A Targeting One (eg. Exe or Fairy)
-        if (role is MercenaryRole) return false; // Technically Not A Targeting One
         if (role is IDoubleDraftRole) return false; // For Things Like Recruiter And Vampire
-        if (role is ZombieLeaderRole) return false; // I... don't want to deal with the consequences of this...
 
         if (role.IsImpostor()) return false; // Stupid Fix Right Now So Mimic At Least Can Be Played
 
         if (role.GetRoleAlignment() == RoleAlignment.NeutralOutlier) return false; // Removing Chef, Inquiz, etc.
         if (role.GetRoleAlignment() == RoleAlignment.CrewmatePower) return false; // No Crewmate Power
         if (role.GetRoleAlignment() == RoleAlignment.CrewmateSupport) return false; // No Crewmate Support
+        if (role.GetRoleAlignment() == RoleAlignment.NeutralEvil) return false; // No Neutral Evils
+
+        // Explicitly Blacklisted Roles
+        if (role is ZombieLeaderRole
+            || role is MercenaryRole
+            || role is MimicRole
+            || role is AltruistRole
+            || role is AmnesiacRole
+            || role is ForbearingRole
+            || role is PoliticianRole) return false;
+
 
         return true; //Will Be Ok Here
     }
 
     public bool ContinuesGame => MiraAPI.Utilities.Helpers.GetAlivePlayers().Count > 2;
+
+    public override bool CanUse(IUsable usable)
+    {
+        if (!GameManager.Instance.LogicUsables.CanUse(usable, Player))
+        {
+            return false;
+        }
+
+        var console = usable.TryCast<Console>()!;
+        return console == null || console.AllowImpostor;
+    }
 }

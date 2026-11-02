@@ -46,7 +46,10 @@ public sealed class OverhearButton : TownOfUsRoleButton<GossipRole, PlayerContro
         {
             if (player.HasModifier<GossipOverhearModifier>())
             {
-                player.RemoveModifier<GossipOverhearModifier>();
+                if (OptionGroupSingleton<GossipOptions>.Instance.ShowGossip)
+                    player.RpcRemoveModifier<GossipOverhearModifier>();
+                else
+                    player.RemoveModifier<GossipOverhearModifier>();
             }
         }
 

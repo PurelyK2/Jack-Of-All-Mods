@@ -25,4 +25,7 @@ public sealed class ZombieOptions : AbstractOptionGroup<ZombieLeaderRole>
 
     [ModdedToggleOption("Zombie Leader Is Unlovable")]
     public bool ZombieCantLove { get; set; } = true;
+
+    [ModdedNumberOption("Players Left When Unguessable", 0, 15, 1)]
+    public int PlayersWhenUnguessable { get; set; } = 3;
 }

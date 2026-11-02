@@ -416,16 +416,6 @@ public sealed class ModdedRolesMenu(IntPtr cppPtr) : Minigame(cppPtr)
 
         var roles = MiscUtils.GetPotentialRoles().Where(roleMatch).ToList();
 
-        var allRoles = MiscUtils.AllRoles.Where(roleMatch).ToList();
-
-        if (allRoles.Count > 0)
-        {
-            foreach (var addedRole in allRoles)
-            {
-                roles.Add(addedRole);
-            }
-        }
-
         var newRoleList = roles.OrderBy(x =>
             LocalSettingsTabSingleton<TouLocalTabPreferences>.Instance.SortGuessingByAlignmentToggle.Value
                 ? MiscUtils.GetParsedRoleAlignment(x) + x.GetRoleName()

@@ -51,4 +51,16 @@ public static class ZombiePatches
             }
         }
     }
+
+    [HarmonyPatch(typeof(VitalsPanel), "SetAlive")]
+    public static class ZombieVitals
+    {
+        public static void Postfix(ref VitalsPanel __instance)
+        {
+            if (__instance.PlayerInfo.Role is ZombieRole || true)
+            {
+                __instance.Cardio.SetDead();
+            }
+        }
+    }
 }

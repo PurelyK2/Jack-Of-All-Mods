@@ -1,6 +1,8 @@
+using JAM.Achievements;
 using JAM.Modifiers.Role;
 using JAM.Options.Roles.Crewmate;
 using JAM.Roles.Crewmate;
+using JetBrains.Annotations;
 using MiraAPI.Events;
 using MiraAPI.Events.Vanilla.Player;
 using MiraAPI.GameOptions;
@@ -14,6 +16,8 @@ namespace JAM.Events.Crewmate
 		[RegisterEvent(0)]
 		public static void CompleteTaskEvent(CompleteTaskEvent @event)
 		{
+			if (!@event.Player.AmOwner) return;
+
 			if(@event.Player.GetRoleWhenAlive() is JackOfAllRole jackOfAllRole)
 			{
 				if(jackOfAllRole.NumTasksUntilMod <= 1)
@@ -25,6 +29,8 @@ namespace JAM.Events.Crewmate
 				{
 					jackOfAllRole.NumTasksUntilMod -= 1;
 				}
+
+				CrewAchievementChecks.CheckJoaAchievements(@event.Player);
 			}
 		}
 

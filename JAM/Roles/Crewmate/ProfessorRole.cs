@@ -61,6 +61,8 @@ public sealed class ProfessorRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOf
     private NetworkedPlayerInfo? selectedPlr;
     public override void OnMeetingStart()
     {
+        if (Uses <= 0) return;
+
         meetingMenu = new MeetingMenu(
             Player.Data.Role,
             Click,
