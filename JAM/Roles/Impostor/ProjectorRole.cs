@@ -128,4 +128,12 @@ public sealed class ProjectorRole(IntPtr cppPtr) : ImpostorRole(cppPtr), ITownOf
             ];
         }
     }
+
+    public override void OnDeath(DeathReason reason)
+    {
+        if(Spirit != null)
+        {
+            Spirit.DestroyImmediate();
+        }
+    }
 }

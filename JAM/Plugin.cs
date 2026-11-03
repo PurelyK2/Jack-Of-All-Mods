@@ -21,7 +21,7 @@ using UnityEngine;
 
 namespace JAM;
 
-[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.2.1")]
+[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.2.2")]
 [BepInProcess("Among Us.exe")]
 [BepInDependency(ReactorPlugin.Id)]
 [BepInDependency(MiraApiPlugin.Id)]
@@ -121,6 +121,7 @@ public enum JAMRpcCalls : uint
 
 // ================== FEATURES ====================
 // Make JAM green on summaries and such?
+// Scrubber Scrubbing Lovers Kills Lovers
 
 // ================== TEMP FIXES ===================
 // MIMIC STILL SEES IMPS!?! (stops imp cards from being in selections)
@@ -139,21 +140,10 @@ public enum JAMRpcCalls : uint
 
 // =============== FIXES ===============
 /*
- * Changed Deceive Button Keybind
- * Made Zombies Able To See Roles In Rounds After zombie leader dies
- * Mimic Alliance Modifier Is No Longer Visible
- * Projector No Longer Has Zero Cooldown When Killing Outside Projections
- * Vacillator Now Globally Changes Alignment
- * Professor's Limited Uses Now Work Properly
- * "DiedToUndead" and "DiedToLeaderless" changed to "Undead" and "Leaderless" Respectively
- * Mimic Can No Longer Do Tasks
- * Mimic's Tasks No Longer Count When Crew
- * Added A Few More Explicitly Blacklisted Roles For Mimic (Including All Neutral Evils)
- * Added Option For Forbearing To Start With Kill Button
- * Zombies Now Appear "Dead" In Vitals
- * Scrubber Now Has The Option To Scrub In Rounds Or Meetings
- * Implemented Deceiver Shield Better
- * Added Foolish Modifier
- * Fixed Deceiver Shield To Have A Medic Shield Icon Next To Name
- * Zombie Leader Is In The Cleaning Bucket With Chef And Janitor Now
+ * Fixed Mimic Win Condition To Properly Work
+ * Forbearing Role Now Properly Works
+ * Zombie Vitals Work Properly Now
+ * Projection Now Goes Away When Player Dies
+ * Foolish Art Is Correct Now
+ * Deceiver Shield Now Works Properly
 */

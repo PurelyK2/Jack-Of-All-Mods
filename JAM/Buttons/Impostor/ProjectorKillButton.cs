@@ -18,6 +18,7 @@ using TownOfUs.Modifiers.Game.Alliance;
 using TownOfUs.Modules;
 using TownOfUs.Modules.Components;
 using TownOfUs.Modules.MedSpirit;
+using TownOfUs.Networking;
 using TownOfUs.Options;
 using TownOfUs.Options.Maps;
 using TownOfUs.Options.Modifiers.Alliance;
@@ -53,7 +54,7 @@ public sealed class ProjectorKillButton : TownOfUsKillRoleButton<ProjectorRole, 
             return;
         }
 
-        PlayerControl.LocalPlayer.RpcCustomMurder(Target);
+        PlayerControl.LocalPlayer.RpcSpecialMurder(Target, causeOfDeath: "Projected");
         if(Role.Spirit != null)
             ProjectorRole.RpcRemoveMediumSpirit(PlayerControl.LocalPlayer, Role.Spirit);
         Role.Spirit = null;

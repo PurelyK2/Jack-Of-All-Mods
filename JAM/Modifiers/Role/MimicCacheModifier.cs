@@ -84,5 +84,10 @@ public sealed class MimicAllianceModifier : AllianceGameModifier, IWikiDiscovera
         return 0;
     }
 
+    public override bool? DidWin(GameOverReason reason)
+    {
+        return DestroyableSingleton<RoleManager>.Instance.GetRole((RoleTypes)RoleId.Get<MimicRole>()).DidWin(reason);
+    }
+
     public override bool DoesTasks => false;
 }

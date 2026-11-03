@@ -7,8 +7,8 @@
       "RelativeMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|solutionrelative:jam\\plugin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|c:\\users\\k2\\documents\\all k2\u0027s stuff\\among us stuff\\k2-and-null-mod\\jam\\achievements\\jamachievements.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|solutionrelative:jam\\achievements\\jamachievements.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|c:\\users\\k2\\documents\\all k2\u0027s stuff\\among us stuff\\k2-and-null-mod\\jam\\modifiers\\role\\deceivershieldmodifiers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|solutionrelative:jam\\modifiers\\role\\deceivershieldmodifiers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,15 +23,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "JAMAchievements.cs",
-              "DocumentMoniker": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Achievements\\JAMAchievements.cs",
-              "RelativeDocumentMoniker": "JAM\\Achievements\\JAMAchievements.cs",
-              "ToolTip": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Achievements\\JAMAchievements.cs",
-              "RelativeToolTip": "JAM\\Achievements\\JAMAchievements.cs",
-              "ViewState": "AgIAADYAAAAAAAAAAAAkwE8AAAAAAAAAAAAAAA==",
+              "Title": "DeceiverShieldModifiers.cs",
+              "DocumentMoniker": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Modifiers\\Role\\DeceiverShieldModifiers.cs",
+              "RelativeDocumentMoniker": "JAM\\Modifiers\\Role\\DeceiverShieldModifiers.cs",
+              "ToolTip": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Modifiers\\Role\\DeceiverShieldModifiers.cs",
+              "RelativeToolTip": "JAM\\Modifiers\\Role\\DeceiverShieldModifiers.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAACwAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-01T20:47:21.462Z",
-              "IsPinned": true,
+              "WhenOpened": "2026-11-02T19:30:28.48Z",
               "EditorCaption": ""
             },
             {
@@ -42,7 +41,7 @@
               "RelativeDocumentMoniker": "JAM\\Plugin.cs",
               "ToolTip": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Plugin.cs",
               "RelativeToolTip": "JAM\\Plugin.cs",
-              "ViewState": "AgIAAG8AAAAAAAAAAAAiwIkAAAAGAAAAAAAAAA==",
+              "ViewState": "AgIAAG4AAAAAAAAAAADwv5MAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-11-02T15:51:19.869Z",
               "EditorCaption": ""

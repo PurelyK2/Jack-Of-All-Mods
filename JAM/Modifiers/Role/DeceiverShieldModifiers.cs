@@ -35,37 +35,9 @@ public sealed class DeceiverMedicShield : BaseShieldModifier, IAnimated
     {
         get
         {
-            bool commsActive = false;
-            switch ((ExpandedMapNames)GameOptionsManager.Instance.currentGameOptions.MapId)
-            {
-                case ExpandedMapNames.MiraHq:
-                case ExpandedMapNames.Fungle:
-                    var hqComms = ShipStatus.Instance.Systems[SystemTypes.Comms]
-                        .Cast<HqHudSystemType>();
-
-                    commsActive = hqComms.IsActive;
-                    break;
-
-                default:
-                    var hudComms = ShipStatus.Instance.Systems[SystemTypes.Comms]
-                        .Cast<HudOverrideSystemType>();
-
-                    commsActive = hudComms.IsActive;
-                    break;
-            }
-            if (commsActive && TownOfUsMapOptions.IsCamoCommsOn())
-            {
-                return false;
-            }
-
-            var showShielded = OptionGroupSingleton<MedicOptions>.Instance.ShowShielded;
-            var showShieldedEveryone = showShielded == MedicOption.Everyone;
-            var showShieldedSelf = Player.AmOwner &&
-                                   showShielded is MedicOption.Shielded or MedicOption.ShieldedAndMedic;
-            return showShieldedSelf || showShieldedEveryone;
+            return DeceiverShieldIconMaker.ShouldSeeShield(Player) || (PlayerControl.LocalPlayer.HasDied() && PlayerControl.LocalPlayer.DiedOtherRound()) || PlayerControl.LocalPlayer.IsImpostorAligned();
         }
     }
-    public void SetVisible() { }
     public override void OnActivate()
     {
         Shield = AnimStore.SpawnAnimBody(base.Player, TouAssets.MedicShield.LoadAsset(), false, -1.1f, -0.1f, 1.5f);
@@ -85,7 +57,7 @@ public sealed class DeceiverMedicShield : BaseShieldModifier, IAnimated
     }
     public override void Update()
     {
-        Shield.SetActive(!Player.Data.IsDead);
+        Shield.SetActive(VisibleSymbol);
 
         DeceiverRole.confuseRole = false;
         if(!MiraAPI.Utilities.Helpers.GetAlivePlayers().Any(p => p.Data.Role is DeceiverRole))

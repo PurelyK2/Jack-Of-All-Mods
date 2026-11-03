@@ -57,7 +57,7 @@ public static class ZombiePatches
     {
         public static void Postfix(ref VitalsPanel __instance)
         {
-            if (__instance.PlayerInfo.Role is ZombieRole || true)
+            if (__instance.PlayerInfo.Role is ZombieRole)
             {
                 __instance.Cardio.SetDead();
             }
