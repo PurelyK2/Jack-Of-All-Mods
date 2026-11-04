@@ -14,6 +14,7 @@ using Reactor.Networking;
 using Reactor.Networking.Attributes;
 using Reactor.Utilities;
 using System.Globalization;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using TownOfUs;
 using TownOfUs.Achievements;
@@ -21,7 +22,7 @@ using UnityEngine;
 
 namespace JAM;
 
-[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.2.2")]
+[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.2.3")]
 [BepInProcess("Among Us.exe")]
 [BepInDependency(ReactorPlugin.Id)]
 [BepInDependency(MiraApiPlugin.Id)]
@@ -93,6 +94,55 @@ public partial class Plugin : BasePlugin, IMiraPlugin
                     __result = locale;
                 }
             }
+
+            // Achievement Stuff
+            if(__result.Contains("JAM.Achievement."))
+            {
+                Type classType = typeof(JamAchievements);
+
+                __result = __result.Substring(__result.IndexOf("t.") + 2);
+
+                if (__result.Contains(".N"))
+                {
+                    __result = __result.Substring(0, __result.IndexOf(".N"));
+
+                    FieldInfo? fieldInfo = classType.GetField(__result, BindingFlags.Public | BindingFlags.Static);
+
+                    if (fieldInfo != null)
+                    {
+                        AchievementSpec? value = fieldInfo.GetValue(null) as AchievementSpec;
+
+                        if (value != null)
+                        {
+                            __result = value.Name;
+                        }
+                        else
+                        {
+                            Fatal("Error: Achievement Is Null - " + __result);
+                        }
+                    }
+                }
+                else
+                {
+                    __result = __result.Substring(0, __result.IndexOf(".D"));
+
+                    FieldInfo? fieldInfo = classType.GetField(__result, BindingFlags.Public | BindingFlags.Static);
+
+                    if (fieldInfo != null)
+                    {
+                        AchievementSpec? value = fieldInfo.GetValue(null) as AchievementSpec;
+
+                        if (value != null)
+                        {
+                            __result = value.Description;
+                        }
+                        else
+                        {
+                            Fatal("Error: Achievement Is Null - " + __result);
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -116,34 +166,32 @@ public enum JAMRpcCalls : uint
     RemoveProjection = 5,
     AssignSpirit = 6,
     SyncRolesList = 7,
-    UpdateVacillatorAlignment
+    UpdateVacillatorAlignment = 8
 }
 
 // ================== FEATURES ====================
 // Make JAM green on summaries and such?
-// Scrubber Scrubbing Lovers Kills Lovers
+// Make Zombie Votes Grey And Happen After All Other Votes
 
 // ================== TEMP FIXES ===================
 // MIMIC STILL SEES IMPS!?! (stops imp cards from being in selections)
-// Deceiver Can't Be Guessed (Deceiver Is Unguessable)
+// Deceiver Is Always Misguessed (Deceiver Is Unguessable)
 
 // ================== MINOR BUGS ====================
-// Zombies lose-win if only zombie leader and crewmate are left on meeting end (after voting out evil)
-    // Edge case, minimal worry
-// Professor Sometimes Gives Wrong Alignment Roles???
-// JOA gets imp assassin???
 // Zombies Can't See Chat
 // Exposed Doesn't Work
 // Camouflager Reveals Invis People??? (Camouflager => snoop not being invis)
 // concealed is sometimes fully invisible?
-// Achievements Don't Work
 
 // =============== FIXES ===============
 /*
- * Fixed Mimic Win Condition To Properly Work
- * Forbearing Role Now Properly Works
- * Zombie Vitals Work Properly Now
- * Projection Now Goes Away When Player Dies
- * Foolish Art Is Correct Now
- * Deceiver Shield Now Works Properly
+ * Jack Of All Can Now Guess Impostors
+ * Mimic Works Properly Now
+ * Changed The Zombie Revive Sprite
+ * Scrubber Now Kills The Other Lover If A Lover Is Scrubbed
+ * Made Unstable "Universal Visibility"
+ * (Hopefully) Fixed Professor
+ * Fixed Extra Votes Backend To Be Cleaner
+ * Made Achievements Work!!!
+ * Foolish Now Takes Discussion Time Into Account
 */

@@ -92,6 +92,8 @@ public sealed class ProfessorSelectMinigame(IntPtr cppPtr) : Minigame(cppPtr)
 
     private void Begin()
     {
+        availableRoles = availableRoles.Where(r => r.GetRoleAlignment() == PlayerControl.LocalPlayer.Data.Role.GetRoleAlignment()).ToList();
+
         HudManager.Instance.StartCoroutine(HudManager.Instance.CoFadeFullScreen(Color.clear, _bgColor));
 
         StatusText!.gameObject.SetActive(true);

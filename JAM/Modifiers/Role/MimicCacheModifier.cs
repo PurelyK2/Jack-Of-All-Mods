@@ -8,6 +8,7 @@ using JAM.Roles.Neutral;
 using MiraAPI.Events;
 using MiraAPI.Events.Vanilla.Gameplay;
 using MiraAPI.Events.Vanilla.Meeting;
+using MiraAPI.Events.Vanilla.Meeting.Voting;
 using MiraAPI.GameOptions;
 using MiraAPI.Modifiers;
 using MiraAPI.Roles;
@@ -52,7 +53,20 @@ public sealed class MimicCacheModifier : BaseModifier, ICachedRole
         base.OnActivate();
     }
 
-    //Remove On True Role Change
+    // Return Role On Voting Complete
+    [RegisterEvent(0)]
+    public static void OnVotingComplete(VotingCompleteEvent @event)
+    {
+        foreach (var player in PlayerControl.AllPlayerControls)
+        {
+            if (player.HasModifier<MimicCacheModifier>())
+            {
+                player.RpcChangeRole(RoleId.Get<MimicRole>(), false);
+            }
+        }
+    }
+
+    // Remove On True Role Change
     [HarmonyPatch(typeof(TownOfUs.Utilities.Extensions), "RpcChangeRole", [typeof(PlayerControl), typeof(ushort), typeof(bool)])]
     public static class TrulyChangeRolePatch
     {

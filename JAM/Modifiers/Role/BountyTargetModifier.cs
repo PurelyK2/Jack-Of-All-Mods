@@ -450,13 +450,13 @@ public sealed class BountyRewardModifier : BaseModifier
                 MiraAPI.Utilities.Helpers.CreateAndShowNotification("You Can Now Vent", Colors.BountyHunter, new UnityEngine.Vector3(0f, 1f, -20f), null, JamRoleIcons.BountyHunter.LoadAsset());
                 break;
             case RewardType.ExtraVote:
-                if(!Player.HasModifier<JackOfAllVotes>())
+                if(!Player.HasModifier<ExtraVotesModifier>())
                 {
-                    Player.RpcAddModifier<JackOfAllVotes>();
+                    Player.RpcAddModifier<ExtraVotesModifier>();
                 }
                 else
                 {
-                    JackOfAllVotes votes = Player.GetModifier<JackOfAllVotes>();
+                    ExtraVotesModifier votes = Player.GetModifier<ExtraVotesModifier>();
                     votes.NumVotes++;
                 }
                 MiraAPI.Utilities.Helpers.CreateAndShowNotification("You Have An Extra Vote", Colors.BountyHunter, new UnityEngine.Vector3(0f, 1f, -20f), null, JamRoleIcons.BountyHunter.LoadAsset());

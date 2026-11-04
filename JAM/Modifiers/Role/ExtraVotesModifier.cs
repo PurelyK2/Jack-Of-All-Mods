@@ -6,7 +6,7 @@ using TownOfUs.Utilities;
 
 namespace JAM.Modifiers.Role;
 
-internal class JackOfAllVotes : BaseModifier, IContinuesGame
+internal class ExtraVotesModifier : BaseModifier, IContinuesGame
 {
     public int NumVotes = 1;
     public override string ModifierName => "Extra Votes!";

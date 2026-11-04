@@ -25,18 +25,10 @@ public sealed class UnstableModifier : TouGameModifier, IWikiDiscoverable
 {
      
     public bool isUnstable { get; set; }
-
-     
     public override string ModifierName => "Unstable";
-
-     
     public override string IntroInfo => "You are unstable";
-
-     
     public override bool HideFromGuessing => true;
 
-
-     
     public override string GetDescription()
     {
         int minTPTime = (int)OptionGroupSingleton<UnstableOptions>.Instance.UnstableMinCooldown;
@@ -62,7 +54,7 @@ public sealed class UnstableModifier : TouGameModifier, IWikiDiscoverable
         }
     }
      
-    public override ModifierFaction FactionType => ModifierFaction.UniversalPassive;
+    public override ModifierFaction FactionType => ModifierFaction.UniversalVisibility;
 
      
     public override int GetAssignmentChance()

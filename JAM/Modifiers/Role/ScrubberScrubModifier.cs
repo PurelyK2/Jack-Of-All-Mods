@@ -11,7 +11,9 @@ using System.Text;
 using System.Threading.Tasks;
 using TownOfUs.Modifiers;
 using TownOfUs.Modifiers.Game;
+using TownOfUs.Modifiers.Game.Alliance;
 using TownOfUs.Modules.Wiki;
+using TownOfUs.Networking;
 using TownOfUs.Utilities;
 
 namespace JAM.Modifiers;
@@ -34,7 +36,19 @@ public sealed class ScrubberScrubModifier : BaseModifier
                     if (modifier is not TouGameModifier) continue;
                     if (modifier is TouGameModifier gameModifier && (gameModifier.GetAssignmentChance() == 0 || gameModifier.GetAmountPerGame() == 0)) continue;
                     if (modifier is BaseShieldModifier) continue;
-                    if (modifier is AllianceGameModifier) continue;
+                    if (modifier is AllianceGameModifier)
+                    {
+                        if(modifier is LoverModifier)
+                        {
+                            player.RpcRemoveModifier(modifier.UniqueId);
+                            PlayerControl? lover = PlayerControl.AllPlayerControls.ToArray().FirstOrDefault(p => p.HasModifier<LoverModifier>() && p != player);
+
+                            if(lover != null)
+                                lover.RpcSpecialMurder(lover, true, true, true, false, true, false, true, true, "Heartbroken");
+                        }
+
+                        continue;
+                    }
 
                     player.RpcRemoveModifier(modifier.UniqueId);
                 }

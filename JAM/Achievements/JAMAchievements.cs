@@ -25,7 +25,7 @@ internal static class JamAchievementGroups
         MuAssembly, "Jack Of All Mods", "Jack Of All Mods", "general",
         TabLocaleKey: "JAM.Achievements.Tab",
         LocalePrefix: "JAM.Achievement",
-        TabIcon: JamRoleIcons.JackOfAll, ModIcon: JamAssets.GossipOverhear,
+        TabIcon: JamRoleIcons.JackOfAll, ModIcon: JamRoleIcons.JackOfAll,
         TabColor: Colors.Zombie);
 }
 
@@ -42,56 +42,58 @@ public static class JamAchievements
             SubIconTooltip: subIconTooltip);
 
     // Mimic
-    public static AchievementSpec DIYSwooper = Define("DIY Swooper", "Kill As A Snoop", JamRoleIcons.Snoop);
-    public static AchievementSpec ThereCanOnlyBeOne = Define("There Can Only Be One", "Kill Someone Whose Role You're Mimicking", TouModifierIcons.Colorblind);
+    public static AchievementSpec DIYSwooper = Define("DIY Swooper", "Kill As A Snoop", JamRoleIcons.Snoop, JamRoleIcons.Snoop, rarity: 3, hidden: true);
+    public static AchievementSpec ThereCanOnlyBeOne = Define("There Can Only Be One", "Kill Someone Whose Role You're Mimicking", TouModifierIcons.Colorblind, rarity: 2);
 
     // Jack Of All
-    public static AchievementSpec DIYMayor = Define("DIY Mayor", "Get 2 Bonus Votes From Tasks As Jack Of All", JamRoleIcons.JackOfAll);
-    public static AchievementSpec Unkillable = Define("Unkillable", "Get Bait + Celebrety As Jack Of All", TouModifierIcons.Bait);
+    public static AchievementSpec DIYMayor = Define("DIY Mayor", "Get 2 Bonus Votes From Tasks As Jack Of All", JamRoleIcons.JackOfAll, TouRoleIcons.Mayor, rarity: 3, hidden: true);
+    public static AchievementSpec Unkillable = Define("Unkillable", "Get Bait + Celebrety As Jack Of All", TouModifierIcons.Bait, rarity: 1);
 
     // Deceiver
-    public static AchievementSpec GetBaited = Define("Get Baited", "Be Guessed As Medic When Deceiver", JamRoleIcons.Deceiver);
+    public static AchievementSpec GetBaited = Define("Get Baited", "Be Guessed As Medic When Deceiver", JamRoleIcons.Deceiver, rarity: 2);
     public static AchievementSpec Deceived = Define("Deceived", "Deceive 3 People", JamRoleIcons.Deceiver);
-    public static AchievementSpec Psych = Define("Psych!", "Kill The Person You Shielded As Deceiver", JamRoleIcons.Deceiver);
+    public static AchievementSpec Psych = Define("Psych!", "Kill The Person You Shielded As Deceiver", JamRoleIcons.Deceiver, rarity: 1);
 
     // Vacillator
     public static AchievementSpec IShotTheSheriff = Define("I Shot The Sheriff", "Misfire On A Crewmate As Vacillator", TouModifierIcons.Colorblind);
-    public static AchievementSpec DespicableMe = Define("Despicable Me", "Misfire On An Evil As Vacillator", TouModifierIcons.Colorblind);
+    public static AchievementSpec DespicableMe = Define("Despicable Me", "Misfire On An Evil As Vacillator", TouModifierIcons.Colorblind, rarity: 1);
 
     // Forbearing
-    public static AchievementSpec FineIllDoItMyself = Define("Fine, I'll Do It Myself", "Have 0 Kill Cooldown As Forbearing", TouRoleIcons.Jackal);
+    public static AchievementSpec FineIllDoItMyself = Define("Fine, I'll Do It Myself", "Have 0 Kill Cooldown As Forbearing", TouRoleIcons.Jackal, rarity: 2);
     public static AchievementSpec Boring = Define("BORING!", "Have Your Cooldown Reduced As Forbearing", TouRoleIcons.Jackal);
 
     // Zombie Leader
-    public static AchievementSpec Apocolypse = Define("Apocolypse", "Win As Zombie Leader", JamRoleIcons.ZombieLeader);
-    public static AchievementSpec Arise = Define("ARISE!", "Personally Revive 3 People As Zombies In 1 Game", JamRoleIcons.ZombieLeader, persistence: AchievementPersistence.ThroughoutRounds);
+    public static AchievementSpec Apocolypse = Define("Apocolypse", "Win As Zombie Leader", JamRoleIcons.ZombieLeader, rarity: 2);
+    public static AchievementSpec Arise = Define("ARISE!", "Personally Revive 3 People As Zombies In 1 Game", JamRoleIcons.ZombieLeader, persistence: AchievementPersistence.ThroughoutRounds, rarity: 1);
     public static AchievementSpec Infected = Define("Infected", "Become A Zombie", JamRoleIcons.Zombie);
 
     // Projector
     public static AchievementSpec Poof = Define("Poof!", "Kill While Projected", JamRoleIcons.Projector);
-    public static AchievementSpec OldFashioned = Define("Old-Fashioned", "Kill 3 Players Normally In A Single Game", JamRoleIcons.Projector);
+    public static AchievementSpec OldFashioned = Define("Old-Fashioned", "Kill 3 Players Normally In A Single Game", JamRoleIcons.Projector, rarity: 1);
 
     // Mortician
-    public static AchievementSpec CaughtRedHanded = Define("Caught Red-Handed", "Perform An Autopsy On Someone Who Was Killed With Bait This Round", JamRoleIcons.Mortician);
+    public static AchievementSpec CaughtRedHanded = Define("Caught Red-Handed", "Perform An Autopsy On Someone Who Was Killed With Bait This Round", JamRoleIcons.Mortician, rarity: 1);
     public static AchievementSpec UselessDegree = Define("Useless Degree", "Die Round 1 As Mortician", JamRoleIcons.Mortician);
 
     // Professor
-    public static AchievementSpec PeerReviewed = Define("Peer Reviewed", "Get Killed By Someone You Retrained", JamRoleIcons.Professor);
+    public static AchievementSpec PeerReviewed = Define("Peer Reviewed", "Get Killed By Someone You Retrained", JamRoleIcons.Professor, rarity: 1);
 
     // Micromanager
-    public static AchievementSpec EmployeeOfTheMonth = Define("Employee Of The Month", "Complete All Tasks As Micromanager", JamRoleIcons.Micromanager);
-    
+    public static AchievementSpec EmployeeOfTheMonth = Define("Employee Of The Month", "Complete All Tasks As Micromanager", JamRoleIcons.Micromanager, rarity: 1);
+
     public static readonly AchievementSpec[] All =
     [
-    /*
         DIYSwooper, ThereCanOnlyBeOne,
         DIYMayor, Unkillable,
         GetBaited, Deceived, Psych,
         DespicableMe, IShotTheSheriff,
         FineIllDoItMyself, Boring,
         Apocolypse, Arise, Infected,
+    /*
         Poof, OldFashioned, 
-        CaughtRedHanded, UselessDegree
+        CaughtRedHanded, UselessDegree,
+        PeerReviewed,
+        EmployeeOfTheMonth
     */
     ];
 }

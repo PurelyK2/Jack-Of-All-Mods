@@ -15,6 +15,7 @@ using TownOfUs.Utilities;
 using TownOfUs.Utilities.Appearances;
 using UnityEngine;
 using JAM.Achievements;
+using JAM.Assets;
 
 namespace JAM.Buttons.Neutral;
 
@@ -25,7 +26,7 @@ public class ZombieReviveButton : TownOfUsButton
     public override Color TextOutlineColor => Colors.Zombie;
     public override float Cooldown => OptionGroupSingleton<ZombieOptions>.Instance.ZombieReviveCd;
     public override bool ZeroIsInfinite { get; set; } = true;
-    public override LoadableAsset<Sprite> Sprite => TouCrewAssets.ReviveSprite;
+    public override LoadableAsset<Sprite> Sprite => JamRoleIcons.Zombie;
 
     public override bool Enabled(RoleBehaviour? role)
     {

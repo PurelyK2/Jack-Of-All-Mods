@@ -33,19 +33,5 @@ namespace JAM.Events.Crewmate
 				CrewAchievementChecks.CheckJoaAchievements(@event.Player);
 			}
 		}
-
-        [RegisterEvent(0)]
-        public static void HandleVoteEvent(MiraAPI.Events.Vanilla.Meeting.Voting.HandleVoteEvent @event)
-        {
-            if (@event.Player.HasModifier<JackOfAllVotes>())
-            {
-                @event.VoteData.SetRemainingVotes(0);
-                for (int i = 0; i < @event.Player.GetModifier<JackOfAllVotes>().NumVotes + 1; i++)
-                {
-                    @event.VoteData.VoteForPlayer(@event.TargetId);
-                }
-                @event.Cancel();
-            }
-        }
     }
 }

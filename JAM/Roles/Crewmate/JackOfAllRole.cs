@@ -110,7 +110,7 @@ public sealed class JackOfAllRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOf
                     && (m is not TelepathModifier || player.HasModifier<EgotistModifier>() || player.HasModifier<CrewpostorModifier>())
                     && (m is not DoubleShotModifier || player.HasModifier<AssassinModifier>())
                     && (m is not FirstDeadShield)
-                    || m is JackOfAllVotes
+                    || m is ExtraVotesModifier
                 ).ToList();
 
             if(modifiers.Count == 0)
@@ -137,17 +137,17 @@ public sealed class JackOfAllRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOf
                     modifiers.Shuffle();
                     modifier = modifiers[0];
                     modifiers.Remove(modifier);
-                } while (player.HasModifier(modifier.TypeId) && modifier is not JackOfAllVotes && modifiers.Count > 0);
+                } while (player.HasModifier(modifier.TypeId) && modifier is not ExtraVotesModifier && modifiers.Count > 0);
 
                 Helpers.CreateAndShowNotification("You Gained The " + modifier.ModifierName + " Modifier", Colors.JackOfAll, null, JamRoleIcons.JackOfAll.LoadAsset());
 
-                if (modifier is JackOfAllVotes)
+                if (modifier is ExtraVotesModifier)
                 {
-                    JackOfAllVotes? joav = player.GetModifier<JackOfAllVotes>();
+                    ExtraVotesModifier? joav = player.GetModifier<ExtraVotesModifier>();
 
                     if(joav == null)
                     {
-                        player.RpcAddModifier<JackOfAllVotes>();
+                        player.RpcAddModifier<ExtraVotesModifier>();
                     }
                     else
                     {
@@ -187,6 +187,29 @@ public sealed class JackOfAllRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOf
                         __result--;
                     }
                 }
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(AssassinModifier), "IsRoleValid")]
+    public static class AssassinJackOfAllPrecheck
+    {
+        public static bool IsChecking = false;
+        public static void Prefix()
+        {
+            IsChecking = true;
+        }
+        public static void Postfix()
+        {
+            IsChecking = false;
+        }
+
+        [HarmonyPatch(typeof(TownOfUs.Utilities.MiscUtils), "GetRoleAlignment", [typeof(RoleBehaviour)])]
+        public static void Postfix(ref RoleAlignment __result, RoleBehaviour role)
+        {
+            if (IsChecking && role is JackOfAllRole)
+            {
+                __result = RoleAlignment.NeutralEvil;
             }
         }
     }

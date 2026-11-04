@@ -22,6 +22,7 @@ public static class FoolishEvents
     public static void OnMeetingStart(StartMeetingEvent @event)
     {
         FoolishModifier.votingTimeLeft = OptionGroupSingleton<FoolishOptions>.Instance.FoolishTime + 5; // the 5 is for the initial animation
+        FoolishModifier.votingTimeLeft += GameManager.Instance.LogicOptions.Cast<LogicOptionsNormal>().GetDiscussionTime();
     }
 
     [HarmonyPatch(typeof(PlayerVoteData), "VoteForPlayer")]

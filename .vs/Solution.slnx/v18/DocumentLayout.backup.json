@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|c:\\users\\k2\\documents\\all k2\u0027s stuff\\among us stuff\\k2-and-null-mod\\jam\\events\\modifiers\\foolishevents.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|solutionrelative:jam\\events\\modifiers\\foolishevents.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|c:\\users\\k2\\documents\\all k2\u0027s stuff\\among us stuff\\k2-and-null-mod\\jam\\plugin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|solutionrelative:jam\\plugin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|c:\\users\\k2\\documents\\all k2\u0027s stuff\\among us stuff\\k2-and-null-mod\\jam\\modifiers\\role\\deceivershieldmodifiers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|solutionrelative:jam\\modifiers\\role\\deceivershieldmodifiers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|c:\\users\\k2\\documents\\all k2\u0027s stuff\\among us stuff\\k2-and-null-mod\\jam\\achievements\\jamachievements.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|solutionrelative:jam\\achievements\\jamachievements.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,30 +22,43 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DeceiverShieldModifiers.cs",
-              "DocumentMoniker": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Modifiers\\Role\\DeceiverShieldModifiers.cs",
-              "RelativeDocumentMoniker": "JAM\\Modifiers\\Role\\DeceiverShieldModifiers.cs",
-              "ToolTip": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Modifiers\\Role\\DeceiverShieldModifiers.cs",
-              "RelativeToolTip": "JAM\\Modifiers\\Role\\DeceiverShieldModifiers.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAACwAAAA0AAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "FoolishEvents.cs",
+              "DocumentMoniker": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Events\\Modifiers\\FoolishEvents.cs",
+              "RelativeDocumentMoniker": "JAM\\Events\\Modifiers\\FoolishEvents.cs",
+              "ToolTip": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Events\\Modifiers\\FoolishEvents.cs",
+              "RelativeToolTip": "JAM\\Events\\Modifiers\\FoolishEvents.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABgAAAB6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-02T19:30:28.48Z",
+              "WhenOpened": "2026-11-04T17:36:57.59Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
+              "Title": "JAMAchievements.cs",
+              "DocumentMoniker": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Achievements\\JAMAchievements.cs",
+              "RelativeDocumentMoniker": "JAM\\Achievements\\JAMAchievements.cs",
+              "ToolTip": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Achievements\\JAMAchievements.cs",
+              "RelativeToolTip": "JAM\\Achievements\\JAMAchievements.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAAAzwDAAAACaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-04T14:41:39.474Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Plugin.cs",
               "DocumentMoniker": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Plugin.cs",
               "RelativeDocumentMoniker": "JAM\\Plugin.cs",
               "ToolTip": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Plugin.cs",
               "RelativeToolTip": "JAM\\Plugin.cs",
-              "ViewState": "AgIAAG4AAAAAAAAAAADwv5MAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAJwAAAAAAAAAAAAswKoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-11-02T15:51:19.869Z",
               "EditorCaption": ""

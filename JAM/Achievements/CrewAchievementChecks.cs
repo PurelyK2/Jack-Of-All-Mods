@@ -21,7 +21,7 @@ public static class CrewAchievementChecks
             Unlock(Unkillable);
         }
 
-        if(modifiers.FirstOrDefault(m => m is JackOfAllVotes) is JackOfAllVotes votes && votes.NumVotes > 1 && !IsUnlocked(DIYMayor))
+        if(modifiers.FirstOrDefault(m => m is ExtraVotesModifier) is ExtraVotesModifier votes && votes.NumVotes > 1 && !IsUnlocked(DIYMayor))
         {
             Unlock(DIYMayor);
         }
