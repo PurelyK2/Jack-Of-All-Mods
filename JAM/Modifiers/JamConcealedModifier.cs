@@ -25,7 +25,7 @@ public sealed class JamConcealedModifier : UniversalGameModifier, IWikiDiscovera
     
     public override string GetDescription()
     {
-        return "You Are Slightly Less Opaque";
+        return "You Are Semi-Transparent";
     }
      
     public string GetAdvancedDescription()

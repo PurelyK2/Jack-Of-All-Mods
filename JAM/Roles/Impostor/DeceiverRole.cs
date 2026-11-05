@@ -31,13 +31,8 @@ using JAM.Modifiers.Role;
 using JAM.Roles.Neutral;
 
 //Note: This Role Was Suggested By: ‧₊˚✧ 𝒥𝒶𝓎 :3 ✧˚₊‧ (Discord)
-public sealed class DeceiverRole(IntPtr cppPtr) : ImpostorRole(cppPtr), ITownOfUsRole, IWikiDiscoverable, ICrewVariant, IDoomable, IUnguessable
+public sealed class DeceiverRole(IntPtr cppPtr) : ImpostorRole(cppPtr), ITownOfUsRole, IWikiDiscoverable, ICrewVariant, IDoomable
 {
-    // Temp Fix To Deceiver Being Unguessable
-    public RoleBehaviour AppearAs => RoleManager.Instance.GetRole((RoleTypes)RoleId.Get<MimicRole>());
-    public bool IsGuessable => false;
-
-
     public RoleBehaviour randomizedRole;
     public static bool confuseRole;
     public static bool hasGameStarted;
@@ -138,13 +133,26 @@ public sealed class DeceiverRole(IntPtr cppPtr) : ImpostorRole(cppPtr), ITownOfU
     }
 
     [HarmonyPatch(typeof(AssassinModifier), "ClickGuess", [typeof(PlayerVoteArea), typeof(MeetingHud)])]
-	public static class AssassinGuessDeceiverPatch
-	{
-		public static void Prefix()
-		{
-			confuseRole = false;
-		}
-		public static void Postfix()
+    public static class AssassinGuessDeceiverPatch
+    {
+        public static void Prefix()
+        {
+            confuseRole = false;
+        }
+        public static void Postfix()
+        {
+            ReConfuse();
+        }
+    }
+
+    [HarmonyPatch(typeof(VigilanteRole), "ClickGuess", [typeof(PlayerVoteArea), typeof(MeetingHud)])]
+    public static class VigilanGuessDeceiverPatch
+    {
+        public static void Prefix()
+        {
+            confuseRole = false;
+        }
+        public static void Postfix()
         {
             ReConfuse();
         }

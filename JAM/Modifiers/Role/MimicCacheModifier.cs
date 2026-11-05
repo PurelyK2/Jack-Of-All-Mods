@@ -100,7 +100,7 @@ public sealed class MimicAllianceModifier : AllianceGameModifier, IWikiDiscovera
 
     public override bool? DidWin(GameOverReason reason)
     {
-        return DestroyableSingleton<RoleManager>.Instance.GetRole((RoleTypes)RoleId.Get<MimicRole>()).DidWin(reason);
+        return DestroyableSingleton<RoleManager>.Instance.GetRole((RoleTypes)RoleId.Get<MimicRole>()).DidWin(reason) || (!Player.HasDied() && reason != GameOverReason.CrewmatesByTask && reason != GameOverReason.CrewmateDisconnect && reason != GameOverReason.CrewmatesByVote);
     }
 
     public override bool DoesTasks => false;

@@ -22,7 +22,7 @@ using UnityEngine;
 
 namespace JAM;
 
-[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.2.3")]
+[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.2.4")]
 [BepInProcess("Among Us.exe")]
 [BepInDependency(ReactorPlugin.Id)]
 [BepInDependency(MiraApiPlugin.Id)]
@@ -146,7 +146,7 @@ public partial class Plugin : BasePlugin, IMiraPlugin
         }
     }
 
-    static readonly List<string> JamLocales = new List<string>()
+    static List<string> JamLocales = new List<string>()
     {
         "Undead",
         "Leaderless",
@@ -166,8 +166,10 @@ public enum JAMRpcCalls : uint
     RemoveProjection = 5,
     AssignSpirit = 6,
     SyncRolesList = 7,
-    UpdateVacillatorAlignment = 8
+    UpdateVacillatorAlignment = 8,
+    SendKeyword = 9
 }
+
 
 // ================== FEATURES ====================
 // Make JAM green on summaries and such?
@@ -175,23 +177,19 @@ public enum JAMRpcCalls : uint
 
 // ================== TEMP FIXES ===================
 // MIMIC STILL SEES IMPS!?! (stops imp cards from being in selections)
-// Deceiver Is Always Misguessed (Deceiver Is Unguessable)
 
 // ================== MINOR BUGS ====================
-// Zombies Can't See Chat
 // Exposed Doesn't Work
 // Camouflager Reveals Invis People??? (Camouflager => snoop not being invis)
 // concealed is sometimes fully invisible?
+// Unstable isn't swapping people, just tping them away
 
 // =============== FIXES ===============
 /*
- * Jack Of All Can Now Guess Impostors
- * Mimic Works Properly Now
- * Changed The Zombie Revive Sprite
- * Scrubber Now Kills The Other Lover If A Lover Is Scrubbed
- * Made Unstable "Universal Visibility"
- * (Hopefully) Fixed Professor
- * Fixed Extra Votes Backend To Be Cleaner
- * Made Achievements Work!!!
- * Foolish Now Takes Discussion Time Into Account
+ * Vigilante Can Now Properly Guess Deceiver
+ * Mimic (Should) Properly Win Now
+ * Concealed Description Has Been Reworded
+ * Zombies (Should) Now Be Able To See Chat
+ * Added Masons
+ * Fixed The Infect Achievement
 */

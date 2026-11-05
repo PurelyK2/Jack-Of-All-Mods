@@ -52,6 +52,17 @@ public static class ZombiePatches
         }
     }
 
+    // Disables Hiding Chat On Zombie Death
+    [HarmonyPatch(typeof(TownOfUs.Events.GhostRoleEvents), "CoRemoveChat")]
+    public static class DontHideChatFromZombies
+    {
+        public static bool Prefix()
+        {
+            if (PlayerControl.LocalPlayer.Data.Role is ZombieRole) return false;
+            return true;
+        }
+    }
+
     [HarmonyPatch(typeof(VitalsPanel), "SetAlive")]
     public static class ZombieVitals
     {

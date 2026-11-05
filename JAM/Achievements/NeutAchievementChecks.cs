@@ -77,9 +77,9 @@ public static class NeutAchievementChecks
     [HarmonyPatch(typeof(TownOfUs.Networking.MiscTouRpcs), "RpcFullRevive")]
     public static class ZombieRevivePatch
     {
-        public static void Postfix(ushort newRoleType)
+        public static void Postfix(ref PlayerControl player, ushort newRoleType)
         {
-            if(newRoleType == RoleId.Get<ZombieRole>() && !IsUnlocked(Infected))
+            if(player.AmOwner && newRoleType == RoleId.Get<ZombieRole>() && !IsUnlocked(Infected))
             {
                 Unlock(Infected);
             }

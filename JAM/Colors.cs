@@ -33,4 +33,5 @@ public static class Colors
     public static Color Exposed => new Color32(220, 175, 51, 255);
     public static Color Workaholic => new Color32(124, 142, 158, 255);
     public static Color Battery => new Color32(174, 218, 27, 255);
+    public static Color Mason => new Color32(180, 100, 110, 255);
 }

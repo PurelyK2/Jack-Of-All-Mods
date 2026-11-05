@@ -34,7 +34,7 @@ public sealed class HyperfocusModifier : TouGameModifier, IWikiDiscoverable
     {
         get
         {
-            return new ModifierUiConfiguration(Colors.Hyperfocus, TmpSpriteUtils.CreateSpriteAsset(JamModifierIcons.Hyperfocus.LoadAsset(), "TouMira.Modifier.Game.Universal.Hyperfocus", 1.45f));
+            return new ModifierUiConfiguration(Colors.Hyperfocus, TmpSpriteUtils.CreateSpriteAsset(JamModifierIcons.Hyperfocus.LoadAsset(), "Hyperfocus", 1.45f));
         }
     }
      

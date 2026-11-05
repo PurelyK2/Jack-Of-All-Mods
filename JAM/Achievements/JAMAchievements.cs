@@ -47,7 +47,7 @@ public static class JamAchievements
 
     // Jack Of All
     public static AchievementSpec DIYMayor = Define("DIY Mayor", "Get 2 Bonus Votes From Tasks As Jack Of All", JamRoleIcons.JackOfAll, TouRoleIcons.Mayor, rarity: 3, hidden: true);
-    public static AchievementSpec Unkillable = Define("Unkillable", "Get Bait + Celebrety As Jack Of All", TouModifierIcons.Bait, rarity: 1);
+    public static AchievementSpec Unkillable = Define("Unkillable", "Get Bait + Celebrity As Jack Of All", TouModifierIcons.Bait, rarity: 1);
 
     // Deceiver
     public static AchievementSpec GetBaited = Define("Get Baited", "Be Guessed As Medic When Deceiver", JamRoleIcons.Deceiver, rarity: 2);
