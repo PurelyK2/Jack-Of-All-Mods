@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|c:\\users\\k2\\documents\\all k2\u0027s stuff\\among us stuff\\k2-and-null-mod\\jam\\modifiers\\jamconcealedmodifier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|solutionrelative:jam\\modifiers\\jamconcealedmodifier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|c:\\users\\k2\\documents\\all k2\u0027s stuff\\among us stuff\\k2-and-null-mod\\jam\\modifiers\\masonmodifier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|solutionrelative:jam\\modifiers\\masonmodifier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|c:\\users\\k2\\documents\\all k2\u0027s stuff\\among us stuff\\k2-and-null-mod\\jam\\plugin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|solutionrelative:jam\\plugin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|c:\\users\\k2\\documents\\all k2\u0027s stuff\\among us stuff\\k2-and-null-mod\\jam\\options\\modifiers\\masonoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|solutionrelative:jam\\options\\modifiers\\masonoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|c:\\users\\k2\\documents\\all k2\u0027s stuff\\among us stuff\\k2-and-null-mod\\jam\\options\\modifiers\\hyperfocusoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2C95A791-B9D2-1DAC-D497-35182BA28956}|JAM\\JackOfAllMods.csproj|solutionrelative:jam\\options\\modifiers\\hyperfocusoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,45 +26,60 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Plugin.cs",
               "DocumentMoniker": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Plugin.cs",
               "RelativeDocumentMoniker": "JAM\\Plugin.cs",
               "ToolTip": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Plugin.cs",
               "RelativeToolTip": "JAM\\Plugin.cs",
-              "ViewState": "AgIAAKAAAAAAAAAAAAAUwLMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAqwBgAAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-11-05T00:36:19.652Z",
-              "IsPinned": true
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "JamConcealedModifier.cs",
-              "DocumentMoniker": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Modifiers\\JamConcealedModifier.cs",
-              "RelativeDocumentMoniker": "JAM\\Modifiers\\JamConcealedModifier.cs",
-              "ToolTip": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Modifiers\\JamConcealedModifier.cs",
-              "RelativeToolTip": "JAM\\Modifiers\\JamConcealedModifier.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T17:59:10.397Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
+              "Title": "MasonOptions.cs",
+              "DocumentMoniker": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Options\\Modifiers\\MasonOptions.cs",
+              "RelativeDocumentMoniker": "JAM\\Options\\Modifiers\\MasonOptions.cs",
+              "ToolTip": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Options\\Modifiers\\MasonOptions.cs",
+              "RelativeToolTip": "JAM\\Options\\Modifiers\\MasonOptions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-05T19:29:21.683Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "HyperfocusOptions.cs",
+              "DocumentMoniker": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Options\\Modifiers\\HyperfocusOptions.cs",
+              "RelativeDocumentMoniker": "JAM\\Options\\Modifiers\\HyperfocusOptions.cs",
+              "ToolTip": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Options\\Modifiers\\HyperfocusOptions.cs",
+              "RelativeToolTip": "JAM\\Options\\Modifiers\\HyperfocusOptions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-05T19:29:21.074Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "MasonModifier.cs",
               "DocumentMoniker": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Modifiers\\MasonModifier.cs",
               "RelativeDocumentMoniker": "JAM\\Modifiers\\MasonModifier.cs",
               "ToolTip": "C:\\Users\\K2\\Documents\\All K2\u0027s Stuff\\Among Us Stuff\\K2-And-Null-Mod\\JAM\\Modifiers\\MasonModifier.cs",
               "RelativeToolTip": "JAM\\Modifiers\\MasonModifier.cs",
-              "ViewState": "AgIAADIAAAAAAAAAAAAAwE4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAD0AAAAAFPIIbtQIwFAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T17:51:55.773Z"
+              "WhenOpened": "2026-11-05T18:19:42.169Z",
+              "EditorCaption": ""
             }
           ]
         }

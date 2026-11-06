@@ -45,19 +45,21 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets
     public override string IdPart => "Masons";
     public override string ModifierName => "Masons";
     public override string IntroInfo => "You Are A Mason";
-    public override string Symbol => "♠";
+    public override string Symbol => "♣";
 
     public override string GetDescription()
     {
         string description = "You Are A Mason!\nMasons Win With Eachother, Not With Their Own Factions";
 
-        if(Keyword != "")
+        if (Keyword != "" && PlayerControl.LocalPlayer.HasModifier<MasonModifier>())
         {
             description += $"\n{Colors.Mason.ToTextColor()}Keyword: <b>" + Keyword + "</b></color>";
         }
 
         return description;
     }
+    public override int CustomAmount => GetAmountPerGame();
+    public override int CustomChance => GetAssignmentChance();
 
     public string GetAdvancedDescription()
     {
@@ -83,45 +85,10 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets
     }
     public void AssignTargets()
     {
-
-        if (!RoleOptions.IsClassicRoleAssignment)
-        {
-            return;
-        }
+        if (!PlayerControl.LocalPlayer.IsHost()) return;
 
         uint keywordIndex = (uint)UnityEngine.Random.Range(0, MasonKeywords.Count);
         MasonModifier.RpcSendKeyword(PlayerControl.LocalPlayer, keywordIndex);
-
-        foreach (var mason in PlayerControl.AllPlayerControls.ToArray().Where(x => x.HasModifier<MasonModifier>()).ToList())
-        {
-            mason.RpcRemoveModifier<MasonModifier>();
-        }
-
-        if (PlayerControl.AllPlayerControls.ToArray().Count() <= (int)OptionGroupSingleton<MasonOptions>.Instance.MasonAmount * 2)
-        {
-            Info("Not Enough Players For Masons");
-            return;
-        }
-
-        var chance = UnityEngine.Random.Range(1, 101);
-
-        if (chance <= (int)OptionGroupSingleton<MasonOptions>.Instance.MasonChance)
-        {
-            int numMasons = UnityEngine.Random.Range(2, (int)OptionGroupSingleton<MasonOptions>.Instance.MasonAmount);
-            
-            List<PlayerControl> possibleMasons = MiraAPI.Utilities.Helpers.GetAlivePlayers().Where(p => !p.HasModifier<AllianceGameModifier>()).ToList();
-
-            for (int i = 0; i < numMasons && possibleMasons.Count > 0; i++)
-            {
-                possibleMasons.Shuffle();
-
-                PlayerControl newMason = possibleMasons[0];
-
-                possibleMasons.RemoveAt(0);
-
-                newMason.RpcAddModifier<MasonModifier>();
-            }
-        }
     }
     public override void FixedUpdate()
     {
@@ -193,6 +160,7 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets
         "Map",
         "Evil",
         "Task",
+        "Wait",
 
         // Somewhat Difficult Words (Can Find Ways To Use, And Some People May Just Use Them Normally)
         "Friend",
@@ -235,7 +203,7 @@ public static class MasonIconPatch
 
         if(PlayerControl.LocalPlayer.HasDied() && PlayerControl.LocalPlayer.DiedOtherRound())
         {
-            __result += $"{Colors.Mason.ToTextColor()} ♠</color>";
+            __result += $"{Colors.Mason.ToTextColor()} ♣</color>";
         }
     }
 }

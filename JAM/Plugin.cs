@@ -22,7 +22,7 @@ using UnityEngine;
 
 namespace JAM;
 
-[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.2.4")]
+[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.2.4.2")]
 [BepInProcess("Among Us.exe")]
 [BepInDependency(ReactorPlugin.Id)]
 [BepInDependency(MiraApiPlugin.Id)]
@@ -170,6 +170,12 @@ public enum JAMRpcCalls : uint
     SendKeyword = 9
 }
 
+// Masons Are Always Doing 4
+// Make Masons Have Continue Game Options
+// Make Option For Masons Disbanding If Only 1 Is Alive
+// Fix Masons To Work Like A Normal Modifier, But If There Is Only One On Round Start, Make Another
+// Give Mason Custom Background On Startup
+
 
 // ================== FEATURES ====================
 // Make JAM green on summaries and such?
@@ -186,10 +192,4 @@ public enum JAMRpcCalls : uint
 
 // =============== FIXES ===============
 /*
- * Vigilante Can Now Properly Guess Deceiver
- * Mimic (Should) Properly Win Now
- * Concealed Description Has Been Reworded
- * Zombies (Should) Now Be Able To See Chat
- * Added Masons
- * Fixed The Infect Achievement
 */
