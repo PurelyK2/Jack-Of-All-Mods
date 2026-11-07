@@ -42,7 +42,7 @@ public static class JamAchievements
             SubIconTooltip: subIconTooltip);
 
     // Mimic
-    public static AchievementSpec DIYSwooper = Define("DIY Swooper", "Kill As A Snoop", JamRoleIcons.Snoop, JamRoleIcons.Snoop, rarity: 3, hidden: true);
+    public static AchievementSpec DIYSwooper = Define("DIY Swooper", "Kill As A Snoop", TouRoleIcons.Swooper, TouRoleIcons.Swooper, rarity: 3, hidden: true);
     public static AchievementSpec ThereCanOnlyBeOne = Define("There Can Only Be One", "Kill Someone Whose Role You're Mimicking", TouModifierIcons.Colorblind, rarity: 2);
 
     // Jack Of All

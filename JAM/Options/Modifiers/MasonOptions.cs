@@ -15,4 +15,7 @@ public sealed class MasonOptions : AbstractOptionGroup<MasonModifier>
 
     [ModdedNumberOption("Mason Chance", 0f, 100f, 5f, MiraNumberSuffixes.Percent)]
     public float MasonChance { get; set; } = 50f;
+
+    [ModdedToggleOption("Masons Disband At 1")]
+    public bool MasonsDisband { get; set; } = true;
 }

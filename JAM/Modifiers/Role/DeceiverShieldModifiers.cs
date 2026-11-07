@@ -3,6 +3,7 @@ using MiraAPI.Events;
 using MiraAPI.Events.Vanilla.Gameplay;
 using MiraAPI.GameOptions;
 using MiraAPI.Modifiers;
+using MiraAPI.Modifiers.Types;
 using MiraAPI.Translation;
 using MiraAPI.Utilities.Assets;
 using Reactor.Utilities.Extensions;
@@ -20,10 +21,10 @@ using UnityEngine.UIElements;
 
 namespace JAM.Modifiers.Role;
 
-public sealed class DeceiverMedicShield : BaseShieldModifier, IAnimated
+public sealed class DeceiverMedicShield : TimedModifier, IAnimated
 {
     public override string ModifierName => MiraLocaleManager.Get("TouMedicShield", "Medic");
-    public override string ShieldDescription => MiraLocaleManager.Get("TouMedicShieldDescription", "");
+    public string ShieldDescription => MiraLocaleManager.Get("TouMedicShieldDescription", "");
     public override LoadableAsset<Sprite>? ModifierIcon => TouRoleIcons.Medic;
     public override bool HideOnUi => false;
     public override Color FreeplayFileColor => new Color32(100, 220, 100, byte.MaxValue);
@@ -31,13 +32,24 @@ public sealed class DeceiverMedicShield : BaseShieldModifier, IAnimated
 
     public static (string good, string bad) DeceiverShieldIcon => new("+", "±");
 
-    public override bool VisibleSymbol
+    public bool IsVisible
     {
         get
         {
             return DeceiverShieldIconMaker.ShouldSeeShield(Player) || (PlayerControl.LocalPlayer.HasDied() && PlayerControl.LocalPlayer.DiedOtherRound()) || PlayerControl.LocalPlayer.IsImpostorAligned();
         }
     }
+    public override string GetDescription()
+    {
+        return (!this.HideOnUi) ? this.ShieldDescription : string.Empty;
+    }
+    public void SetVisible() { }
+
+    public override float Duration => 0.001f;
+    public override bool AutoStart => false;
+
+    bool IAnimated.IsVisible { get; set; } = true;
+
     public override void OnActivate()
     {
         Shield = AnimStore.SpawnAnimBody(base.Player, TouAssets.MedicShield.LoadAsset(), false, -1.1f, -0.1f, 1.5f);
@@ -57,7 +69,7 @@ public sealed class DeceiverMedicShield : BaseShieldModifier, IAnimated
     }
     public override void Update()
     {
-        Shield.SetActive(VisibleSymbol);
+        Shield.SetActive(IsVisible);
 
         DeceiverRole.confuseRole = false;
         if(!MiraAPI.Utilities.Helpers.GetAlivePlayers().Any(p => p.Data.Role is DeceiverRole))

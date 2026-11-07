@@ -22,7 +22,7 @@ using UnityEngine;
 
 namespace JAM;
 
-[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.2.4.2")]
+[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.2.6")]
 [BepInProcess("Among Us.exe")]
 [BepInDependency(ReactorPlugin.Id)]
 [BepInDependency(MiraApiPlugin.Id)]
@@ -170,26 +170,29 @@ public enum JAMRpcCalls : uint
     SendKeyword = 9
 }
 
-// Masons Are Always Doing 4
-// Make Masons Have Continue Game Options
-// Make Option For Masons Disbanding If Only 1 Is Alive
-// Fix Masons To Work Like A Normal Modifier, But If There Is Only One On Round Start, Make Another
 // Give Mason Custom Background On Startup
-
 
 // ================== FEATURES ====================
 // Make JAM green on summaries and such?
-// Make Zombie Votes Grey And Happen After All Other Votes
+// Change Appearance Of Settings For Modifiers
 
 // ================== TEMP FIXES ===================
 // MIMIC STILL SEES IMPS!?! (stops imp cards from being in selections)
 
 // ================== MINOR BUGS ====================
-// Exposed Doesn't Work
 // Camouflager Reveals Invis People??? (Camouflager => snoop not being invis)
 // concealed is sometimes fully invisible?
 // Unstable isn't swapping people, just tping them away
 
 // =============== FIXES ===============
 /*
+ * Made Only Someone Who Starts The Game As The Jack Of All Get The Initial Modifiers
+ * Made Option For Masons Disbanding If There Is Only 1 Alive
+ * (Hopefully) Fixed Exposed
+ * Added Words To Mason's Word Bank
+ * Killing Masons Continue Game
+ * Masons No Longer Get Punished
+ * Deceiver Shield No Longer Functions As A Shield
+ * Exposed Now Works Again!!!
+ * Zombie Leader Votes Now Are Grey And Appear At The End Of The Votes List
 */

@@ -74,23 +74,7 @@ public sealed class JackOfAllRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOf
         }
     }
 
-    public override void Initialize(PlayerControl player)
-    {
-        RoleBehaviourStubs.Initialize(this, player);
-
-        if(player.AmOwner)
-        {
-            try
-            {
-                GiveRandModifiers((int)OptionGroupSingleton<JackOfAllOptions>.Instance.NumModifiers - player.GetModifiers<BaseModifier>().Count(), player);
-            }
-            catch(System.Exception e)
-            {
-                Fatal(e);
-            }
-        }
-    }
-    static void GiveRandModifiers(int count, PlayerControl player)
+    public static void GiveRandModifiers(int count, PlayerControl player)
     {
         if(count < 1) return;
 

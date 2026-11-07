@@ -13,51 +13,35 @@ namespace NullsMod.Patches;
 
 [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.BloopAVoteIcon))]
 public static class ExposedPatch
-{/*
-    [HarmonyPrefix]
-    public static bool Prefix(ref MeetingHud __instance, NetworkedPlayerInfo voterPlayer, int index, Transform parent)
+{
+    public static void Postfix(NetworkedPlayerInfo voterPlayer, Transform parent)
     {
-        var spriteRenderer = Object.Instantiate(__instance.PlayerVotePrefab);
-        var player = MiscUtils.PlayerById(voterPlayer.PlayerId);
+        if (TownOfUs.Utilities.MiscUtils.PlayerById(voterPlayer.PlayerId)?.HasModifier<ExposedModifier>() != true) return;
 
-        if (PlayerControl.LocalPlayer.Data.Role is ProsecutorRole)
+        var icon = FindLatestVoteIcon(parent);
+        if (icon != null)
         {
-            PlayerMaterial.SetColors(voterPlayer.DefaultOutfit.ColorId, spriteRenderer);
+            PlayerMaterial.SetColors(voterPlayer.Color, icon);
         }
-        else if (player != null &&
-                 player.Data.Role is ProsecutorRole pros &&
-                 pros.HasProsecuted &&
-                 !PlayerControl.LocalPlayer.Data.IsDead)
+    }
+    private static SpriteRenderer? FindLatestVoteIcon(Transform parent)
+    {
+        SpriteRenderer? latest = null;
+        for (var i = 0; i < parent.childCount; i++)
         {
-            PlayerMaterial.SetColors(Palette.DisabledGrey, spriteRenderer);
-        }
-        else if (GameOptionsManager.Instance.currentNormalGameOptions.AnonymousVotes &&
-                 (player == null || !player.HasModifier<ExposedModifier>()) &&
-                 (!OptionGroupSingleton<PostmortemOptions>.Instance.DeadSeeVotes || !PlayerControl.LocalPlayer.Data.IsDead))
-        {
-            PlayerMaterial.SetColors(Palette.DisabledGrey, spriteRenderer);
-        }
-        else
-        {
-            PlayerMaterial.SetColors(voterPlayer.DefaultOutfit.ColorId, spriteRenderer);
-        }
+            var child = parent.GetChild(i);
+            if (child.name != "playerVote(Clone)")
+            {
+                continue;
+            }
 
-        spriteRenderer.transform.SetParent(parent);
-        spriteRenderer.transform.localScale = Vector3.zero;
-
-        var component = parent.GetComponent<PlayerVoteArea>();
-        if (component != null)
-        {
-            spriteRenderer.material.SetInt(
-                PlayerMaterial.MaskLayer,
-                component.MaskLayer);
+            var rend = child.GetComponent<SpriteRenderer>();
+            if (rend != null)
+            {
+                latest = rend;
+            }
         }
 
-        __instance.StartCoroutine(
-            Effects.Bloop(index * 0.3f, spriteRenderer.transform));
-
-        parent.GetComponent<VoteSpreader>().AddVote(spriteRenderer);
-
-        return false;
-    }*/
+        return latest;
+    }
 }

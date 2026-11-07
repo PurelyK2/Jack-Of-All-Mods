@@ -5,6 +5,8 @@ using JAM.Options.Modifiers;
 using JAM.Patches.WinConditions;
 using JAM.Roles.Crewmate;
 using JAM.Roles.Neutral;
+using MiraAPI.Events;
+using MiraAPI.Events.Vanilla.Gameplay;
 using MiraAPI.GameEnd;
 using MiraAPI.GameOptions;
 using MiraAPI.Modifiers;
@@ -36,9 +38,9 @@ using UnityEngine;
 
 namespace JAM.Modifiers;
 
-public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets
+public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets, IContinuesGame
 {
-    int IAssignableTargets.Priority { get; set; } = 5;
+    int IAssignableTargets.Priority { get; set; } = 4;
 
     public static string Keyword = "";
     public override ModifierUiConfiguration Configuration => new(Colors.Mason, TmpSpriteUtils.CreateSpriteAsset(JamModifierIcons.Mason.LoadAsset(), "Masons", 1.45f));
@@ -46,6 +48,7 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets
     public override string ModifierName => "Masons";
     public override string IntroInfo => "You Are A Mason";
     public override string Symbol => "♣";
+    public override bool GetsPunished => false;
 
     public override string GetDescription()
     {
@@ -74,6 +77,8 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets
 
     public List<CustomButtonWikiDescription> Abilities { get; } = [];
 
+    public bool ContinuesGame => !Player.Data.IsDead && (Player.Data.Role.GetRoleAlignment() == RoleAlignment.CrewmateKilling || Player.Data.Role.GetRoleAlignment() == RoleAlignment.NeutralKilling || Player.Data.Role.IsImpostor() || MiraAPI.Utilities.Helpers.GetAlivePlayers().Count(p => p.HasModifier<MasonModifier>()) > 1);
+
     public override int GetAssignmentChance()
     {
         return (int)OptionGroupSingleton<MasonOptions>.Instance.MasonChance;
@@ -88,7 +93,13 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets
         if (!PlayerControl.LocalPlayer.IsHost()) return;
 
         uint keywordIndex = (uint)UnityEngine.Random.Range(0, MasonKeywords.Count);
-        MasonModifier.RpcSendKeyword(PlayerControl.LocalPlayer, keywordIndex);
+
+        if (UnityEngine.Random.Range(0, 101) == 0)
+        {
+            keywordIndex = (uint)UnityEngine.Random.Range(0, MasonFunnies.Count);
+            MasonModifier.RpcSendKeyword(PlayerControl.LocalPlayer, keywordIndex, true);
+        }
+        else MasonModifier.RpcSendKeyword(PlayerControl.LocalPlayer, keywordIndex, false);
     }
     public override void FixedUpdate()
     {
@@ -97,11 +108,15 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets
             Info("Masons Should Win!");
             CustomGameOver.Trigger<MasonWinCondition>(PlayerControl.AllPlayerControls.ToArray().Where(p => p.HasModifier<MasonModifier>()).Select(p => p.Data));
         }
+
+        if(OptionGroupSingleton<MasonOptions>.Instance.MasonsDisband)
+        {
+            TryDisbandMasons();
+        }
     }
 
     static bool CheckMasonWinCon()
     {
-
         float percentMasons = (float)MiraAPI.Utilities.Helpers.GetAlivePlayers().Count(p => p.HasModifier<MasonModifier>()) / (float)MiraAPI.Utilities.Helpers.GetAlivePlayers().Count;
 
         if (percentMasons > 0.5f)
@@ -113,13 +128,21 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets
 
 
     [MethodRpc((uint)JAMRpcCalls.SendKeyword)]
-    public static void RpcSendKeyword(PlayerControl player, uint keywordId) // Required PlayerControl to work
+    public static void RpcSendKeyword(PlayerControl player, uint keywordId, bool isFunny) // Required PlayerControl to work
     {
         string keyword;
 
         try
         {
-            keyword = MasonKeywords[(int)keywordId];
+            if(!isFunny)
+            {
+                keyword = MasonFunnies[(int)keywordId];
+            }
+            else
+            {
+                keyword = MasonKeywords[(int)keywordId];
+            }
+
         }
         catch
         {
@@ -132,6 +155,19 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets
     public override bool? DidWin(GameOverReason reason)
     {
         return CheckMasonWinCon();
+    }
+    
+    void TryDisbandMasons()
+    {
+        if(MiraAPI.Utilities.Helpers.GetAlivePlayers().Count(p => p.HasModifier<MasonModifier>()) == 1)
+        {
+            foreach (PlayerControl mason in PlayerControl.AllPlayerControls.ToArray().Where(p => p.HasModifier<MasonModifier>()))
+            {
+                mason.RpcRemoveModifier<MasonModifier>();
+            }
+
+            MiraAPI.Utilities.Helpers.CreateAndShowNotification("The Masons Have Disbanded", Colors.Mason, spr: JamModifierIcons.Mason);
+        }
     }
 
     static List<string> MasonKeywords = new() {
@@ -178,6 +214,9 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets
         "Foot",
         "Love",
         "Cautious",
+        "Chill",
+        "Mention",
+        "Color",
 
         // Hard Words (Will likely tell others you're a mason, but are hard to use without revealing yourself)
         "Jump",
@@ -190,8 +229,28 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets
         // Near Impossible To Use (You'll Have To Be Clever To Use These)
         "Creature",
         "Peculiar",
-        "Hippopotomonstrosesquipedaliophobia" // I feel Bad If Someone Gets This, But It's Too Funny
     };
+    static List<string> MasonFunnies = new() {
+        "Hippopotomonstrosesquipedaliophobia",
+        "The Entire Declaration Of Independence",
+        "'MURICA!",
+        "I Want To Flatter K2",
+        "Supercalifragilisticexpialidocious"
+    };
+
+    [RegisterEvent(0)]
+    public static void MakeMin2Masons(RoundStartEvent @event)
+    {
+        if (!@event.TriggeredByIntro || !PlayerControl.LocalPlayer.IsHost()) return;
+
+        if (PlayerControl.AllPlayerControls.ToArray().Count(p => p.HasModifier<MasonModifier>()) == 1)
+        {
+            List<PlayerControl> possibleMasons = PlayerControl.AllPlayerControls.ToArray().Where(p => !p.HasModifier<MasonModifier>()).ToList();
+            possibleMasons.Shuffle();
+            PlayerControl newMason = possibleMasons[0];
+            newMason.AddModifier<MasonModifier>();
+        }
+    }
 }
 
 [HarmonyPatch(typeof(TownOfUs.Utilities.PlayerRoleTextExtensions), "UpdateAllianceSymbols", [typeof(string), typeof(PlayerControl), typeof(DataVisibility)])]
