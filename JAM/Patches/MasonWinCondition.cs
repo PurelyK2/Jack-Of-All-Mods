@@ -33,10 +33,7 @@ public sealed class MasonWinCondition : CustomGameOver
 		text.text = "Masons Win!";
 		text.color = Colors.Mason;
 		DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(17, 2);
-		defaultInterpolatedStringHandler.AppendLiteral("<color=#");
-		defaultInterpolatedStringHandler.AppendFormatted(Colors.Mason);
-		defaultInterpolatedStringHandler.AppendLiteral(">");
-        defaultInterpolatedStringHandler.AppendLiteral("Masons Win!</color>");
+        defaultInterpolatedStringHandler.AppendLiteral("Masons Win!");
         GameHistory.WinningFaction = defaultInterpolatedStringHandler.ToStringAndClear();
 		Vector3 pos = endGameManager.WinText.transform.localPosition;
 		pos.y = 1.5f;

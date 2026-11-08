@@ -22,7 +22,7 @@ using UnityEngine;
 
 namespace JAM;
 
-[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.2.7")]
+[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.2.8")]
 [BepInProcess("Among Us.exe")]
 [BepInDependency(ReactorPlugin.Id)]
 [BepInDependency(MiraApiPlugin.Id)]
@@ -171,6 +171,7 @@ public enum JAMRpcCalls : uint
 }
 
 // Give Mason Custom Background On Startup
+// Foolish Doesn't Work Right With Discussion Time
 
 // ================== FEATURES ====================
 // Make JAM green on summaries and such?
@@ -186,8 +187,8 @@ public enum JAMRpcCalls : uint
 
 // =============== FIXES ===============
 /*
- * Scrubber Scrub Modifier Now Doesn't Happen More Than One Round In A Row
- * Fixed Masons Only Having "Fly"
- * Masons Disbanding Now Should Work Better
- * Neutral Winning Masons Now Win For Masons Instead
+ * Masons Should Properly Disband Now
+ * Mason with other alliance modifiers also win with said modifiers
+ * Mason Win On Summary Looks Right Now
+ * Crew Power Masons Continue
 */

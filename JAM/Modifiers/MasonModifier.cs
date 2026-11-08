@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using TownOfUs.Extensions;
@@ -79,7 +80,7 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets, IC
 
     public List<CustomButtonWikiDescription> Abilities { get; } = [];
 
-    public bool ContinuesGame => !Player.Data.IsDead && (Player.Data.Role.GetRoleAlignment() == RoleAlignment.CrewmateKilling || Player.Data.Role.GetRoleAlignment() == RoleAlignment.NeutralKilling || Player.Data.Role.IsImpostor() || MiraAPI.Utilities.Helpers.GetAlivePlayers().Count(p => p.HasModifier<MasonModifier>()) > 1);
+    public bool ContinuesGame => Player.Data.Role.GetRoleAlignment() == RoleAlignment.CrewmatePower || Player.Data.Role.GetRoleAlignment() == RoleAlignment.CrewmateKilling || Player.Data.Role.GetRoleAlignment() == RoleAlignment.NeutralKilling || Player.Data.Role.IsImpostor() || MiraAPI.Utilities.Helpers.GetAlivePlayers().Count(p => p.HasModifier<MasonModifier>()) > 1;
 
     public override int GetAssignmentChance()
     {
@@ -117,7 +118,7 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets, IC
 
         if (OptionGroupSingleton<MasonOptions>.Instance.MasonsDisband)
         {
-            TryDisbandMasons();
+            //TryDisbandMasons();
         }
     }
 
@@ -141,11 +142,25 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets, IC
 
     public override bool? DidWin(GameOverReason reason)
     {
-        return CheckMasonWinCon();
+        bool otherModifiersWin = false;
+
+        foreach (AllianceGameModifier modifier in Player.GetModifiers<AllianceGameModifier>())
+        {
+            if (modifier is MasonModifier) continue;
+
+            if (modifier.DidWin(reason) == true)
+            {
+                otherModifiersWin = true;
+            }
+        }
+
+        return CheckMasonWinCon() || otherModifiersWin;
     }
     
     void TryDisbandMasons()
     {
+        if (!PlayerControl.LocalPlayer.IsHost()) return;
+
         if(MiraAPI.Utilities.Helpers.GetAlivePlayers().Count(p => p.HasModifier<MasonModifier>()) == 1)
         {
             foreach (PlayerControl mason in PlayerControl.AllPlayerControls.ToArray().Where(p => p.HasModifier<MasonModifier>()))

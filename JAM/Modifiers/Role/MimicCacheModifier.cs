@@ -66,6 +66,16 @@ public sealed class MimicCacheModifier : BaseModifier, ICachedRole
         }
     }
 
+    public override void OnDeath(DeathReason reason)
+    {
+        base.OnDeath(reason);
+
+        if(Player.HasModifier<MimicCacheModifier>())
+        {
+            Player.RpcChangeRole(RoleId.Get<MimicRole>(), false);
+        }
+    }
+
     // Remove On True Role Change
     [HarmonyPatch(typeof(TownOfUs.Utilities.Extensions), "RpcChangeRole", [typeof(PlayerControl), typeof(ushort), typeof(bool)])]
     public static class TrulyChangeRolePatch
