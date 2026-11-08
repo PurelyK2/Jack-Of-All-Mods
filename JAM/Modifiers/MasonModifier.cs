@@ -19,9 +19,11 @@ using Reactor.Utilities.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using TownOfUs.Extensions;
+using TownOfUs.GameOver;
 using TownOfUs.Interfaces;
 using TownOfUs.Modifiers;
 using TownOfUs.Modifiers.Game;
@@ -40,7 +42,7 @@ namespace JAM.Modifiers;
 
 public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets, IContinuesGame
 {
-    int IAssignableTargets.Priority { get; set; } = 4;
+    int IAssignableTargets.Priority { get; set; } = 3;
 
     public static string Keyword = "";
     public override ModifierUiConfiguration Configuration => new(Colors.Mason, TmpSpriteUtils.CreateSpriteAsset(JamModifierIcons.Mason.LoadAsset(), "Masons", 1.45f));
@@ -61,8 +63,8 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets, IC
 
         return description;
     }
-    public override int CustomAmount => GetAmountPerGame();
-    public override int CustomChance => GetAssignmentChance();
+    public override int CustomAmount => (int)OptionGroupSingleton<MasonOptions>.Instance.MasonChance > 0 ? (int)OptionGroupSingleton<MasonOptions>.Instance.MasonAmount : 0;
+    public override int CustomChance => (int)OptionGroupSingleton<MasonOptions>.Instance.MasonChance;
 
     public string GetAdvancedDescription()
     {
@@ -81,25 +83,25 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets, IC
 
     public override int GetAssignmentChance()
     {
-        return (int)OptionGroupSingleton<MasonOptions>.Instance.MasonChance;
+        return CustomChance;
     }
 
     public override int GetAmountPerGame()
     {
-        return GetAssignmentChance() > 0 ? (int)OptionGroupSingleton<MasonOptions>.Instance.MasonAmount : 0;
+        return CustomAmount;
     }
     public void AssignTargets()
     {
         if (!PlayerControl.LocalPlayer.IsHost()) return;
 
-        uint keywordIndex = (uint)UnityEngine.Random.Range(0, MasonKeywords.Count);
+        MasonKeywords.Shuffle();
+        MasonFunnies.Shuffle();
 
         if (UnityEngine.Random.Range(0, 101) == 0)
         {
-            keywordIndex = (uint)UnityEngine.Random.Range(0, MasonFunnies.Count);
-            MasonModifier.RpcSendKeyword(PlayerControl.LocalPlayer, keywordIndex, true);
+            MasonModifier.RpcSendKeyword(PlayerControl.LocalPlayer, MasonFunnies[0]);
         }
-        else MasonModifier.RpcSendKeyword(PlayerControl.LocalPlayer, keywordIndex, false);
+        else MasonModifier.RpcSendKeyword(PlayerControl.LocalPlayer, MasonKeywords[0]);
     }
     public override void FixedUpdate()
     {
@@ -108,8 +110,12 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets, IC
             Info("Masons Should Win!");
             CustomGameOver.Trigger<MasonWinCondition>(PlayerControl.AllPlayerControls.ToArray().Where(p => p.HasModifier<MasonModifier>()).Select(p => p.Data));
         }
+    }
+    public override void OnDeath(DeathReason reason)
+    {
+        base.OnDeath(reason);
 
-        if(OptionGroupSingleton<MasonOptions>.Instance.MasonsDisband)
+        if (OptionGroupSingleton<MasonOptions>.Instance.MasonsDisband)
         {
             TryDisbandMasons();
         }
@@ -128,27 +134,8 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets, IC
 
 
     [MethodRpc((uint)JAMRpcCalls.SendKeyword)]
-    public static void RpcSendKeyword(PlayerControl player, uint keywordId, bool isFunny) // Required PlayerControl to work
+    public static void RpcSendKeyword(PlayerControl player, string keyword) // Required PlayerControl to work
     {
-        string keyword;
-
-        try
-        {
-            if(!isFunny)
-            {
-                keyword = MasonFunnies[(int)keywordId];
-            }
-            else
-            {
-                keyword = MasonKeywords[(int)keywordId];
-            }
-
-        }
-        catch
-        {
-            keyword = MasonKeywords[0];
-        }
-
         MasonModifier.Keyword = keyword;
     }
 
@@ -264,5 +251,25 @@ public static class MasonIconPatch
         {
             __result += $"{Colors.Mason.ToTextColor()} ♣</color>";
         }
+    }
+}
+
+// Override Neutral Wins
+[HarmonyPatch(typeof(CustomGameOver), "Trigger")]
+public static class NoTriggerNeutralMason
+{
+    public static bool Prefix(IEnumerable<NetworkedPlayerInfo> winners)
+    {
+        if(winners.Count() == 1)
+        {
+            if (TownOfUs.Utilities.MiscUtils.PlayerById(winners.ToArray()[0].PlayerId)?.HasModifier<MasonModifier>() == true)
+            {
+                CustomGameOver.Trigger<MasonWinCondition>(PlayerControl.AllPlayerControls.ToArray().Where(p => p.HasModifier<MasonModifier>()).Select(p => p.Data));
+
+                return false;
+            }
+        }
+
+        return true;
     }
 }

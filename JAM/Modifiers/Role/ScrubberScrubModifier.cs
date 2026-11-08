@@ -54,6 +54,7 @@ public sealed class ScrubberScrubModifier : BaseModifier
                 }
                 MiraAPI.Utilities.Helpers.CreateAndShowNotification("Your Modifiers Have Been Scrubbed!", UnityEngine.Color.white, null, JamRoleIcons.Scrubber.LoadAsset());
                 player.RpcAddModifier<ScrubbedModifier>();
+                player.RpcRemoveModifier<ScrubberScrubModifier>();
             }
         }
     }

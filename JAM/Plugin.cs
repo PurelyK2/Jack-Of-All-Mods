@@ -22,7 +22,7 @@ using UnityEngine;
 
 namespace JAM;
 
-[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.2.6")]
+[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.2.7")]
 [BepInProcess("Among Us.exe")]
 [BepInDependency(ReactorPlugin.Id)]
 [BepInDependency(MiraApiPlugin.Id)]
@@ -186,13 +186,8 @@ public enum JAMRpcCalls : uint
 
 // =============== FIXES ===============
 /*
- * Made Only Someone Who Starts The Game As The Jack Of All Get The Initial Modifiers
- * Made Option For Masons Disbanding If There Is Only 1 Alive
- * (Hopefully) Fixed Exposed
- * Added Words To Mason's Word Bank
- * Killing Masons Continue Game
- * Masons No Longer Get Punished
- * Deceiver Shield No Longer Functions As A Shield
- * Exposed Now Works Again!!!
- * Zombie Leader Votes Now Are Grey And Appear At The End Of The Votes List
+ * Scrubber Scrub Modifier Now Doesn't Happen More Than One Round In A Row
+ * Fixed Masons Only Having "Fly"
+ * Masons Disbanding Now Should Work Better
+ * Neutral Winning Masons Now Win For Masons Instead
 */
