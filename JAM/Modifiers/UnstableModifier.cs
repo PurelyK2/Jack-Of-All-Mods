@@ -6,6 +6,7 @@ using MiraAPI.Hud;
 using MiraAPI.Modifiers;
 using MiraAPI.Utilities;
 using MiraAPI.Utilities.Assets;
+using Reactor.Networking.Attributes;
 using TownOfUs.Buttons.Impostor;
 using TownOfUs.Events.TouEvents;
 using TownOfUs.Interfaces;
@@ -108,7 +109,6 @@ public sealed class UnstableModifier : TouGameModifier, IWikiDiscoverable
         }
     }
 
-     
     void RandomlyTeleport()
     {
         if(!(MeetingHud.Instance || ExileController.Instance))
@@ -143,6 +143,7 @@ public sealed class UnstableModifier : TouGameModifier, IWikiDiscoverable
     }
 
     #region Transport
+    [MethodRpc((uint)JAMRpcCalls.SwapUnstable)]
     public static void RpcTransport(PlayerControl transporter, byte player1, byte player2)
     {
         var t1 = GetTarget(player1);

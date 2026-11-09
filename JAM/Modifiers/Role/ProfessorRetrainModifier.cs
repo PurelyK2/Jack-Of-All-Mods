@@ -37,6 +37,11 @@ internal class ProfessorRetrainModifier : BaseModifier
     {
         if (!PlayerControl.LocalPlayer.HasModifier<ProfessorRetrainModifier>()) return;
 
+        if(!MiraAPI.Utilities.Helpers.GetAlivePlayers().Any(p => p.Data.Role is ProfessorRole))
+        {
+            PlayerControl.LocalPlayer.RpcRemoveModifier<ProfessorRetrainModifier>();
+        }    
+
         if (ChosenRoles.Count == 0)
         {
             List<RoleBehaviour> roleList = DestroyableSingleton<RoleManager>.Instance.AllRoles.ToArray().Where(delegate (RoleBehaviour r)

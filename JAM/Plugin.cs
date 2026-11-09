@@ -22,7 +22,7 @@ using UnityEngine;
 
 namespace JAM;
 
-[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.2.8")]
+[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.2.9")]
 [BepInProcess("Among Us.exe")]
 [BepInDependency(ReactorPlugin.Id)]
 [BepInDependency(MiraApiPlugin.Id)]
@@ -64,6 +64,8 @@ public partial class Plugin : BasePlugin, IMiraPlugin
     }
     private static async Task ConstantlyError(string e)
     {
+        return;
+
         while(true)
         {
             await Task.Delay(100);
@@ -151,7 +153,7 @@ public partial class Plugin : BasePlugin, IMiraPlugin
         "Undead",
         "Leaderless",
         "Deceived", // Not Implemented
-        "Projected", // Not Implemented
+        "Projected",
         "Scrubbed" // Not Implemented
     };
 }
@@ -167,28 +169,25 @@ public enum JAMRpcCalls : uint
     AssignSpirit = 6,
     SyncRolesList = 7,
     UpdateVacillatorAlignment = 8,
-    SendKeyword = 9
+    SendKeyword = 9,
+    SwapUnstable = 10
 }
-
-// Give Mason Custom Background On Startup
-// Foolish Doesn't Work Right With Discussion Time
 
 // ================== FEATURES ====================
 // Make JAM green on summaries and such?
 // Change Appearance Of Settings For Modifiers
+// Give Mason Custom Background On Startup
 
 // ================== TEMP FIXES ===================
 // MIMIC STILL SEES IMPS!?! (stops imp cards from being in selections)
+// Turned To Micromanager On Death? (Wait To Fix Until Spectre Fix)
+// concealed is sometimes fully invisible? (The settings even change so that it is) (Made Forced At 25% for now)
 
 // ================== MINOR BUGS ====================
-// Camouflager Reveals Invis People??? (Camouflager => snoop not being invis)
-// concealed is sometimes fully invisible?
-// Unstable isn't swapping people, just tping them away
+// DiedToProjected instead of Projected
+// Misfire Kills Give Weird Info For Mortician Autopsy
+// Foolish Doesn't Work Right With Discussion Time still
 
 // =============== FIXES ===============
 /*
- * Masons Should Properly Disband Now
- * Mason with other alliance modifiers also win with said modifiers
- * Mason Win On Summary Looks Right Now
- * Crew Power Masons Continue
 */

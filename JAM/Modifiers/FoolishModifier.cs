@@ -28,6 +28,7 @@ public sealed class FoolishModifier : UniversalGameModifier, IContinuesGame
         if(votingTimeLeft > 0f)
         {
             votingTimeLeft -= Time.deltaTime;
+            Info(votingTimeLeft);
         }
     }
 

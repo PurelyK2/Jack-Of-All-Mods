@@ -80,7 +80,7 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets, IC
 
     public List<CustomButtonWikiDescription> Abilities { get; } = [];
 
-    public bool ContinuesGame => Player.Data.Role.GetRoleAlignment() == RoleAlignment.CrewmatePower || Player.Data.Role.GetRoleAlignment() == RoleAlignment.CrewmateKilling || Player.Data.Role.GetRoleAlignment() == RoleAlignment.NeutralKilling || Player.Data.Role.IsImpostor() || MiraAPI.Utilities.Helpers.GetAlivePlayers().Count(p => p.HasModifier<MasonModifier>()) > 1;
+    public bool ContinuesGame => Player.Data.Role.GetRoleAlignment() == RoleAlignment.CrewmatePower || Player.Data.Role.GetRoleAlignment() == RoleAlignment.CrewmateKilling || Player.Data.Role.GetRoleAlignment() == RoleAlignment.NeutralKilling || Player.Data.Role.IsImpostor();
 
     public override int GetAssignmentChance()
     {
@@ -95,10 +95,22 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets, IC
     {
         if (!PlayerControl.LocalPlayer.IsHost()) return;
 
+        if(OptionGroupSingleton<MasonOptions>.Instance.MasonChance < UnityEngine.Random.Range(1, 101))
+        {
+            foreach(PlayerControl player in PlayerControl.AllPlayerControls.ToArray().Where(p => p.HasModifier<MasonModifier>()))
+            {
+                player.RpcRemoveModifier<MasonModifier>();
+            }    
+        }
+
         MasonKeywords.Shuffle();
         MasonFunnies.Shuffle();
 
-        if (UnityEngine.Random.Range(0, 101) == 0)
+        if(UnityEngine.Random.Range(1, 101) <= 25)
+        {
+            MasonModifier.RpcSendKeyword(PlayerControl.LocalPlayer, MiraAPI.Roles.CustomRoleManager.AllRoles[UnityEngine.Random.Range(1, MiraAPI.Roles.CustomRoleManager.AllRoles.Count())].GetRoleName());
+        }
+        else if (UnityEngine.Random.Range(1, 101) == 1)
         {
             MasonModifier.RpcSendKeyword(PlayerControl.LocalPlayer, MasonFunnies[0]);
         }
@@ -118,7 +130,7 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets, IC
 
         if (OptionGroupSingleton<MasonOptions>.Instance.MasonsDisband)
         {
-            //TryDisbandMasons();
+            TryDisbandMasons();
         }
     }
 
@@ -171,6 +183,12 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets, IC
             MiraAPI.Utilities.Helpers.CreateAndShowNotification("The Masons Have Disbanded", Colors.Mason, spr: JamModifierIcons.Mason);
         }
     }
+    public override bool DoesTasks => false;
+
+    public override bool IsModifierValidOn(RoleBehaviour role)
+    {
+        return base.IsModifierValidOn(role) || (role is IAssignableTargets);
+    }
 
     static List<string> MasonKeywords = new() {
         // Sensible Words (Easy To Use, Hard To Decide If they're Just Using It Or Are A Mason)
@@ -221,7 +239,6 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets, IC
         "Color",
 
         // Hard Words (Will likely tell others you're a mason, but are hard to use without revealing yourself)
-        "Jump",
         "Sneak",
         "Inquiry",
         "Oblivious",
@@ -286,5 +303,14 @@ public static class NoTriggerNeutralMason
         }
 
         return true;
+    }
+}
+
+[HarmonyPatch(typeof(TownOfUs.Utilities.Extensions), "GetClosestLivingPlayer")]
+public static class MasonsKillAll
+{
+    public static void Prefix(PlayerControl playerControl, ref bool includeImpostors)
+    {
+        if (playerControl.HasModifier<MasonModifier>()) includeImpostors = true;
     }
 }

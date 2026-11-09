@@ -36,7 +36,7 @@ public sealed class DeceiverMedicShield : TimedModifier, IAnimated
     {
         get
         {
-            return DeceiverShieldIconMaker.ShouldSeeShield(Player) || (PlayerControl.LocalPlayer.HasDied() && PlayerControl.LocalPlayer.DiedOtherRound()) || PlayerControl.LocalPlayer.IsImpostorAligned();
+            return DeceiverShieldIconMaker.ShouldSeeShield(Player);
         }
     }
     public override string GetDescription()
@@ -156,6 +156,6 @@ public static class  DeceiverShieldIconMaker
         var showShieldedEveryone = showShielded == MedicOption.Everyone;
         var showShieldedSelf = player.AmOwner &&
                                showShielded is MedicOption.Shielded or MedicOption.ShieldedAndMedic;
-        return showShieldedSelf || showShieldedEveryone;
+        return showShieldedSelf || showShieldedEveryone || (PlayerControl.LocalPlayer.HasDied() && PlayerControl.LocalPlayer.DiedOtherRound()) || PlayerControl.LocalPlayer.IsImpostorAligned();
     }
 }
