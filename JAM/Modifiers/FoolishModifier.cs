@@ -19,16 +19,13 @@ namespace JAM.Modifiers;
 
 public sealed class FoolishModifier : UniversalGameModifier, IContinuesGame
 {
-    public static float votingTimeLeft = 0f;
-
     public override void Update()
     {
         base.Update();
 
-        if(votingTimeLeft > 0f)
+        if(MeetingHud.Instance?.discussionTimer > 0 && MeetingHud.Instance?.discussionTimer <= OptionGroupSingleton<FoolishOptions>.Instance.FoolishTime)
         {
-            votingTimeLeft -= Time.deltaTime;
-            Info(votingTimeLeft);
+            Info(MeetingHud.Instance.discussionTimer);
         }
     }
 

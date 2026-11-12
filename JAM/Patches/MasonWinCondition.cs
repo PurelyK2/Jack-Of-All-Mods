@@ -14,16 +14,7 @@ public sealed class MasonWinCondition : CustomGameOver
 {
 	public override bool VerifyCondition(PlayerControl playerControl, NetworkedPlayerInfo[] winners)
     {
-		float percentMasons = (float)Helpers.GetAlivePlayers().Count(p => p.HasModifier<MasonModifier>()) / (float)Helpers.GetAlivePlayers().Count;
-
-		Info(percentMasons);
-
-        if (percentMasons > 0.5f)
-        {
-            Info("Masons Should Win!");
-            return true;
-        }
-		return false;
+		return MasonModifier.CheckMasonWinCon();
     }
 
 	public override void AfterEndGameSetup(EndGameManager endGameManager)

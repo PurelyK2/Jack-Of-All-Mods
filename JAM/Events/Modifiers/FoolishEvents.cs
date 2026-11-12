@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using Innersloth.Assets;
 using JAM.Modifiers;
 using JAM.Modifiers.Role;
 using JAM.Options.Modifiers;
@@ -18,34 +19,21 @@ namespace JAM.Events.Modifiers;
 
 public static class FoolishEvents
 {
-    [RegisterEvent(0)]
-    public static void OnMeetingStart(StartMeetingEvent @event)
-    {
-        FoolishModifier.votingTimeLeft = OptionGroupSingleton<FoolishOptions>.Instance.FoolishTime + 10 + GameManager.Instance.LogicOptions.Cast<LogicOptionsNormal>().GetDiscussionTime(); // the 5 is for the initial animation, + discussion time for the discussion time
-    }
-
     [HarmonyPatch(typeof(PlayerVoteData), "VoteForPlayer")]
     public static class FoolishVote
     {
-        static bool repeating;
+        [HarmonyPriority(Priority.Last)]
         public static void Postfix(ref PlayerVoteData __instance, byte playerId)
         {
-            if(repeating) return;
+            if (!__instance.Owner.HasModifier<FoolishModifier>()) return;
 
-            if(!__instance.Owner.HasModifier<FoolishModifier>())
+            Info("Voting Foolishly");
+
+            int currVotes = __instance.Votes.Count;
+            for(int i = 0; i < currVotes; i++)
             {
-                return;
+                __instance.Votes.Add(new CustomVote(__instance.Owner.PlayerId, playerId));
             }
-
-            if (FoolishModifier.votingTimeLeft <= 0)
-            {
-                Info("Not In Voting Time");
-                return;
-            }
-
-            repeating = true;
-            __instance.VoteForPlayer(playerId);
-            repeating = false;
         }
     }
 }

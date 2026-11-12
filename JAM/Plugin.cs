@@ -22,7 +22,7 @@ using UnityEngine;
 
 namespace JAM;
 
-[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.2.9")]
+[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.2.10")]
 [BepInProcess("Among Us.exe")]
 [BepInDependency(ReactorPlugin.Id)]
 [BepInDependency(MiraApiPlugin.Id)]
@@ -64,7 +64,6 @@ public partial class Plugin : BasePlugin, IMiraPlugin
     }
     private static async Task ConstantlyError(string e)
     {
-        return;
 
         while(true)
         {
@@ -170,13 +169,16 @@ public enum JAMRpcCalls : uint
     SyncRolesList = 7,
     UpdateVacillatorAlignment = 8,
     SendKeyword = 9,
-    SwapUnstable = 10
+    SwapUnstable = 10,
+    SetRivalScore = 11,
+    DisbandMasons = 12
 }
 
 // ================== FEATURES ====================
 // Make JAM green on summaries and such?
 // Change Appearance Of Settings For Modifiers
 // Give Mason Custom Background On Startup
+// Fix Mason Chances To Properly Calculate (chance of at least one spawning = chance of spawning)
 
 // ================== TEMP FIXES ===================
 // MIMIC STILL SEES IMPS!?! (stops imp cards from being in selections)
@@ -184,10 +186,20 @@ public enum JAMRpcCalls : uint
 // concealed is sometimes fully invisible? (The settings even change so that it is) (Made Forced At 25% for now)
 
 // ================== MINOR BUGS ====================
-// DiedToProjected instead of Projected
 // Misfire Kills Give Weird Info For Mortician Autopsy
-// Foolish Doesn't Work Right With Discussion Time still
+// Foolish Doesn't Work?
+// My Overrides For Locales Aren't Working?
+
+// ================== MAJOR BUGS ====================
+// PROFESSOR STILL CHANGES ALLIGNMENTS!!! (Not Related To Prev Alignments)
 
 // =============== FIXES ===============
 /*
+ * Fixed Micromanager To Not Have Repeated Identical Tasks
+ * Took Neutral Benigns Out Of Mason End Game Checks
+ * Forced At Least One Mason To Be A Killer
+ * Ventable Is Disabled On Death
+ * Deceiver Should Properly Show As A Winner Now
+ * Mason Disband Notif Now Works Properly
+ * Masons Should Now Win With Neutrals That End Game Early If Those Are Masons
 */

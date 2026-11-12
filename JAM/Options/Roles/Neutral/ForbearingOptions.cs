@@ -20,7 +20,7 @@ public sealed class ForbearingOptions : AbstractOptionGroup<ForbearingRole>
         Visible = () => OptionGroupSingleton<ForbearingOptions>.Instance.AlwaysDecreaseCd
     };
 
-    [ModdedToggleOption("Time Keeper Notifies")]
+    [ModdedToggleOption("Forbearing Notifies")]
     public bool TimeNotif { get; set; } = true;
 
     [ModdedToggleOption("Forbearing Starts With Kill Button")]

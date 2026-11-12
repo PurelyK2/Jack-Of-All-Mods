@@ -47,7 +47,7 @@ public sealed class VentableModifier : TouGameModifier, IWikiDiscoverable
      
     public override bool? CanVent()
     {
-        return true;
+        return !Player.Data.IsDead;
     }
 
     public override ModifierUiConfiguration Configuration

@@ -20,7 +20,7 @@ namespace JAM.Buttons.Impostor;
 public sealed class ScrubberScrubButton : TownOfUsRoleButton<ScrubberRole, PlayerControl>
 {
     public override float Cooldown => GameManager.Instance.LogicOptions.GetKillCooldown();
-    public override BaseKeybind? Keybind => Keybinds.PrimaryAction;
+    public override BaseKeybind? Keybind => Keybinds.SecondaryAction;
     public override LoadableAsset<Sprite> Sprite => JamRoleIcons.Scrubber;
     public override PlayerControl? GetTarget()
     {

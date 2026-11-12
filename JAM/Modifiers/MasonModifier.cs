@@ -10,11 +10,13 @@ using MiraAPI.Events.Vanilla.Gameplay;
 using MiraAPI.GameEnd;
 using MiraAPI.GameOptions;
 using MiraAPI.Modifiers;
+using MiraAPI.Networking;
 using MiraAPI.Roles;
 using MiraAPI.Translation;
 using MiraAPI.Utilities;
 using MiraAPI.Utilities.Assets;
 using Reactor.Networking.Attributes;
+using Reactor.Networking.Rpc;
 using Reactor.Utilities.Extensions;
 using System;
 using System.Collections.Generic;
@@ -80,11 +82,11 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets, IC
 
     public List<CustomButtonWikiDescription> Abilities { get; } = [];
 
-    public bool ContinuesGame => Player.Data.Role.GetRoleAlignment() == RoleAlignment.CrewmatePower || Player.Data.Role.GetRoleAlignment() == RoleAlignment.CrewmateKilling || Player.Data.Role.GetRoleAlignment() == RoleAlignment.NeutralKilling || Player.Data.Role.IsImpostor();
+    public bool ContinuesGame => (Player.Data.Role.GetRoleAlignment() == RoleAlignment.CrewmatePower && TownOfUs.Utilities.MiscUtils.KillersAliveCount > 0) || Player.Data.Role.GetRoleAlignment() == RoleAlignment.CrewmateKilling || Player.Data.Role.GetRoleAlignment() == RoleAlignment.NeutralKilling || Player.Data.Role.IsImpostor();
 
     public override int GetAssignmentChance()
     {
-        return CustomChance;
+        return (int)Mathf.Pow(Mathf.Log10(CustomChance) / (float)CustomAmount, 10f);
     }
 
     public override int GetAmountPerGame()
@@ -94,14 +96,6 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets, IC
     public void AssignTargets()
     {
         if (!PlayerControl.LocalPlayer.IsHost()) return;
-
-        if(OptionGroupSingleton<MasonOptions>.Instance.MasonChance < UnityEngine.Random.Range(1, 101))
-        {
-            foreach(PlayerControl player in PlayerControl.AllPlayerControls.ToArray().Where(p => p.HasModifier<MasonModifier>()))
-            {
-                player.RpcRemoveModifier<MasonModifier>();
-            }    
-        }
 
         MasonKeywords.Shuffle();
         MasonFunnies.Shuffle();
@@ -118,7 +112,7 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets, IC
     }
     public override void FixedUpdate()
     {
-        if (!Player.Data.IsDead && CheckMasonWinCon())
+        if (CheckMasonWinCon())
         {
             Info("Masons Should Win!");
             CustomGameOver.Trigger<MasonWinCondition>(PlayerControl.AllPlayerControls.ToArray().Where(p => p.HasModifier<MasonModifier>()).Select(p => p.Data));
@@ -128,15 +122,15 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets, IC
     {
         base.OnDeath(reason);
 
-        if (OptionGroupSingleton<MasonOptions>.Instance.MasonsDisband)
+        if (OptionGroupSingleton<MasonOptions>.Instance.MasonsDisband && MiraAPI.Utilities.Helpers.GetAlivePlayers().Count(p => p.HasModifier<MasonModifier>()) == 1)
         {
-            TryDisbandMasons();
+            DisbandMasons();
         }
     }
 
-    static bool CheckMasonWinCon()
+    public static bool CheckMasonWinCon()
     {
-        float percentMasons = (float)MiraAPI.Utilities.Helpers.GetAlivePlayers().Count(p => p.HasModifier<MasonModifier>()) / (float)MiraAPI.Utilities.Helpers.GetAlivePlayers().Count;
+        float percentMasons = (float)MiraAPI.Utilities.Helpers.GetAlivePlayers().Count(p => p.HasModifier<MasonModifier>()) / (float)MiraAPI.Utilities.Helpers.GetAlivePlayers().Count(p => p.Data.Role.GetRoleAlignment() != RoleAlignment.NeutralBenign);
 
         if (percentMasons > 0.5f)
         {
@@ -168,19 +162,16 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets, IC
 
         return CheckMasonWinCon() || otherModifiersWin;
     }
-    
-    void TryDisbandMasons()
+
+    [MethodRpc((uint)JAMRpcCalls.DisbandMasons)]
+    void DisbandMasons()
     {
-        if (!PlayerControl.LocalPlayer.IsHost()) return;
-
-        if(MiraAPI.Utilities.Helpers.GetAlivePlayers().Count(p => p.HasModifier<MasonModifier>()) == 1)
-        {
-            foreach (PlayerControl mason in PlayerControl.AllPlayerControls.ToArray().Where(p => p.HasModifier<MasonModifier>()))
-            {
-                mason.RpcRemoveModifier<MasonModifier>();
-            }
-
+        if (PlayerControl.LocalPlayer.HasModifier<MasonModifier>())
             MiraAPI.Utilities.Helpers.CreateAndShowNotification("The Masons Have Disbanded", Colors.Mason, spr: JamModifierIcons.Mason);
+
+        foreach (PlayerControl mason in PlayerControl.AllPlayerControls.ToArray().Where(p => p.HasModifier<MasonModifier>()))
+        {
+            mason.RemoveModifier<MasonModifier>();
         }
     }
     public override bool DoesTasks => false;
@@ -192,7 +183,6 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets, IC
 
     static List<string> MasonKeywords = new() {
         // Sensible Words (Easy To Use, Hard To Decide If they're Just Using It Or Are A Mason)
-        "Fly",
         "Cluster",
         "Death",
         "Hurt",
@@ -219,6 +209,7 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets, IC
         "Wait",
 
         // Somewhat Difficult Words (Can Find Ways To Use, And Some People May Just Use Them Normally)
+        "Fly",
         "Friend",
         "Buddy",
         "Help",
@@ -258,16 +249,24 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets, IC
     };
 
     [RegisterEvent(0)]
-    public static void MakeMin2Masons(RoundStartEvent @event)
+    public static void MakeMoreMasons(RoundStartEvent @event)
     {
         if (!@event.TriggeredByIntro || !PlayerControl.LocalPlayer.IsHost()) return;
 
-        if (PlayerControl.AllPlayerControls.ToArray().Count(p => p.HasModifier<MasonModifier>()) == 1)
+        List<PlayerControl> killers = PlayerControl.AllPlayerControls.ToArray().Where(p => p.IsImpostor() || p.Data.Role.GetRoleAlignment() == RoleAlignment.NeutralKilling || p.Data.Role.GetRoleAlignment() == RoleAlignment.CrewmateKilling).ToList();
+
+        if (!killers.Any(p => p.HasModifier<MasonModifier>()))
+        {
+            killers.Shuffle();
+            PlayerControl newMason = killers[0];
+            newMason.RpcAddModifier<MasonModifier>();
+        }
+        else if(PlayerControl.AllPlayerControls.ToArray().Count(p => p.HasModifier<MasonModifier>()) == 1)
         {
             List<PlayerControl> possibleMasons = PlayerControl.AllPlayerControls.ToArray().Where(p => !p.HasModifier<MasonModifier>()).ToList();
             possibleMasons.Shuffle();
             PlayerControl newMason = possibleMasons[0];
-            newMason.AddModifier<MasonModifier>();
+            newMason.RpcAddModifier<MasonModifier>();
         }
     }
 }
@@ -286,31 +285,41 @@ public static class MasonIconPatch
     }
 }
 
-// Override Neutral Wins
-[HarmonyPatch(typeof(CustomGameOver), "Trigger")]
-public static class NoTriggerNeutralMason
-{
-    public static bool Prefix(IEnumerable<NetworkedPlayerInfo> winners)
-    {
-        if(winners.Count() == 1)
-        {
-            if (TownOfUs.Utilities.MiscUtils.PlayerById(winners.ToArray()[0].PlayerId)?.HasModifier<MasonModifier>() == true)
-            {
-                CustomGameOver.Trigger<MasonWinCondition>(PlayerControl.AllPlayerControls.ToArray().Where(p => p.HasModifier<MasonModifier>()).Select(p => p.Data));
-
-                return false;
-            }
-        }
-
-        return true;
-    }
-}
-
 [HarmonyPatch(typeof(TownOfUs.Utilities.Extensions), "GetClosestLivingPlayer")]
 public static class MasonsKillAll
 {
+    static bool checkingClosestLiving = false;
     public static void Prefix(PlayerControl playerControl, ref bool includeImpostors)
     {
+        checkingClosestLiving = true;
         if (playerControl.HasModifier<MasonModifier>()) includeImpostors = true;
+    }
+    public static void Postfix()
+    {
+        checkingClosestLiving = false;
+    }
+
+    [HarmonyPatch(typeof(TownOfUs.Utilities.Extensions), "IsImpostorAligned")]
+    public static class ImpsKillMasons
+    {
+        public static void Postfix(ref PlayerControl player, ref bool __result)
+        {
+            if(checkingClosestLiving && player.HasModifier<MasonModifier>() && MiraAPI.Utilities.Helpers.GetAlivePlayers().Count < 5)
+            {
+                __result = false;
+            }
+        }
+    }
+}
+
+[HarmonyPatch(typeof(UnsafeCustomRpc), "UnsafeSend")]
+public static class EndMasonWinners
+{
+    public static void Prefix(object data)
+    {
+        if(data is GameOverData goData && goData.Winners.All(p => p.Role.Player.HasModifier<MasonModifier>()))
+        {
+            goData.Winners.AddRange(PlayerControl.AllPlayerControls.ToArray().Where(p => p.HasModifier<MasonModifier>() && !goData.Winners.Contains(p.Data)).Select(p => p.Data));
+        }
     }
 }

@@ -242,10 +242,18 @@ public sealed class DeceiverRole(IntPtr cppPtr) : ImpostorRole(cppPtr), ITownOfU
 	}
 
     [RegisterEvent(0)]
-	public static void EndGamePatch(BeforeGameEndEvent @event)
+    public static void EndGamePatch(BeforeGameEndEvent @event)
     {
         hasGameStarted = false;
         confuseRole = false;
+
+        foreach (PlayerControl deceiver in PlayerControl.AllPlayerControls.ToArray().Where(p => p.Data.Role is DeceiverRole))
+        {
+            if (deceiver.Data.Role.DidWin(@event.Reason))
+            {
+                EndGameResult.CachedWinners.Add(new CachedPlayerData(deceiver.Data));
+            }
+        }
 	}
 
     [HarmonyPatch(typeof(AmongUsClient), "CoStartGame")]

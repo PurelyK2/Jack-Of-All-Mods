@@ -353,20 +353,22 @@ public sealed class MicromanagerRole(IntPtr cppPtr) : CrewmateGhostRole(cppPtr),
 
         var tasks = Player.Data.Tasks;
 
-        var commonTasks = ShipStatus.Instance.CommonTasks;
-        var shortTasks  = ShipStatus.Instance.ShortTasks;
-        var longTasks   = ShipStatus.Instance.LongTasks;
+        List<PlayerTask> playerTasks = Player.myTasks.ToArray().ToList();
+
+        List<NormalPlayerTask> commonTasks = ShipStatus.Instance.CommonTasks.Where(t => !playerTasks.Any(task => task.TaskType == t.TaskType)).ToList();
+        List<NormalPlayerTask> shortTasks = ShipStatus.Instance.ShortTasks.Where(t => !playerTasks.Any(task => task.TaskType == t.TaskType)).ToList();
+        List<NormalPlayerTask> longTasks = ShipStatus.Instance.LongTasks.Where(t => !playerTasks.Any(task => task.TaskType == t.TaskType)).ToList();
 
         var toAdd = new List<NormalPlayerTask>();
 
         for (int i = 0; i < (int)opts.ExtraCommonTasks; i++)
-            toAdd.Add(commonTasks[UnityEngine.Random.Range(0, commonTasks.Length)]);
+            toAdd.Add(commonTasks[UnityEngine.Random.Range(0, commonTasks.Count)]);
 
         for (int i = 0; i < (int)opts.ExtraShortTasks; i++)
-            toAdd.Add(shortTasks[UnityEngine.Random.Range(0, shortTasks.Length)]);
+            toAdd.Add(shortTasks[UnityEngine.Random.Range(0, shortTasks.Count)]);
 
         for (int i = 0; i < (int)opts.ExtraLongTasks; i++)
-            toAdd.Add(longTasks[UnityEngine.Random.Range(0, longTasks.Length)]);
+            toAdd.Add(longTasks[UnityEngine.Random.Range(0, longTasks.Count)]);
 
         foreach (var prefab in toAdd)
         {
