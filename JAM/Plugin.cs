@@ -22,7 +22,7 @@ using UnityEngine;
 
 namespace JAM;
 
-[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.2.10")]
+[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.2.11")]
 [BepInProcess("Among Us.exe")]
 [BepInDependency(ReactorPlugin.Id)]
 [BepInDependency(MiraApiPlugin.Id)]
@@ -189,17 +189,17 @@ public enum JAMRpcCalls : uint
 // Misfire Kills Give Weird Info For Mortician Autopsy
 // Foolish Doesn't Work?
 // My Overrides For Locales Aren't Working?
+// It Says The Wrong Team Won When Mimic Won (Make A Custom Game Over For Mimic?)
 
 // ================== MAJOR BUGS ====================
 // PROFESSOR STILL CHANGES ALLIGNMENTS!!! (Not Related To Prev Alignments)
 
 // =============== FIXES ===============
 /*
- * Fixed Micromanager To Not Have Repeated Identical Tasks
- * Took Neutral Benigns Out Of Mason End Game Checks
- * Forced At Least One Mason To Be A Killer
- * Ventable Is Disabled On Death
- * Deceiver Should Properly Show As A Winner Now
- * Mason Disband Notif Now Works Properly
- * Masons Should Now Win With Neutrals That End Game Early If Those Are Masons
+ * Gave Rivals A Proper Description
+ * Gave Snoop An Option For Venting
+ * Completely Disallowed Neutrals From Getting Rivals
+ * Made Rivals Properly Show Up
+ * Made Rivals Properly Assign Rival
+ * Zombie leader get the correct number of votes now
 */

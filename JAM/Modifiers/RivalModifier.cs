@@ -27,6 +27,19 @@ public sealed class RivalModifier : AllianceGameModifier, IAssignableTargets
     public static Dictionary<PlayerControl, int> RivalScores = new Dictionary<PlayerControl, int>();
 
     public override string ModifierName => "Rival";
+    public override string IntroInfo => "You Are A Rival";
+    public override bool HideOnUi => false;
+    public override string GetDescription()
+    {
+        if(!PlayerControl.LocalPlayer.HasModifier<RivalModifier>())
+            return IntroInfo;
+
+        return IntroInfo + "\nYour Rival Is: " + RivalScores.Keys.FirstOrDefault(p => p.HasModifier<RivalModifier>() && !p.AmOwner)?.Data?.PlayerName ?? "PLAYER 0";
+    }
+    public string GetAdvancedDescription()
+    {
+        return IntroInfo + MiscUtils.AppendOptionsText(GetType());
+    }
     public override LoadableAsset<Sprite>? ModifierIcon => JamModifierIcons.Rivalry;
     public override ModifierUiConfiguration Configuration => new(Colors.Rivals, TmpSpriteUtils.CreateSpriteAsset(JamModifierIcons.Rivalry.LoadAsset(), "Rivals", 1.45f));
     public override int GetAssignmentChance()
@@ -62,12 +75,30 @@ public sealed class RivalModifier : AllianceGameModifier, IAssignableTargets
         if (CustomChance < UnityEngine.Random.Range(1, 101)) return;
 
         List<PlayerControl> PossiblePlayers = MiraAPI.Utilities.Helpers.GetAlivePlayers().Where(p => !p.HasModifier<AllianceGameModifier>() && (p.IsImpostor() || p.IsCrewmate())).ToList();
+        
+        if(PossiblePlayers.Count(p => p.IsImpostor()) < 2)
+        {
+            PossiblePlayers.RemoveAll(p => p.IsImpostor());
+        }
+
+        if (!PossiblePlayers.Any())
+        {
+            return;
+        }
+        
         PossiblePlayers.Shuffle();
         PlayerControl randPlayer = PossiblePlayers[0];
 
         randPlayer.RpcAddModifier<RivalModifier>();
 
-        PossiblePlayers.RemoveAll(p => p.IsImpostor() != randPlayer.IsImpostor() || p == randPlayer);
+        PossiblePlayers.RemoveAll(p => (p.IsImpostor() != randPlayer.IsImpostor() && p.IsCrewmate() != randPlayer.IsCrewmate()) || p == randPlayer);
+
+        if (PossiblePlayers.Count == 0)
+        {
+            randPlayer.RpcRemoveModifier<RivalModifier>();
+            return;
+        }
+
         PossiblePlayers.Shuffle();
         PlayerControl randPlayer2 = PossiblePlayers[0];
 

@@ -255,7 +255,7 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets, IC
 
         List<PlayerControl> killers = PlayerControl.AllPlayerControls.ToArray().Where(p => p.IsImpostor() || p.Data.Role.GetRoleAlignment() == RoleAlignment.NeutralKilling || p.Data.Role.GetRoleAlignment() == RoleAlignment.CrewmateKilling).ToList();
 
-        if (!killers.Any(p => p.HasModifier<MasonModifier>()))
+        if (!killers.Any(p => p.HasModifier<MasonModifier>()) && PlayerControl.AllPlayerControls.ToArray().Count(p => p.HasModifier<MasonModifier>()) >= 1)
         {
             killers.Shuffle();
             PlayerControl newMason = killers[0];

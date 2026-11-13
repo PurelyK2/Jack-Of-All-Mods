@@ -25,7 +25,7 @@ public static class ZombiePatches
         if(@event.VoteData.Owner.Data.Role is ZombieLeaderRole)
         {
             @event.VoteData.SetRemainingVotes(0);
-            foreach (PlayerControl player in PlayerControl.AllPlayerControls.ToArray().Where(p => p.GetRoleWhenAlive() is ZombieRole || p.GetRoleWhenAlive() is ZombieLeaderRole))
+            foreach (PlayerControl player in PlayerControl.AllPlayerControls.ToArray().Where(p => p.GetRoleWhenAlive() is ZombieRole))
             {
                 @event.VoteData.VoteForPlayer(@event.TargetId);
             }

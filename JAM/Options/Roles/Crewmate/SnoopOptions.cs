@@ -9,7 +9,7 @@ using TownOfUs.Modules.Localization;
 
 namespace JAM.Options.Roles.Crewmate;
 
-public sealed class StealthyOptions : AbstractOptionGroup<SnoopRole>
+public sealed class SnoopOptions : AbstractOptionGroup<SnoopRole>
 {
     public override string GroupName => "Snoop Options";
     
@@ -18,4 +18,7 @@ public sealed class StealthyOptions : AbstractOptionGroup<SnoopRole>
 
     [ModdedNumberOption("Sneak Duration", 10f, 120f, 5f, MiraNumberSuffixes.Seconds)]
     public float SneakDuration { get; set; } = 30f;
+
+    [ModdedToggleOption("Snoop Can Vent")]
+    public bool SnoopCanVent { get; set; } = false;
 }

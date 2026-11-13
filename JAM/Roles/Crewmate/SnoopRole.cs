@@ -1,5 +1,7 @@
 using Il2CppInterop.Runtime.Attributes;
 using JAM.Assets;
+using JAM.Options.Roles.Crewmate;
+using MiraAPI.GameOptions;
 using MiraAPI.Roles;
 using MiraAPI.Utilities.Assets;
 using TownOfUs.Assets;
@@ -47,6 +49,7 @@ public sealed class SnoopRole(IntPtr cppPtr) : CrewmateRole(cppPtr), ITownOfUsRo
     {
         IconTmp = TmpSpriteUtils.CreateSpriteAsset(JamRoleIcons.Snoop.LoadAsset(), "JackOfAllMods.Roles.Crewmate.Snoop", 1.45f),
         IntroSound = TouAudio.SwooperActivateSound,
-        Icon = JamRoleIcons.Snoop
+        Icon = JamRoleIcons.Snoop,
+        CanUseVent = OptionGroupSingleton<SnoopOptions>.Instance.SnoopCanVent
     };
 }

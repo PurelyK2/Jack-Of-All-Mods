@@ -8,6 +8,7 @@ using UnityEngine;
 using JAM.Options.Modifiers;
 using JAM.Assets;
 using JAM.Roles.Neutral;
+using TownOfUs.Roles.Crewmate;
 
 namespace JAM.Modifiers;
 
@@ -46,7 +47,7 @@ public sealed class ExposedModifier : UniversalGameModifier, IWikiDiscoverable
 
     public override bool IsModifierValidOn(RoleBehaviour role)
     {
-        return base.IsModifierValidOn(role) && role is not ZombieLeaderRole;
+        return base.IsModifierValidOn(role) && role is not ZombieLeaderRole && role is not ProsecutorRole;
     }
 
     public override int GetAmountPerGame()

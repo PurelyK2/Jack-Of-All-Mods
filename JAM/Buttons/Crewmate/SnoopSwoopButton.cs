@@ -17,13 +17,9 @@ public sealed class SnoopSwoopButton : TownOfUsRoleButton<SnoopRole>
 	public override Color TextOutlineColor => Colors.Snoop;
 	public override string Name => "Snoop";
 	public override BaseKeybind Keybind => Keybinds.PrimaryAction;
-	public override float Cooldown => Math.Clamp(OptionGroupSingleton<StealthyOptions>.Instance.SneakCooldown + TownOfUsButton.MapCooldown, 5f, 120f);
+	public override float Cooldown => Math.Clamp(OptionGroupSingleton<SnoopOptions>.Instance.SneakCooldown + TownOfUsButton.MapCooldown, 5f, 120f);
 
-	public override float EffectDuration => OptionGroupSingleton<StealthyOptions>.Instance.SneakDuration;
-
-    /* 
-	public override int MaxUses => (int)OptionGroupSingleton<StealthyOptions>.Instance.MaxSneaks;
-	*/
+	public override float EffectDuration => OptionGroupSingleton<SnoopOptions>.Instance.SneakDuration;
 
 	public override LoadableAsset<Sprite> Sprite => TouCrewAssets.CrewSwoopSprite;
 	public override bool ZeroIsInfinite => true;

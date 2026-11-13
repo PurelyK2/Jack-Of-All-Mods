@@ -20,7 +20,7 @@ namespace JAM.Modifiers.Hidden;
 public sealed class StealthySwoopModifier : ConcealedModifier, IVisualAppearance
 {
         public override string ModifierName => "Stealthy";
-        public override float Duration => OptionGroupSingleton<StealthyOptions>.Instance.SneakDuration;
+        public override float Duration => OptionGroupSingleton<SnoopOptions>.Instance.SneakDuration;
         public override bool HideOnUi => true;
         public override bool AutoStart => true;
         public override bool VisibleToOthers => false;
