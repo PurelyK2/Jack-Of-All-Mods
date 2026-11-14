@@ -45,7 +45,7 @@ namespace JAM.Modifiers;
 
 public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets, IContinuesGame
 {
-    int IAssignableTargets.Priority { get; set; } = 3;
+    int IAssignableTargets.Priority { get; set; } = 4;
 
     public static string Keyword = "";
     public override ModifierUiConfiguration Configuration => new(Colors.Mason, TmpSpriteUtils.CreateSpriteAsset(JamModifierIcons.Mason.LoadAsset(), "Masons", 1.45f));
@@ -59,7 +59,7 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets, IC
     {
         string description = "You Are A Mason!\nMasons Win With Eachother, Not With Their Own Factions";
 
-        if (Keyword != "" && PlayerControl.LocalPlayer.HasModifier<MasonModifier>())
+        if (Keyword != "" && PlayerControl.LocalPlayer?.HasModifier<MasonModifier>() == true)
         {
             description += $"\n{Colors.Mason.ToTextColor()}Keyword: <b>" + Keyword + "</b></color>";
         }
@@ -96,6 +96,11 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets, IC
     public void AssignTargets()
     {
         if (!PlayerControl.LocalPlayer.IsHost()) return;
+        if (PlayerControl.AllPlayerControls.ToArray().Count(p => p.HasModifier<LoverModifier>()) == 2)
+        {
+            Info("Lovers Spawned, Don't Spawn Masons");
+            return;
+        }
 
         MasonKeywords.Shuffle();
         MasonFunnies.Shuffle();
@@ -109,6 +114,19 @@ public sealed class MasonModifier : AllianceGameModifier, IAssignableTargets, IC
             MasonModifier.RpcSendKeyword(PlayerControl.LocalPlayer, MasonFunnies[0]);
         }
         else MasonModifier.RpcSendKeyword(PlayerControl.LocalPlayer, MasonKeywords[0]);
+    }
+    [HarmonyPatch(typeof(LoverModifier), nameof(LoverModifier.AssignTargets))]
+    public static class MakeMasonsAndLoversExclusive
+    {
+        public static bool Prefix()
+        {
+            if (PlayerControl.AllPlayerControls.ToArray().Count(p => p.HasModifier<RivalModifier>()) == 2)
+            {
+                return false;
+            }
+            
+            return true;
+        }
     }
     public override void FixedUpdate()
     {

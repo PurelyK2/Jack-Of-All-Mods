@@ -66,7 +66,7 @@ public sealed class VacillatorRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOf
         TasksCountForProgress = false
     };
 
-    public bool ContinuesGame => (winsWithCrew != true && MiraAPI.Utilities.Helpers.GetAlivePlayers().Count > 2) || TownOfUs.Utilities.MiscUtils.KillersAliveCount > 0;
+    public bool ContinuesGame => (winsWithCrew != true && MiraAPI.Utilities.Helpers.GetAlivePlayers().Count > 2) || TownOfUs.Utilities.MiscUtils.RealKillersAliveCount > 0;
 
     public override bool DidWin(GameOverReason gameOverReason)
     {

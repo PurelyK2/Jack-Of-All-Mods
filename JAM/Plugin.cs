@@ -22,7 +22,7 @@ using UnityEngine;
 
 namespace JAM;
 
-[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.2.11")]
+[BepInAutoPlugin("com.JackOfAllMods.mod", "JackOfAllMods", "1.2.12")]
 [BepInProcess("Among Us.exe")]
 [BepInDependency(ReactorPlugin.Id)]
 [BepInDependency(MiraApiPlugin.Id)]
@@ -174,6 +174,8 @@ public enum JAMRpcCalls : uint
     DisbandMasons = 12
 }
 
+// Crew Vacillator Continued Game (All Saw Crew)
+
 // ================== FEATURES ====================
 // Make JAM green on summaries and such?
 // Change Appearance Of Settings For Modifiers
@@ -196,10 +198,9 @@ public enum JAMRpcCalls : uint
 
 // =============== FIXES ===============
 /*
- * Gave Rivals A Proper Description
- * Gave Snoop An Option For Venting
- * Completely Disallowed Neutrals From Getting Rivals
- * Made Rivals Properly Show Up
- * Made Rivals Properly Assign Rival
- * Zombie leader get the correct number of votes now
+ * Made Rivals Only A Crewmate Modifier
+ * Made Prosecutor Not Miskill On Deceiver If Crew Killers Aren't Deceived
+ * Rivals Should Now Only Ever Spawn A Max Of 2
+ * Made Lovers And Rivals Mutually Exclusive
+ * Crew Vacillator Should No Longer Continue Game If No Real Killers Are Alive
 */

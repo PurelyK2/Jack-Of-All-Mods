@@ -270,7 +270,7 @@ public sealed class DeceiverRole(IntPtr cppPtr) : ImpostorRole(cppPtr), ITownOfU
     {
         if (!hasGameStarted) return;
         if (PlayerControl.LocalPlayer.Data.Role.IsImpostor() || PlayerControl.LocalPlayer.Data.IsDead || PlayerControl.LocalPlayer.Data.Role is IGhostRole) return;
-        if (PlayerControl.LocalPlayer.Data.Role is SnitchRole || PlayerControl.LocalPlayer.Data.Role is InquisitorRole) return;
+        if (PlayerControl.LocalPlayer.Data.Role is SnitchRole || PlayerControl.LocalPlayer.Data.Role is InquisitorRole || (PlayerControl.LocalPlayer.Data.Role is ProsecutorRole && !OptionGroupSingleton<DeceiverOptions>.Instance.DeceiveCrewKillers)) return;
 
         confuseRole = true;
     }

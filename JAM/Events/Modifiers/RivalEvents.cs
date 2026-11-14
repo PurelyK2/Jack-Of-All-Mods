@@ -29,15 +29,6 @@ public static class RivalEvents
     }
 
     [RegisterEvent(0)]
-    public static void OnKillEvent(AfterMurderEvent @event)
-    {
-        if(@event.Source.HasModifier<RivalModifier>() && @event.Source.IsImpostor())
-        {
-            AddOneScore(@event.Source);
-        }
-    }
-
-    [RegisterEvent(0)]
     public static void OnTaskCompleteEvent(CompleteTaskEvent @event)
     {
         if (@event.Player.HasModifier<RivalModifier>() && @event.Player.IsCrewmate())

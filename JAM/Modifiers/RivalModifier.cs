@@ -1,22 +1,13 @@
 ﻿using JAM.Assets;
 using JAM.Options.Modifiers;
-using JetBrains.Annotations;
-using MiraAPI.Events;
-using MiraAPI.Events.Vanilla.Gameplay;
 using MiraAPI.GameOptions;
 using MiraAPI.Modifiers;
 using MiraAPI.Utilities;
 using MiraAPI.Utilities.Assets;
 using Reactor.Networking.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TownOfUs.Extensions;
 using TownOfUs.Modifiers;
 using TownOfUs.Modifiers.Game;
-using TownOfUs.Roles.Other;
 using TownOfUs.Utilities;
 using UnityEngine;
 
@@ -28,17 +19,22 @@ public sealed class RivalModifier : AllianceGameModifier, IAssignableTargets
 
     public override string ModifierName => "Rival";
     public override string IntroInfo => "You Are A Rival";
-    public override bool HideOnUi => false;
     public override string GetDescription()
     {
         if(!PlayerControl.LocalPlayer.HasModifier<RivalModifier>())
             return IntroInfo;
 
-        return IntroInfo + "\nYour Rival Is: " + RivalScores.Keys.FirstOrDefault(p => p.HasModifier<RivalModifier>() && !p.AmOwner)?.Data?.PlayerName ?? "PLAYER 0";
+        string RivalDesc = IntroInfo + "\nComplete More Tasks Than " + (RivalScores.Keys.FirstOrDefault(p => p.HasModifier<RivalModifier>() && !p.AmOwner)?.Data?.PlayerName ?? "Your Rival") + " To Win!";
+        
+        if(RivalScores.Keys.Any(p => p.AmOwner))
+        {
+            RivalDesc += "\nCurrent Score: " + RivalScores[RivalScores.Keys.FirstOrDefault(p => p.AmOwner) ?? RivalScores.Keys.First()];
+        }
+        return RivalDesc;
     }
     public string GetAdvancedDescription()
     {
-        return IntroInfo + MiscUtils.AppendOptionsText(GetType());
+        return "Complete More Tasks Than Your Rival To Win!\n(Tasks Only Count So Long As Both Of You Are Alive)" + MiscUtils.AppendOptionsText(GetType());
     }
     public override LoadableAsset<Sprite>? ModifierIcon => JamModifierIcons.Rivalry;
     public override ModifierUiConfiguration Configuration => new(Colors.Rivals, TmpSpriteUtils.CreateSpriteAsset(JamModifierIcons.Rivalry.LoadAsset(), "Rivals", 1.45f));
@@ -67,22 +63,25 @@ public sealed class RivalModifier : AllianceGameModifier, IAssignableTargets
     int IAssignableTargets.Priority { get; set; } = 5;
     public void AssignTargets()
     {
-        foreach(PlayerControl player in PlayerControl.AllPlayerControls.ToArray().Where(p => p.HasModifier<RivalModifier>()))
+        if (!PlayerControl.LocalPlayer.IsHost()) return;
+
+        foreach (PlayerControl player in PlayerControl.AllPlayerControls.ToArray().Where(p => p.HasModifier<RivalModifier>()))
         {
             player.RpcRemoveModifier<RivalModifier>();
         }
 
         if (CustomChance < UnityEngine.Random.Range(1, 101)) return;
 
-        List<PlayerControl> PossiblePlayers = MiraAPI.Utilities.Helpers.GetAlivePlayers().Where(p => !p.HasModifier<AllianceGameModifier>() && (p.IsImpostor() || p.IsCrewmate())).ToList();
-        
-        if(PossiblePlayers.Count(p => p.IsImpostor()) < 2)
+        List<PlayerControl> PossiblePlayers = MiraAPI.Utilities.Helpers.GetAlivePlayers().Where(p => !p.HasModifier<AllianceGameModifier>() && p.IsCrewmate()).ToList();
+
+        if (PossiblePlayers.Count < 3)
         {
-            PossiblePlayers.RemoveAll(p => p.IsImpostor());
+            return;
         }
 
-        if (!PossiblePlayers.Any())
+        if (PlayerControl.AllPlayerControls.ToArray().Any(p => p.HasModifier<RivalModifier>()))
         {
+            Error("Error - Rivals Already Spawned");
             return;
         }
         
@@ -91,13 +90,7 @@ public sealed class RivalModifier : AllianceGameModifier, IAssignableTargets
 
         randPlayer.RpcAddModifier<RivalModifier>();
 
-        PossiblePlayers.RemoveAll(p => (p.IsImpostor() != randPlayer.IsImpostor() && p.IsCrewmate() != randPlayer.IsCrewmate()) || p == randPlayer);
-
-        if (PossiblePlayers.Count == 0)
-        {
-            randPlayer.RpcRemoveModifier<RivalModifier>();
-            return;
-        }
+        PossiblePlayers.Remove(randPlayer);
 
         PossiblePlayers.Shuffle();
         PlayerControl randPlayer2 = PossiblePlayers[0];
