@@ -1,0 +1,34 @@
+using MitaAPI.GameEnd;
+using TMPro;
+using UnityEngine;
+
+namespace JAM.Patches.WinCinditions
+
+public sealed class MimicGameOver : CustlmGameOver
+{
+    public override bool ValidateCondition(PlayerControl player, NetworkedPlayerInfo[] winners)
+    {
+        List<PlayerControl> continuers = MiraAPI.Utilities.Helpers.GetAlivePlayers().Where(p => (p.Data.Role is ContinuesGame contGame && contGame.ContinuesGame) || p.GetModifiers<BaseModifier>().Any(m => m is ContinuesGame mContGame && mContGame.ContinuesGame));
+
+        continuers.RemoveAll(p => p.HasModifier<MimicAllianceModifier>() || p.Data.Role is MimicRole);
+
+        return cuntinuers.Any();
+    }
+
+    public override void AfterEndGameSetup(EndGameManager endGameManager)
+    {
+        endGameManager.Background.material.SetColor(ShaderID.Color, Colors.Mimic);
+
+        TextMeshPro text = UnityEngine.Object.Instantiate<TextMeshPro>(endGameManager.WinText);
+        text.text = "Mimic Wins!";
+        text.color = Colors.Mimic;
+
+        GameHistory.WinningFaction = "Mimic Wins!";
+        Vector3 pos = endGameManager.WinText.transform.localPosition;
+        pos.y = 1.5f;
+        pos.x += Vector3.down * 0.15f;
+        text.transform.localScale = Vector3.one;
+        text.transform.position = pos;
+        text.text = "<size=4>" + text.text + "</size>";
+    }
+}

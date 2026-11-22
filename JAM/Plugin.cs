@@ -189,7 +189,6 @@ public enum JAMRpcCalls : uint
 
 // ================== MINOR BUGS ====================
 // Misfire Kills Give Weird Info For Mortician Autopsy
-// Foolish Doesn't Work?
 // My Overrides For Locales Aren't Working?
 // It Says The Wrong Team Won When Mimic Won (Make A Custom Game Over For Mimic?)
 

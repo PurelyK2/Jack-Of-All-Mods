@@ -97,7 +97,7 @@ public sealed class MimicRole(IntPtr cppPtr) : NeutralRole(cppPtr), ITownOfUsRol
         return true; //Will Be Ok Here
     }
 
-    public bool ContinuesGame => MiraAPI.Utilities.Helpers.GetAlivePlayers().Count > 2;
+    public bool ContinuesGame => true;
 
     public override bool CanUse(IUsable usable)
     {
